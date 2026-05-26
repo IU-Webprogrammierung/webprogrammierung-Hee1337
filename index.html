@@ -8,20 +8,43 @@
 </head>
 <body>
 
+  <!-- Skip-Link: ermöglicht Tastatur- und Screenreader-Nutzenden, direkt zum Hauptinhalt zu springen. -->
+  <a href="#inhalt" class="skip-link">Zum Hauptinhalt springen</a>
 
-    <header>
-      <h1>Meine sportliche Laufbahn</h1>
-    </header>
+  <header>
+    <h1>Meine sportliche Laufbahn</h1>
 
-    <main>
-      <section>
-        <h2>Einleitung</h2>
-        <p>In diesem Artikel möchte ich meine sportliche Laufbahn teilen, die von meiner Kindheit bis heute reicht. Sport war schon immer ein wichtiger Teil meines Lebens, und ich habe viele verschiedene Aktivitäten ausprobiert, um fit und gesund zu bleiben.</p>
-      </section>
+    <!-- Hauptnavigation: aria-label benennt die Navigation eindeutig für Screenreader. -->
+    <nav aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="#ueber-mich">Das bin ich</a></li>
+        <li><a href="#jugend">Jugend</a></li>
+        <li><a href="#crossfit">CrossFit</a></li>
+        <li><a href="#hyrox">Hyrox</a></li>
+        <li><a href="#rennrad">Rennrad</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#rennen">Mein erstes Rennen</a></li>
+        <li><a href="#impressum">Impressum</a></li>
+      </ul>
+    </nav>
+  </header>
 
-     
-    </main>
+  <!-- main enthält den zentralen Seiteninhalt. Die id wird vom Skip-Link angesprungen. -->
+  <main id="inhalt">
 
+    <!-- aria-labelledby verbindet den Abschnitt eindeutig mit seiner sichtbaren Überschrift. -->
+    <section id="ueber-mich" aria-labelledby="ueber-mich-heading">
+      <h2 id="ueber-mich-heading">Das bin ich</h2>
+      <p>
+        In diesem Abschnitt stelle ich mich und meinen sportlichen Hintergrund vor.
+      </p>
+    </section>
 
-    <footer>
-        <h2>Impressum</h2> 
+  </main>
+
+  <footer id="impressum">
+    <h2>Impressum</h2>
+    <p>Angaben gemäß den Vorgaben des Projekts.</p>
+  </footer>
+
+</body>
