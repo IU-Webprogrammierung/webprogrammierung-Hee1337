@@ -129,3 +129,28 @@ Desktop Ansicht ab ca. 768px / 1024px:
 ├──────────────────────────────────────────────┤
 │ Footer / Impressum                           │
 └──────────────────────────────────────────────┘
+
+## 8. Barrierefreiheit
+
+Bereits in Phase 1 werden grundlegende Maßnahmen zur Barrierefreiheit berücksichtigt. Dazu gehören eine semantische HTML-Struktur mit `header`, `nav`, `main`, `section` und `footer`, die Sprachangabe `lang="de"`, ein Skip-Link zum Hauptinhalt und eine Hauptnavigation mit `aria-label`.
+
+Die einzelnen Inhaltsbereiche werden mit `aria-labelledby` mit ihren sichtbaren Überschriften verbunden. Dadurch können assistive Technologien die Bereiche besser einordnen. Die Navigationslinks sind verständlich benannt und führen direkt zu den jeweiligen Bereichen des Onepagers.
+
+In späteren Phasen werden weitere Maßnahmen ergänzt, zum Beispiel sichtbare Fokuszustände, ausreichende Farbkontraste, sinnvolle Alternativtexte für Bilder, responsive Bildgrößen und ein tastaturbedienbares Burger-Menü.
+
+## 9. Git-Workflow
+
+Das Projekt wird mit Git versioniert. Die Commit-Messages folgen festen Kategorien, damit der Entwicklungsprozess nachvollziehbar bleibt.
+
+Verwendete Kategorien:
+
+- `chore`: technische Aufgaben und Projektstruktur
+- `feat`: neue Funktionen oder neue Seitenbereiche
+- `content`: Inhalte und Texte
+- `style`: CSS, Layout und visuelle Gestaltung
+- `a11y`: Maßnahmen zur Barrierefreiheit
+- `docs`: Dokumentation, Konzept und README
+- `fix`: Fehlerbehebungen
+- `refactor`: Codeverbesserungen ohne sichtbare Funktionsänderung
+
+Die Commit-Legende ist zusätzlich in `docs/commit-guidelines.md` dokumentiert.
