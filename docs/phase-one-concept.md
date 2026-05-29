@@ -159,3 +159,13 @@ Die Commit-Legende ist zusätzlich in `docs/commit-guidelines.md` dokumentiert.
 ## 10. Zusammenfassende Konzeptbeschreibung
 
 Die Konzeptbeschreibung ist im PDF enthalten
+
+## 11 Einleitung
+
+## Einleitung
+
+Im Rahmen des Kurses „Projekt: Web-Programmierung“ wird ein persönlicher Webauftritt als statische Website mit HTML und CSS konzipiert und umgesetzt. Für dieses Projekt plane ich einen scrollbaren Onepager, der meine sportliche Laufbahn darstellt.
+
+Der Schwerpunkt der Konzeptionsphase liegt auf der Planung der Inhalte, der semantischen HTML-Struktur, einer nachvollziehbaren Seitenordnung und der frühen Berücksichtigung von Barrierefreiheit. Die Website soll später responsive gestaltet werden und sowohl auf mobilen Geräten als auch auf größeren Bildschirmen gut nutzbar sein.
+
+Inhaltlich erzählt die Seite meine Entwicklung vom Jugend-Mannschaftssport über CrossFit und Hyrox bis hin zum strukturierten Rennradtraining und meinem ersten Rennen. Das Konzept beschreibt die geplanten Inhaltsbereiche, die mobile und desktopbasierte Anordnung, den Barrierefreiheitsansatz sowie den eingesetzten Git-Workflow.
