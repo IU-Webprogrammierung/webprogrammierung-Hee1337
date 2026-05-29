@@ -154,3 +154,8 @@ Verwendete Kategorien:
 - `refactor`: Codeverbesserungen ohne sichtbare Funktionsänderung
 
 Die Commit-Legende ist zusätzlich in `docs/commit-guidelines.md` dokumentiert.
+
+
+## 10. Zusammenfassende Konzeptbeschreibung
+
+Die Konzeptbeschreibung ist im PDF enthalten
