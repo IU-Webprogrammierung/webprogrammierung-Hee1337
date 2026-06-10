@@ -142,3 +142,82 @@ Die geplanten Breakpoints sind:
 
 Alle Breakpoints werden in der CSS-Datei kommentiert, damit nachvollziehbar bleibt, warum sich das Layout an diesen Stellen verändert.
 
+
+## 5. Verbindliche Umsetzungsmatrix
+
+Damit das Konzept als konkrete Arbeitsgrundlage genutzt werden kann, werden die geplanten Komponenten mit ihrer späteren technischen Umsetzung verknüpft. Alle hier aufgeführten Komponenten sollen in Phase 2 entweder umgesetzt oder im Konzept bewusst angepasst werden.
+
+### 5.1 Hauptnavigation
+
+**Geplante HTML-Umsetzung:**
+Die Navigation wird mit `nav`, `ul`, `li` und `a` umgesetzt. Die Links führen als Sprungmarken zu den jeweiligen Inhaltsbereichen.
+
+**Geplante CSS-Umsetzung:**
+Die Navigation wird mobile-first gestaltet. Auf kleinen Bildschirmen wird sie kompakt dargestellt. Ab 768px wird sie horizontal mit Flexbox ausgerichtet. Sichtbare Fokuszustände werden ergänzt.
+
+**Status:** geplant
+
+### 5.2 Hero-Bereich
+
+**Geplante HTML-Umsetzung:**
+Der Hero-Bereich wird mit `section`, `h2`, `p` und `img` umgesetzt.
+
+**Geplante CSS-Umsetzung:**
+Das Hero-Bild wird responsiv eingebunden und in seiner Dateigröße optimiert. Der Bereich erhält klare Abstände und eine maximale Inhaltsbreite.
+
+**Status:** geplant
+
+### 5.3 Sportliche Laufbahn
+
+**Geplante HTML-Umsetzung:**
+Die sportlichen Stationen werden mit `section`, `article`, Überschriften und Fließtexten strukturiert.
+
+**Geplante CSS-Umsetzung:**
+Die Stationen werden als Card- oder Timeline-Struktur gestaltet. Ab Tablet- und Desktop-Breite wird ein Grid-Layout mit mehreren Spalten eingesetzt.
+
+**Status:** geplant
+
+### 5.4 Bildergalerie
+
+**Geplante HTML-Umsetzung:**
+Die Galerie wird mit `ul`, `li`, `figure`, `img` und `figcaption` umgesetzt.
+
+**Geplante CSS-Umsetzung:**
+Die Galerie wird als responsives Grid gestaltet. Mobil erscheint sie einspaltig, ab größeren Ansichten zwei- bis dreispaltig.
+
+**Status:** geplant
+
+### 5.5 Rennrad-Setup-Infobox
+
+**Geplante HTML-Umsetzung:**
+Die Infobox wird mit `aside`, `h3` und einer Liste oder kurzen Key-Facts umgesetzt.
+
+**Geplante CSS-Umsetzung:**
+Die Infobox wird optisch vom Haupttext abgesetzt. Auf größeren Bildschirmen kann sie neben dem Text stehen.
+
+**Status:** geplant
+
+### 5.6 Trainingsbereich
+
+**Geplante HTML-Umsetzung:**
+Der Trainingsbereich wird mit `section`, `table`, `caption`, `thead`, `tbody` und einem Download-Link umgesetzt.
+
+**Geplante CSS-Umsetzung:**
+Die Tabelle wird responsiv gestaltet. Der Download-Link wird optisch wie ein Button gestaltet, bleibt semantisch aber ein Link.
+
+**Status:** geplant
+
+### 5.7 Footer und Impressum
+
+**Geplante HTML-Umsetzung:**
+Der Footer wird mit `footer`, einer Überschrift und ergänzendem Text umgesetzt.
+
+**Geplante CSS-Umsetzung:**
+Der Footer wird visuell klar vom Hauptinhalt getrennt.
+
+**Status:** geplant
+
+Diese Umsetzungsmatrix dient während Phase 2 als Kontrollliste. Vor der Abgabe wird geprüft, ob die beschriebenen Komponenten tatsächlich in HTML und CSS umgesetzt wurden.
+
+
+
