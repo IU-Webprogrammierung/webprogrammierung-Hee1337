@@ -32,7 +32,53 @@ Die Website wird in Phase 2 stärker in wiederverwendbare und klar beschriebene 
 
 ### 3.1 Hauptnavigation
 
-Die Hauptnavigation ermöglicht den direkten Sprung zu den wichtigsten Inhaltsbereichen des Onepagers. Sie soll in Phase 2 deutlicher dargestellt und responsive gestaltet werden. Auf kleinen Bildschirmen wird eine kompakte mobile Navigation geplant. Ab Tablet- und Desktop-Breite soll die Navigation horizontal dargestellt werden.
+### 3.1 Hauptnavigation
+
+Die Hauptnavigation ist ein zentrales Orientierungselement des Onepagers. Sie ermöglicht den direkten Sprung zu den wichtigsten Inhaltsbereichen und bleibt inhaltlich auf die Hauptstationen der Seite begrenzt, damit sie übersichtlich bleibt.
+
+#### Navigationspunkte
+
+Die Navigation enthält folgende Sprungmarken:
+
+* Das bin ich
+* Jugend
+* CrossFit
+* Hyrox
+* Rennrad
+* Training
+* Rennen
+* Impressum
+
+Jeder Navigationspunkt verweist auf einen klar benannten Inhaltsbereich innerhalb der Seite. Die Linktexte sollen kurz, eindeutig und verständlich bleiben.
+
+#### Mobile Darstellung: 360px bis 767px
+
+Auf kleinen Bildschirmen wird die Navigation platzsparend dargestellt. Der Seitentitel steht im oberen Bereich, darunter folgt eine kompakte Navigation. Für Phase 2 wird zunächst eine einfache mobile Navigation ohne JavaScript umgesetzt. Die Links werden untereinander oder in mehreren Zeilen angeordnet, sodass sie mit dem Finger gut erreichbar bleiben.
+
+Die Navigation soll ausreichend Abstand zwischen den Links haben. Dadurch bleibt sie auch auf Touch-Geräten gut bedienbar. Ein Burger-Menü bleibt als mögliche Erweiterung für Phase 3 vorgesehen, wird in Phase 2 aber nur umgesetzt, wenn es technisch sauber und tastaturbedienbar realisiert werden kann.
+
+#### Tablet-Darstellung: ab 768px
+
+Ab 768px wird die Navigation horizontal dargestellt. Die Links stehen nebeneinander und können bei Bedarf umbrechen. Der Header erhält mehr Breite und Abstand, damit Seitentitel und Navigation klar voneinander getrennt wirken.
+
+#### Desktop-Darstellung: ab 1024px
+
+Ab 1024px wird die Navigation als horizontale Hauptnavigation im Header dargestellt. Die Navigationslinks werden gleichmäßig verteilt oder rechts neben dem Seitentitel ausgerichtet. Dadurch ist die Navigation auf größeren Bildschirmen deutlicher sichtbar und besser als zentrale Steuerung des Onepagers erkennbar.
+
+#### Große Desktop-Auflösung: ab 1440px
+
+Bei sehr breiten Bildschirmen bleibt die Navigation innerhalb einer maximalen Inhaltsbreite. Dadurch läuft sie nicht über die gesamte Bildschirmbreite auseinander. Die Seite wirkt kontrollierter und besser lesbar.
+
+#### Technische Umsetzung
+
+Die Navigation wird semantisch mit `nav`, `ul`, `li` und `a` umgesetzt. Das Element `nav` erhält `aria-label="Hauptnavigation"`, damit assistive Technologien den Zweck der Navigation eindeutig erkennen können.
+
+Die Gestaltung erfolgt mit Flexbox. Mobile-first werden die Links zunächst kompakt untereinander oder umbrochen dargestellt. Ab 768px wird die Navigation über eine Media Query horizontal ausgerichtet.
+
+#### Barrierefreiheit
+
+Alle Navigationslinks müssen mit der Tastatur erreichbar sein. Der Fokuszustand wird in Phase 2 sichtbar gestaltet. Die Linktexte bleiben eindeutig und beschreiben den Zielbereich. Die Navigation darf keine reine Hover-Bedienung verwenden, da sie sonst auf Touch-Geräten und mit Tastatur schlechter nutzbar wäre.
+
 
 ### 3.2 Hero-Bereich
 
@@ -57,4 +103,42 @@ Der Trainingsbereich wird in Phase 2 stärker strukturiert. Eine Tabelle kann be
 ### 3.7 Footer und Impressum
 
 Der Footer bleibt am Ende des Onepagers und enthält das Impressum beziehungsweise die notwendigen Projektangaben. In Phase 2 wird er visuell klarer vom Hauptinhalt getrennt.
+
+## 4. Responsive Layoutlogik und Breakpoints
+
+Die Website wird mobile-first umgesetzt. Das bedeutet, dass die einspaltige mobile Darstellung die Grundlage bildet. Größere Layouts werden anschließend über Media Queries erweitert.
+
+### 4.1 Mobile Ansicht: 360px bis 767px
+
+Auf mobilen Geräten werden alle Inhaltsbereiche einspaltig untereinander dargestellt. Die Reihenfolge folgt der inhaltlichen Chronologie der sportlichen Laufbahn. Texte, Bilder, Tabellen und Infoboxen nehmen die verfügbare Breite ein und erhalten ausreichend Innen- und Außenabstand.
+
+Die Navigation wird kompakt dargestellt und bleibt vollständig bedienbar. Bilder werden responsiv eingebunden, damit sie nicht über den Bildschirm hinausragen.
+
+### 4.2 Tablet Ansicht: ab 768px
+
+Ab 768px erhält die Seite mehr horizontale Struktur. Die Navigation wird horizontal ausgerichtet. Die sportlichen Stationen können als zweispaltige Card-Struktur dargestellt werden.
+
+Der Hero-Bereich erhält mehr Raum. Bild und Text können weiterhin untereinander stehen oder visuell stärker voneinander getrennt werden. Galerieelemente werden ab dieser Breite in zwei Spalten angeordnet.
+
+### 4.3 Desktop Ansicht: ab 1024px
+
+Ab 1024px wird das Layout stärker auf Desktop-Nutzung optimiert. Die sportlichen Stationen können als zwei- oder dreispaltiges Grid dargestellt werden. Der Trainingsbereich erhält ausreichend Breite für eine Tabelle. Die Rennrad-Infobox kann neben dem Fließtext platziert werden.
+
+Die Seite erhält eine maximale Inhaltsbreite, damit Textzeilen gut lesbar bleiben und Inhalte nicht über die gesamte Bildschirmbreite auseinanderlaufen.
+
+### 4.4 Große Desktop Ansicht: ab 1440px
+
+Ab 1440px kann die Card-Struktur auf bis zu drei Spalten erweitert werden. Die Galerie kann ebenfalls mehrspaltig dargestellt werden. Die maximale Inhaltsbreite bleibt bestehen, damit das Layout kontrolliert wirkt.
+
+### 4.5 Technische Umsetzung
+
+Die Layouts werden mit Flexbox und CSS Grid umgesetzt. Flexbox wird vor allem für Navigation, Header-Struktur und kleinere Ausrichtungen genutzt. CSS Grid wird für Card-Bereiche, Galerie und mehrspaltige Desktop-Layouts eingesetzt.
+
+Die geplanten Breakpoints sind:
+
+* ab 768px für Tablet-Layout
+* ab 1024px für Desktop-Layout
+* ab 1440px für große Desktop-Ansichten
+
+Alle Breakpoints werden in der CSS-Datei kommentiert, damit nachvollziehbar bleibt, warum sich das Layout an diesen Stellen verändert.
 
