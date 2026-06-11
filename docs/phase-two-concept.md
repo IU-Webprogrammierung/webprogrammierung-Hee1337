@@ -245,6 +245,15 @@ Das `aside`-Element eignet sich für ergänzende Inhalte, die inhaltlich mit dem
 
 Auf mobilen Geräten steht die Infobox unter dem Rennradtext. Auf größeren Bildschirmen kann sie später optisch als eigene Box gestaltet oder neben dem Text platziert werden. Dadurch wird der Rennradbereich informativer und visuell abwechslungsreicher, ohne die Hauptnavigation unnötig zu erweitern.
 
+### 6.4 Trainingsprogression als Tabelle
+
+Der Trainingsbereich enthält beispielhafte Trainingsdaten, die miteinander vergleichbar sind. Dazu gehören Woche, Einheit, Zielbereich und Ziel der Einheit. Da diese Informationen in Zeilen und Spalten sinnvoll zueinander in Beziehung gesetzt werden können, wird die Progression semantisch als Tabelle umgesetzt.
+
+Die Tabelle erhält eine `caption`, damit der Zweck der Tabelle direkt erkennbar ist. Die Spaltenüberschriften werden mit `th` und `scope="col"` ausgezeichnet, damit die Zuordnung der Daten auch für assistive Technologien nachvollziehbar bleibt.
+
+In Phase 2 wird die Tabelle per CSS optisch aufbereitet. Auf kleinen Bildschirmen muss sie so gestaltet werden, dass sie lesbar bleibt und nicht aus dem Layout herausragt. Dadurch ergänzt der Trainingsbereich die Seite nicht nur inhaltlich, sondern zeigt auch einen bewussten Einsatz tabellarischer HTML-Struktur.
+
+
 
 
 
