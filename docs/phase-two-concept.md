@@ -237,6 +237,15 @@ Die Timeline-Artikel werden innerhalb eines gemeinsamen Containers gebündelt. D
 
 Diese Entscheidung greift das Feedback aus Phase 1 auf, nach dem bei höheren Bildschirmauflösungen mehr Spalten in Betracht gezogen werden sollen.
 
+### 6.3 Rennrad-Setup als ergänzende Infobox
+
+Der Rennradbereich wird um eine Infobox zum persönlichen Rennrad-Setup ergänzt. Diese Informationen unterstützen den Haupttext, sind aber nicht zwingend Teil des eigentlichen Fließtextes. Deshalb wird die Infobox semantisch als `aside` umgesetzt.
+
+Das `aside`-Element eignet sich für ergänzende Inhalte, die inhaltlich mit dem Hauptbereich verbunden sind, aber separat dargestellt werden können. Die Infobox enthält kurze Key-Facts zum Fahrrad, zur Schaltung, zum Trainingsbezug und zu den sportlichen Zielen.
+
+Auf mobilen Geräten steht die Infobox unter dem Rennradtext. Auf größeren Bildschirmen kann sie später optisch als eigene Box gestaltet oder neben dem Text platziert werden. Dadurch wird der Rennradbereich informativer und visuell abwechslungsreicher, ohne die Hauptnavigation unnötig zu erweitern.
+
+
 
 
 
