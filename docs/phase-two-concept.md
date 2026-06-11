@@ -219,5 +219,24 @@ Der Footer wird visuell klar vom Hauptinhalt getrennt.
 
 Diese Umsetzungsmatrix dient während Phase 2 als Kontrollliste. Vor der Abgabe wird geprüft, ob die beschriebenen Komponenten tatsächlich in HTML und CSS umgesetzt wurden.
 
+## 6. Entscheidungen und Begründungen
+
+In Phase 2 werden zentrale Struktur- und Gestaltungsentscheidungen bewusst dokumentiert. Dadurch soll nachvollziehbar werden, warum bestimmte HTML-Elemente, Layouttechniken und responsive Verhaltensweisen eingesetzt werden.
+
+### 6.1 Timeline-Struktur für sportliche Stationen
+
+Die sportlichen Stationen werden in einer gemeinsamen Timeline-Struktur zusammengefasst, weil sie inhaltlich eine chronologische Entwicklung darstellen. Der Bereich wird als übergeordnete `section` umgesetzt. Die einzelnen Stationen werden als `article`-Elemente aufgebaut, da jede Station einen eigenständigen Inhaltsblock innerhalb der Laufbahn bildet.
+
+Für die Jahresangaben wird das `time`-Element verwendet. Dadurch sind die Jahreszahlen nicht nur visuelle Gestaltungselemente, sondern semantisch als Zeitangaben ausgezeichnet. Die Klasse `timeline-year` ermöglicht später eine gezielte Gestaltung der Jahresmarker per CSS.
+
+Diese Struktur bereitet außerdem eine mögliche Erweiterung in Phase 3 vor, bei der die Timeline beim Scrollen animiert oder das jeweils aktive Jahr hervorgehoben werden kann.
+
+### 6.2 Vorbereitung für responsive Mehrspaltenlayouts
+
+Die Timeline-Artikel werden innerhalb eines gemeinsamen Containers gebündelt. Dadurch kann der Bereich später mit CSS Grid gestaltet werden. Mobil werden die Stationen einspaltig dargestellt. Ab Tablet- und Desktop-Breite können zwei oder drei Spalten umgesetzt werden.
+
+Diese Entscheidung greift das Feedback aus Phase 1 auf, nach dem bei höheren Bildschirmauflösungen mehr Spalten in Betracht gezogen werden sollen.
+
+
 
 
