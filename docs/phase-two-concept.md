@@ -253,6 +253,15 @@ Die Tabelle erhält eine `caption`, damit der Zweck der Tabelle direkt erkennbar
 
 In Phase 2 wird die Tabelle per CSS optisch aufbereitet. Auf kleinen Bildschirmen muss sie so gestaltet werden, dass sie lesbar bleibt und nicht aus dem Layout herausragt. Dadurch ergänzt der Trainingsbereich die Seite nicht nur inhaltlich, sondern zeigt auch einen bewussten Einsatz tabellarischer HTML-Struktur.
 
+### 6.5 Download-Link für Beispiel-Trainingsplan
+
+Der Trainingsbereich wird um einen Download-Link für einen beispielhaften Trainingsplan ergänzt. Dadurch erhält der Bereich eine konkrete weiterführende Ressource und wirkt nicht nur beschreibend, sondern anwendungsbezogen.
+
+Der Download wird semantisch als Link umgesetzt, weil er zu einer Datei führt. Ein `button` wäre an dieser Stelle nicht passend, da kein direkter Seitenprozess ausgelöst wird. Der Link erhält später per CSS eine Button-Optik, bleibt im HTML aber ein korrektes `a`-Element mit `download`-Attribut.
+
+Die Datei wird im Projekt unter `assets/downloads/` vorgesehen. In Phase 2 wird zunächst die Struktur vorbereitet. Die eigentliche PDF-Datei kann später ergänzt oder durch einen finalen Trainingsplan ersetzt werden.
+
+
 
 
 
