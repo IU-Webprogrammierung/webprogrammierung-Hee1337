@@ -160,12 +160,24 @@ Die Navigation wird mobile-first gestaltet. Auf kleinen Bildschirmen wird sie ko
 ### 5.2 Hero-Bereich
 
 **Geplante HTML-Umsetzung:**
-Der Hero-Bereich wird mit `section`, `h2`, `p` und `img` umgesetzt.
+Der Hero-Bereich wird als eigenständige `section` umgesetzt. Das Hero-Bild wird als reine Sportcollage eingebunden und enthält keine fest eingebrannten Texte, keine Navigationselemente und kein Portraitbild.
+
+Die Sportstationen im Hero-Bereich werden als echte HTML-Sprungmarken umgesetzt. Sie verweisen auf die passenden Inhaltsbereiche der Seite:
+
+* Jugend / Handball verweist auf `#jugend`
+* CrossFit verweist auf `#crossfit`
+* Hyrox verweist auf `#hyrox`
+* Rennrad verweist auf `#rennrad`
+
+Das Portraitbild wird separat als eigenes `img`-Element eingebunden und nicht direkt in die Hero-Collage integriert.
 
 **Geplante CSS-Umsetzung:**
-Das Hero-Bild wird responsiv eingebunden und in seiner Dateigröße optimiert. Der Bereich erhält klare Abstände und eine maximale Inhaltsbreite.
+Der Hero-Bereich erhält ein dunkles, hochwertiges Erscheinungsbild passend zum geplanten blau-schwarzen Theme. Die Sport-Sprungmarken werden per CSS über dem Hero-Bild positioniert und optisch wie interaktive Stationen gestaltet.
+
+Das Portraitbild wird per CSS kreisförmig dargestellt, zum Beispiel über `border-radius: 50%`, und responsiv positioniert. Auf mobilen Geräten werden die Elemente vereinfacht und untereinander beziehungsweise kompakter dargestellt. Auf größeren Bildschirmen können Hero-Bild, Sprungmarken, Headline und Portrait stärker überlagert und layoutet werden.
 
 **Status:** geplant
+
 
 ### 5.3 Sportliche Laufbahn
 
