@@ -273,6 +273,23 @@ Der Download wird semantisch als Link umgesetzt, weil er zu einer Datei führt. 
 
 Die Datei wird im Projekt unter `assets/downloads/` vorgesehen. In Phase 2 wird zunächst die Struktur vorbereitet. Die eigentliche PDF-Datei kann später ergänzt oder durch einen finalen Trainingsplan ersetzt werden.
 
+### 6.6 Hero-Bereich mit ergänzenden Sprungmarken
+
+Der Hero-Bereich wird in Phase 2 als visueller Einstieg in die Website überarbeitet. Das Hero-Bild zeigt die sportlichen Stationen als Bildcollage und bleibt dabei frei von eingebrannten Texten, Navigationselementen und Portraitbestandteilen. Dadurch kann das Bild unabhängig von Inhalt und Interaktion optimiert und responsiv eingesetzt werden.
+
+Die Beschriftungen der Sportarten werden zusätzlich als echte HTML-Links über dem Hero-Bereich umgesetzt. Sie dienen als ergänzende Sprungmarken zu den passenden Inhaltsbereichen der Seite:
+
+* Jugend / Handball verweist auf `#jugend`
+* CrossFit verweist auf `#crossfit`
+* Hyrox verweist auf `#hyrox`
+* Rennrad verweist auf `#rennrad`
+
+Diese Sprungmarken ergänzen die Hauptnavigation im Header. Nutzer:innen können dadurch entweder über die klassische Navigation oder direkt über die visuelle Einstiegsebene zu den jeweiligen Bereichen springen.
+
+Die Umsetzung als echte `a`-Elemente sorgt dafür, dass die Beschriftungen nicht nur dekorativ sind, sondern eine klare Funktion besitzen. Sie bleiben per Tastatur erreichbar, können mit sichtbaren Fokuszuständen gestaltet werden und lassen sich über CSS responsiv positionieren.
+
+Das Portraitbild wird separat als eigenes `img`-Element eingebunden und per CSS kreisförmig dargestellt. Dadurch bleibt es unabhängig vom Hero-Bild austauschbar, responsiv anpassbar und semantisch sauber eingebunden.
+
 
 
 
