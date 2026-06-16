@@ -5,9 +5,11 @@
   --color-text: #f8fafc;
   --color-text-muted: #cbd5e1;
   --color-accent: #e7c9a9;
+  --color-highlight: #ff3045;
   --color-border: rgba(255, 255, 255, 0.14);
+  
 
-  --max-width: 1200px;
+  --max-width: 1600px;
   --spacing-section: 4rem;
 }
 
@@ -28,60 +30,50 @@ body {
   line-height: 1.6;
 }
 
-/* Header: dunkle Navigationsleiste mit klarer Seitenstruktur. */
+//* Header: full-width Navigationsleiste im dunklen Portfolio-Look. */
 .site-header {
-  background-color: var(--color-bg-soft);
+  position: relative;
+  z-index: 10;
+  background-color: rgba(15, 23, 36, 0.96);
   border-bottom: 1px solid var(--color-border);
 }
 
-/*Berenzter Innenbereich: verhindert, das Header Inhalte auf großen Screens zu weit auseinander laufen*/
-.header-inner{
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding:  1rem 0;
+/* Header-Inhalt: Logo links, Navigation rechts. */
+.header-inner {
+  width: 100%;
+  padding: 1.25rem clamp(1.5rem, 4vw, 3rem);
 
-    display: flex;
-    flex-direction: column;
-    gap: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-/* Logo/Kürzel: dient als persönliches Branding und Link zurück zum Seitenanfang. */
+/* Der Seitentitel bleibt semantisch im HTML, wird im visuellen Header aber ausgeblendet. */
+.site-branding {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Logo/Kürzel: persönliches Branding links im Header. */
 .site-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-
   color: var(--color-text);
   text-decoration: none;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 400;
   letter-spacing: 0.08em;
 }
 
-/* Kleiner Einführungstext über dem Haupttitel. */
-.site-kicker {
-  margin: 0 0 0.25rem;
-  color: var(--color-accent);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.site-branding h1 {
-  margin: 0;
-  font-size: clamp(1.75rem, 6vw, 3rem);
-  line-height: 1.1;
-}
-
-/* Hauptnavigation: Links werden zunächst mobil umbrechbar dargestellt. */
+/* Hauptnavigation rechts im Header. */
 .main-navigation ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  justify-content: flex-end;
+  gap: clamp(1rem, 3vw, 3rem);
 
   margin: 0;
   padding: 0;
@@ -89,17 +81,174 @@ body {
 }
 
 .main-navigation a {
-  display: inline-flex;
-  padding: 0.5rem 0.75rem;
-
-  color: var(--color-text-muted);
+  color: var(--color-text);
   text-decoration: none;
-  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .main-navigation a:hover,
 .main-navigation a:focus-visible {
-  color: var(--color-text);
-  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-accent);
   outline: none;
+}
+
+/* Hero-Bereich: full-width Einstieg mit Bildcollage, Textoverlay, Sprungmarken und Portrait. */
+#hero {
+  position: relative;
+  width: 100%;
+  margin: 0 0 var(--spacing-section);
+  overflow: hidden;
+}
+
+/* Hero-Bild als breite Bühne über die gesamte Viewportbreite. */
+.hero-media {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(15, 23, 36, 0.82) 0%,
+      rgba(15, 23, 36, 0.42) 42%,
+      rgba(15, 23, 36, 0.12) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(15, 23, 36, 0.75) 0%,
+      rgba(15, 23, 36, 0.05) 55%
+    );
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: clamp(42rem, calc(100vh - 4.75rem), 82rem);
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Hero-Text: Headline und Introtext werden gemeinsam auf dem Bild positioniert. */
+.hero-content {
+  position: absolute;
+  z-index: 3;
+  left: clamp(1.5rem, 4vw, 4rem);
+  bottom: clamp(3.5rem, 7vw, 5.5rem);
+
+  max-width: 36rem;
+}
+
+.hero-content h2 {
+  margin: 0 0 1.25rem;
+
+  color: var(--color-text);
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.hero-content p {
+  margin: 0;
+
+  color: var(--color-text);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.hero-content p::after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 0.2rem;
+  margin-top: 1.25rem;
+  background-color: var(--color-highlight);
+}
+
+/* Hero-Sprungmarken: liegen als echte Links über der Bildcollage. */
+.hero-station-navigation {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  margin: 0;
+  pointer-events: none;
+}
+
+.hero-station-navigation ul {
+  position: absolute;
+  top: clamp(2.25rem, 5vw, 4rem);
+  left: 0;
+  right: 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  margin: 0;
+  padding: 0 clamp(2rem, 6vw, 8rem);
+  list-style: none;
+}
+
+.hero-station-navigation li {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-station-navigation a {
+  pointer-events: auto;
+
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 700;
+}
+
+.hero-station-navigation a::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 0.12rem;
+  margin-top: 0.5rem;
+  background-color: currentColor;
+}
+
+.hero-station-navigation a:hover,
+.hero-station-navigation a:focus-visible {
+  color: var(--color-text);
+  outline: none;
+}
+
+/* Portrait: separat eingebunden und als Kreis über dem Hero positioniert. */
+.hero-portrait {
+  position: absolute;
+  z-index: 5;
+  right: clamp(2rem, 10vw, 12rem);
+  bottom: clamp(2.5rem, 7vw, 4rem);
+
+  width: clamp(10rem, 18vw, 18rem);
+  aspect-ratio: 1;
+  margin: 0;
+
+  overflow: hidden;
+  border: 0.6rem solid var(--color-bg-soft);
+  border-radius: 50%;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
+}
+
+.hero-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
