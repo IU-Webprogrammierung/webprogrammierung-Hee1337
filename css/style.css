@@ -27,3 +27,79 @@ body {
   color: var(--color-text);
   line-height: 1.6;
 }
+
+/* Header: dunkle Navigationsleiste mit klarer Seitenstruktur. */
+.site-header {
+  background-color: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/*Berenzter Innenbereich: verhindert, das Header Inhalte auf großen Screens zu weit auseinander laufen*/
+.header-inner{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding:  1rem 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: center;
+}
+
+/* Logo/Kürzel: dient als persönliches Branding und Link zurück zum Seitenanfang. */
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Kleiner Einführungstext über dem Haupttitel. */
+.site-kicker {
+  margin: 0 0 0.25rem;
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.site-branding h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  line-height: 1.1;
+}
+
+/* Hauptnavigation: Links werden zunächst mobil umbrechbar dargestellt. */
+.main-navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-navigation a {
+  display: inline-flex;
+  padding: 0.5rem 0.75rem;
+
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.main-navigation a:hover,
+.main-navigation a:focus-visible {
+  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
