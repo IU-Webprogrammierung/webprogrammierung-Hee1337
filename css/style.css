@@ -1,0 +1,29 @@
+/* Grunddesign: zentrale Farb- und Layoutwerte für das dunkle Portfolio-Theme. */
+:root {
+  --color-bg: #0f1724;
+  --color-bg-soft: #172033;
+  --color-text: #f8fafc;
+  --color-text-muted: #cbd5e1;
+  --color-accent: #e7c9a9;
+  --color-border: rgba(255, 255, 255, 0.14);
+
+  --max-width: 1200px;
+  --spacing-section: 4rem;
+}
+
+/* Basislayout: sorgt für ein einheitliches Box-Modell und eine dunkle Grundfläche. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
