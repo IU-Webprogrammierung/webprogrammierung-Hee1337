@@ -267,6 +267,64 @@ body {
 }
 
 
+
+/*-------------------BREAKPOINT DECLARATION ----------------------------*/
+
+
+
+/* Große Desktop-Ansicht: Hero-Elemente werden auf breiten Screens kontrollierter positioniert. */
+@media (min-width: 1440px) {
+  .hero-content {
+    left: 5rem;
+    bottom: 5.5rem;
+  }
+
+  .hero-content h2 {
+    font-size: clamp(5rem, 6vw, 7rem);
+  }
+
+  .hero-station--youth {
+    left: 12%;
+  }
+
+  .hero-station--crossfit {
+    left: 36%;
+  }
+
+  .hero-station--hyrox {
+    left: 60%;
+  }
+
+  .hero-station--cycling {
+    right: 12%;
+  }
+
+  .hero-portrait {
+    right: 8rem;
+    bottom: 4rem;
+    width: clamp(15rem, 16vw, 20rem);
+  }
+}
+
+
+/* Mittlere Desktop-Ansicht: Portrait kleiner und kontrollierter positionieren. */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .hero-portrait {
+    right: clamp(2rem, 6vw, 5rem);
+    bottom: 3rem;
+    width: clamp(10rem, 16vw, 14rem);
+  }
+
+  .hero-content {
+    bottom: 4rem;
+  }
+
+  .hero-content h2 {
+    font-size: clamp(4rem, 7vw, 5.5rem);
+  }
+}
+
+
 /* Mobile Hero: Auf kleinen Screens wird das Overlay-Layout zu einem gut bedienbaren Stapel-Layout. */
 @media (max-width: 1023px) {
   #hero {
@@ -336,6 +394,121 @@ body {
     right: auto;
     bottom: auto;
 
+    width: min(12rem, 55vw);
+    margin: 2rem auto 0;
+  }
+}
+
+/* Tablet: Hero bleibt bildbasiert, aber Texte und Sprungmarken werden kompakter. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-media {
+    position: relative;
+  }
+
+  .hero-image {
+    height: 34rem;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .hero-media::after {
+    display: block;
+  }
+
+  .hero-station-navigation {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .hero-station-navigation ul {
+    position: absolute;
+    top: 2rem;
+    left: 1.5rem;
+    right: 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-station {
+    position: static;
+  }
+
+  .hero-station-navigation a {
+    pointer-events: auto;
+    font-size: clamp(0.75rem, 1.7vw, 0.95rem);
+    white-space: nowrap;
+  }
+
+  .hero-content {
+    position: absolute;
+    z-index: 3;
+    left: 2rem;
+    bottom: 2rem;
+
+    max-width: calc(100% - 18rem);
+    padding: 0;
+  }
+
+  .hero-content h2 {
+    margin-bottom: 0.75rem;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-content h2 br {
+    display: none;
+  }
+
+  .hero-content p {
+    max-width: 24rem;
+    font-size: 1rem;
+  }
+
+  .hero-portrait {
+    position: absolute;
+    z-index: 5;
+    right: 2rem;
+    bottom: 2rem;
+
+    width: clamp(8rem, 16vw, 10rem);
+    margin: 0;
+  }
+}
+
+/* Handy: Hero-Sprungmarken werden ausgeblendet, weil die Hauptnavigation diese Funktion übernimmt. */
+@media (max-width: 767px) {
+  .hero-station-navigation {
+    display: none;
+  }
+
+  .hero-content {
+    position: static;
+    padding: 2rem 1.25rem 0;
+  }
+
+  .hero-content h2 {
+    font-size: clamp(2.5rem, 13vw, 4rem);
+    line-height: 0.95;
+  }
+
+  .hero-content h2 br {
+    display: block;
+  }
+
+  .hero-portrait {
+    position: relative;
+    right: auto;
+    bottom: auto;
     width: min(12rem, 55vw);
     margin: 2rem auto 0;
   }
