@@ -291,6 +291,24 @@ Die Umsetzung als echte `a`-Elemente sorgt dafür, dass die Beschriftungen nicht
 Das Portraitbild wird separat als eigenes `img`-Element eingebunden und per CSS kreisförmig dargestellt. Dadurch bleibt es unabhängig vom Hero-Bild austauschbar, responsiv anpassbar und semantisch sauber eingebunden.
 
 
+### 6.7 Konkretisierung des Hero- und Navigationsbereichs
+
+Auf Basis des Feedbacks aus Phase 1 wird der Hero- und Navigationsbereich in Phase 2 konkreter ausgearbeitet. Der Einstieg der Website soll nicht nur als dekorativer Bildbereich funktionieren, sondern die sportlichen Stationen direkt sichtbar machen und zusätzlich die Orientierung innerhalb des Onepagers unterstützen.
+
+Das Hero-Bild wird als optimierte Sportcollage eingesetzt. Die Beschriftungen der Sportarten werden als echte HTML-Sprungmarken umgesetzt und ergänzen die Hauptnavigation im Header. Dadurch können Nutzer:innen sowohl über die klassische Navigation als auch direkt über den visuellen Einstieg zu den Bereichen Jugend / Handball, CrossFit, Hyrox und Rennrad springen.
+
+Das Portraitbild wird separat vom Hero-Bild eingebunden und per CSS als Kreis gestaltet. Dadurch bleibt es unabhängig vom Hero-Bild austauschbar und kann je nach Bildschirmgröße anders positioniert werden.
+
+Für den Hero-Bereich wird eine eigene responsive Logik festgelegt:
+
+- **360px bis 767px:** Die Hero-Elemente werden gestapelt dargestellt. Bild, Sprungmarken, Headline, Introtext und Portrait stehen untereinander, damit die Inhalte auf kleinen Bildschirmen lesbar und bedienbar bleiben.
+- **768px bis 1023px:** Das Layout bleibt vereinfacht, da für ein vollständiges Overlay-Layout noch zu wenig horizontale Fläche vorhanden ist.
+- **ab 1024px:** Der Hero-Bereich nutzt das geplante Overlay-Layout. Sport-Sprungmarken, Headline, Introtext und Portrait werden über beziehungsweise auf dem Hero-Bild positioniert.
+- **ab 1440px:** Die Positionierung wird für große Bildschirme weiter verfeinert. Der Hero bleibt über die gesamte Breite sichtbar, während Texte, Links und Portrait kontrolliert platziert werden.
+
+Diese Konkretisierung greift das Feedback zur besseren Darstellung der Navigation und zur genaueren Ausarbeitung des Konzepts auf.
+
+
 
 
 
