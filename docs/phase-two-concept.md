@@ -326,6 +326,15 @@ Die Overlay-Flächen dienen gleichzeitig als Sprungmarken zu den jeweiligen Inha
 Diese Lösung verbindet die gestalterische Idee der mobilen Hero-Grafik mit einer semantisch saubereren Umsetzung. Die Navigation bleibt klickbar, responsiv und besser zugänglich als eine reine Bildbeschriftung.
 
 
+### 6.10 Responsive Hauptnavigation
+
+Die Hauptnavigation wurde in Phase 2 konkretisiert und für unterschiedliche Bildschirmgrößen angepasst. Auf größeren Ansichten wird die Navigation als horizontale Linkliste im Header dargestellt. Dadurch sind alle zentralen Seitenbereiche direkt erreichbar und die Orientierung auf Desktop- und Tablet-Ansichten bleibt übersichtlich.
+
+Für kleine Bildschirme wird ein aufklappbares Menü eingesetzt. Die Umsetzung erfolgt mit dem HTML-Element `details` und einem `summary` als sichtbarem Menüauslöser. Dadurch kann die Navigation ohne JavaScript ein- und ausgeklappt werden. Das reduziert die technische Komplexität und sorgt trotzdem für eine platzsparende mobile Darstellung.
+
+Damit die Desktop-Navigation unabhängig vom geschlossenen mobilen Menü sichtbar bleibt, werden für Mobile und Desktop getrennte Navigationslisten verwendet, die per CSS je nach Breakpoint ein- oder ausgeblendet werden. Diese Entscheidung verbessert die Stabilität der Darstellung und macht das responsive Verhalten klar nachvollziehbar.
+
+Zusätzlich wurden Fokus- und Hoverzustände gestaltet, damit die Navigation nicht nur visuell zum Portfolio passt, sondern auch per Tastatur besser bedienbar bleibt.
 
 
 
