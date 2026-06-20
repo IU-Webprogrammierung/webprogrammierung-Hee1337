@@ -707,6 +707,137 @@ body {
   outline-offset: 3px;
 }
 
+
+/* Rennrad-Setup: interaktive Bildkomponente mit Hotspots und Detailkarte. */
+.bike-setup-card {
+  display: grid;
+  gap: 2rem;
+}
+
+.bike-setup-intro {
+  max-width: 60rem;
+}
+
+.bike-setup-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.bike-figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.bike-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bike-figure figcaption {
+  padding: 0.85rem 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Hotspots: klickbare Markierungen auf dem Rennradbild. */
+.bike-hotspot {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border: 0.2rem solid var(--color-text);
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-weight: 800;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.35);
+
+  transform: translate(-50%, -50%);
+  animation: hotspot-pulse 1.8s ease-in-out infinite;
+}
+
+.bike-hotspot:hover,
+.bike-hotspot:focus-visible {
+  color: var(--color-text);
+  background-color: var(--color-highlight);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  animation: none;
+}
+
+.bike-hotspot span {
+  line-height: 1;
+}
+
+/* Hotspot-Positionen: werden passend zum konkreten Rennradbild feinjustiert. */
+.bike-hotspot--di2 {
+  top: 54%;
+  left: 55%;
+}
+
+.bike-hotspot--wheels {
+  top: 67%;
+  left: 78%;
+}
+
+.bike-hotspot--tires {
+  top: 75%;
+  left: 23%;
+}
+
+.bike-hotspot--powermeter {
+  top: 61%;
+  left: 46%;
+}
+
+.bike-hotspot--brakes {
+  top: 68%;
+  left: 70%;
+}
+
+
+/* Detailkarte: zeigt Informationen zur ausgewählten Rennrad-Komponente. */
+.bike-detail-card {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+}
+
+.bike-detail-kicker {
+  margin: 0 0 0.5rem;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bike-detail-card h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.bike-detail-card p:last-child {
+  margin-bottom: 0;
+}
+
 /*-------------------BREAKPOINT DECLARATION ----------------------------*/
 
 
@@ -1017,3 +1148,30 @@ body {
   }
 }
 
+@media (min-width: 1024px) {
+  .bike-setup-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.8fr);
+  }
+
+  .bike-detail-card {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bike-hotspot {
+    animation: none;
+  }
+}
+
+@keyframes hotspot-pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}

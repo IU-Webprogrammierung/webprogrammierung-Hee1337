@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meine sportliche Laufbahn</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js"></script>
 </head>
 <body>
 
@@ -31,9 +32,9 @@
           <ul class="navigation-list navigation-list--mobile">
             <li><a href="#ueber-mich">Das bin ich</a></li>
             <li><a href="#jugend">Jugend</a></li>
-            <li><a href="#crossfit">CrossFit</a></li>
             <li><a href="#hyrox">Hyrox</a></li>
             <li><a href="#rennrad">Rennrad</a></li>
+            <li><a href="#rennrad-setup">Setup</a></li>
             <li><a href="#strukturiertes-training">Training mit Struktur</a></li>
             <li><a href="#trainings-glossar">Glossar</a></li>
             <li><a href="#rennen">Mein erstes Rennen</a></li>
@@ -47,6 +48,7 @@
           <li><a href="#crossfit">CrossFit</a></li>
           <li><a href="#hyrox">Hyrox</a></li>
           <li><a href="#rennrad">Rennrad</a></li>
+          <li><a href="#rennrad-setup">Setup</a></li>
           <li><a href="#strukturiertes-training">Training mit Struktur</a></li>
           <li><a href="#trainings-glossar">Glossar</a></li>
           <li><a href="#rennen">Mein erstes Rennen</a></li>
@@ -207,6 +209,79 @@
   </div>
 </section>
       
+<section id="rennrad-setup" class="content-section bike-setup-section" aria-labelledby="bike-setup-heading">
+  <h2 id="bike-setup-heading">Mein Rennrad-Setup</h2>
+
+  <div class="content-card bike-setup-card">
+    <div class="bike-setup-intro">
+      <p>
+        Mein Rennrad ist nicht nur Sportgerät, sondern ein wichtiger Teil meines strukturierten Trainings.
+        Die markierten Komponenten zeigen, welche Technik mich im Training und auf längeren Ausfahrten unterstützt.
+      </p>
+    </div>
+
+    <div class="bike-setup-layout">
+      <figure class="bike-figure">
+        <img
+          src="assets/images/rennrad-setup.png"
+          alt="Stevens Rennrad von Christopher Berg mit markierten Komponenten"
+        >
+
+        <button 
+        class="bike-hotspot bike-hotspot--di2" 
+        type="button" 
+        data-bike-part="di2" 
+        aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen">
+          <span>1</span>
+        </button>
+
+        <button 
+        class="bike-hotspot bike-hotspot--wheels" 
+        type="button" 
+        data-bike-part="wheels" 
+        aria-label="Details zu den Carbon-Laufrädern anzeigen">
+          <span>2</span>
+        </button>
+
+        <button 
+        class="bike-hotspot bike-hotspot--tires"
+         type="button" 
+         data-bike-part="tires" 
+         aria-label="Details zu den Reifen anzeigen">
+          <span>3</span>
+        </button>
+
+        <button 
+        class="bike-hotspot bike-hotspot--powermeter"
+         type="button" 
+         data-bike-part="powermeter"
+         aria-label="Details zum Powermeter anzeigen">
+          <span>4</span>
+        </button>
+
+        <button 
+        class="bike-hotspot bike-hotspot--brakes"
+         type="button" 
+         data-bike-part="brakes" 
+         aria-label="Details zu den Scheibenbremsen anzeigen">
+          <span>5</span>
+        </button>
+
+        <figcaption>
+          Klickbare Hotspots erklären zentrale Komponenten meines Rennrad-Setups.
+        </figcaption>
+      </figure>
+
+      <article class="bike-detail-card" id="bike-detail-card" aria-live="polite">
+        <p class="bike-detail-kicker">Ausgewählte Komponente</p>
+        <h3 id="bike-detail-title">Shimano 105 Di2</h3>
+        <p id="bike-detail-text">
+          Die elektronische Shimano 105 Di2 sorgt für präzise Schaltvorgänge und unterstützt ein gleichmäßiges Fahren bei wechselnden Belastungen.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section id="training" class="content-section" aria-labelledby="training-heading">
   <h2 id="training-heading">Einblick ins strukturierte Rennradtraining</h2>
