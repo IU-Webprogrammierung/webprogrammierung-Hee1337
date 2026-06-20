@@ -68,29 +68,113 @@ body {
   letter-spacing: 0.08em;
 }
 
-/* Hauptnavigation rechts im Header. */
-.main-navigation ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: clamp(1rem, 3vw, 3rem);
+/* Hauptnavigation: Mobile nutzt ein aufklappbares Menü, Desktop zeigt die Links direkt. */
+.main-navigation {
+  position: relative;
+  margin-left: auto;
+}
 
+.navigation-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.navigation-list--desktop {
+  display: none;
+}
+
+.navigation-toggle {
+  position: relative;
+}
+
+.navigation-toggle > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+.navigation-toggle > summary::-webkit-details-marker {
+  display: none;
+}
+
+.navigation-toggle > summary::marker {
+  content: "";
+}
+
+.navigation-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.navigation-list--mobile {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 0.5rem;
+  min-width: min(18rem, calc(100vw - 2rem));
+  padding: 0.75rem;
+  background-color: rgba(15, 23, 36, 0.96);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+
+.navigation-toggle:not([open]) > .navigation-list--mobile {
+  display: none;
+}
+
 .main-navigation a {
+  display: block;
   color: var(--color-text);
   text-decoration: none;
-  font-size: 1rem;
   font-weight: 600;
+  border-radius: 0.75rem;
+}
+
+.navigation-list--mobile a {
+  padding: 0.65rem 0.75rem;
 }
 
 .main-navigation a:hover,
-.main-navigation a:focus-visible {
+.main-navigation a:focus-visible,
+.navigation-toggle > summary:focus-visible {
   color: var(--color-accent);
-  outline: none;
+  background-color: rgba(255, 255, 255, 0.08);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Ab Tablet-Breite wird das mobile Details-Menü ausgeblendet und die Desktop-Navigation angezeigt. */
+@media (min-width: 768px) {
+  .navigation-toggle {
+    display: none;
+  }
+
+  .navigation-list--desktop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.75rem 1rem;
+  }
+
+  .navigation-list--desktop a {
+    padding: 0.25rem 0;
+  }
+
+  .navigation-list--desktop a:hover,
+  .navigation-list--desktop a:focus-visible {
+    background-color: transparent;
+  }
 }
 
 /* Hero-Bereich: full-width Einstieg mit Bildcollage, Textoverlay, Sprungmarken und Portrait. */
@@ -638,3 +722,4 @@ body {
     display: block;
   }
 }
+
