@@ -140,6 +140,10 @@ body {
   object-position: center center;
 }
 
+.hero-picture {
+  display: block;
+}
+
 /* Hero-Text: Headline und Introtext werden gemeinsam auf dem Bild positioniert. */
 .hero-content {
   position: absolute;
@@ -342,11 +346,13 @@ body {
     display: none;
   }
 
-  .hero-image {
-    height: 24rem;
-    object-fit: cover;
-    object-position: center center;
-  }
+ .hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+}
 
   .hero-station-navigation {
     position: static;
@@ -512,4 +518,8 @@ body {
     width: min(12rem, 55vw);
     margin: 2rem auto 0;
   }
+
+  .hero-media::after {
+  display: none;
+}
 }

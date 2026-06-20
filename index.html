@@ -47,11 +47,17 @@
   </div>
   <!-- Hero-Bild: zeigt den sportlichen Schwerpunkt der Seite. Der alt-Text beschreibt den Bildinhalt für Screenreader. -->
   <div class="hero-media">
-    <img 
-      class="hero-image"
-      src="assets/images/hero-sports-collage.jpg" 
-      alt="Sportcollage mit Handball, CrossFit, Hyrox und Rennrad als Stationen meiner sportlichen Laufbahn"
-  >
+    <picture class="hero-picture">
+      <source 
+        media="(max-width: 767px)" 
+        srcset="assets/images/hero-sports-mobile.jpg"
+      >
+      <img 
+        class="hero-image"
+        src="assets/images/hero-sports-collage.jpg" 
+        alt="Sportcollage mit Handball, CrossFit, Hyrox und Rennrad als Stationen meiner sportlichen Laufbahn"
+      >
+    </picture>
 
   <!-- Hero-Sprungmarken: Die Beschriftungen der Sportarten ergänzen die Hauptnavigation und führen direkt zu den passenden Bereichen. -->
    <nav class="hero-station-navigation" aria-label="Sprungmarken zu den Sportstationen">
