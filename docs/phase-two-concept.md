@@ -317,6 +317,14 @@ Bis 767px wird das mobile Hero-Bild geladen. Ab größeren Ansichten wird weiter
 
 Diese Entscheidung verbessert die responsive Darstellung, weil die vier sportlichen Stationen auch auf kleinen Bildschirmen erkennbar bleiben. Gleichzeitig bleiben Texte, Navigation und Sprungmarken als echte HTML-Elemente erhalten und werden nicht in das Bild eingebrannt. Dadurch bleibt der Hero-Bereich flexibler, barriereärmer und leichter wartbar.
 
+### 6.9 Mobile Hero-Overlays als klickbare Sprungmarken
+
+Für die mobile Ansicht werden die Sportstationen direkt als klickbare Overlay-Flächen auf dem Hero-Bild dargestellt. Jede der vier Bildkacheln erhält eine eigene transparente Textfläche mit Sportart und kurzer Zusatzbeschreibung. Dadurch bleibt die visuelle Wirkung der mobilen Collage erhalten, während die Beschriftungen weiterhin als echte HTML-Inhalte umgesetzt werden.
+
+Die Overlay-Flächen dienen gleichzeitig als Sprungmarken zu den jeweiligen Inhaltsbereichen der Seite. Sie sind groß genug gestaltet, um auf Touchscreens gut bedienbar zu sein, und ersetzen damit eingebrannte Bildtexte. Die Trennung von Bildinhalt und HTML-Text verbessert die Wartbarkeit, da Texte später unabhängig vom Bild angepasst werden können.
+
+Diese Lösung verbindet die gestalterische Idee der mobilen Hero-Grafik mit einer semantisch saubereren Umsetzung. Die Navigation bleibt klickbar, responsiv und besser zugänglich als eine reine Bildbeschriftung.
+
 
 
 
