@@ -308,6 +308,16 @@ Für den Hero-Bereich wird eine eigene responsive Logik festgelegt:
 
 Diese Konkretisierung greift das Feedback zur besseren Darstellung der Navigation und zur genaueren Ausarbeitung des Konzepts auf.
 
+### 6.8 Responsive Bildvarianten im Hero-Bereich
+
+Für den Hero-Bereich werden unterschiedliche Bildvarianten eingesetzt, damit die Darstellung auf verschiedenen Bildschirmgrößen sinnvoll bleibt. Das breite Desktop-Hero-Bild eignet sich gut für große Bildschirme, verliert auf kleinen hochformatigen Displays jedoch wichtige Bildbereiche. Deshalb wird für mobile Ansichten eine eigene hochformatige Bildversion verwendet.
+
+Die technische Umsetzung erfolgt mit dem `picture`-Element. Dadurch kann der Browser abhängig von der Bildschirmbreite automatisch die passende Bildquelle auswählen. 
+Bis 767px wird das mobile Hero-Bild geladen. Ab größeren Ansichten wird weiterhin die breite Desktop-Collage verwendet.
+
+Diese Entscheidung verbessert die responsive Darstellung, weil die vier sportlichen Stationen auch auf kleinen Bildschirmen erkennbar bleiben. Gleichzeitig bleiben Texte, Navigation und Sprungmarken als echte HTML-Elemente erhalten und werden nicht in das Bild eingebrannt. Dadurch bleibt der Hero-Bereich flexibler, barriereärmer und leichter wartbar.
+
+
 
 
 
