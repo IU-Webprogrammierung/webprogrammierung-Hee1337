@@ -336,6 +336,31 @@ Damit die Desktop-Navigation unabhängig vom geschlossenen mobilen Menü sichtba
 
 Zusätzlich wurden Fokus- und Hoverzustände gestaltet, damit die Navigation nicht nur visuell zum Portfolio passt, sondern auch per Tastatur besser bedienbar bleibt.
 
+### 6.11 Trainings-Glossar als interaktiver HTML-Bereich
+
+Das Trainings-Glossar wurde als eigener Inhaltsbereich ergänzt, um zentrale Begriffe des strukturierten Rennradtrainings verständlich zu erklären. Dadurch erhält die Seite einen zusätzlichen Abschnitt, der nicht nur gestalterisch, sondern auch inhaltlich zur Orientierung beiträgt.
+
+Die Umsetzung erfolgt mit den nativen HTML-Elementen `details` und `summary`. Dadurch können einzelne Begriffe ohne JavaScript auf- und zugeklappt werden. Diese Lösung erweitert den HTML-Anteil der Seite sinnvoll, weil sie echte Interaktion mit semantischen Elementen verbindet.
+
+Die Begriffe werden in einer Card-Struktur dargestellt und durch CSS visuell an das restliche Layout angepasst. Zusätzlich werden einfache Zustands- und Animationseffekte genutzt, damit das Öffnen der Einträge für Nutzerinnen und Nutzer deutlicher wahrnehmbar ist.
+
+### 6.12 Interaktive Rennrad-Setup-Komponente
+
+Der Bereich „Mein Rennrad-Setup“ wurde als interaktive Highlight-Komponente ergänzt. Ein Bild des Rennrads wird mit klickbaren Hotspots versehen, die zentrale Komponenten wie Schaltung, Laufräder, Reifen, Powermeter und Scheibenbremsen erklären.
+
+Die Hotspots werden als echte `button`-Elemente umgesetzt. Dadurch sind sie nicht nur visuelle Markierungen, sondern bedienbare interaktive Elemente. Beim Anklicken wird eine Detailkarte aktualisiert, die den jeweiligen Bestandteil des Setups genauer beschreibt. Die Umsetzung nutzt bewusst nur kleines Vanilla JavaScript, um die Interaktion gezielt und ohne zusätzliches Framework zu steuern.
+
+Die Komponente erweitert die Seite um `figure`, `figcaption`, `button`, `article`, JavaScript-Zustände und CSS-Animationen. Gleichzeitig bleibt sie responsive: Auf mobilen Ansichten werden die Hotspots kleiner dargestellt und beziehen sich durch einen eigenen Bild-Wrapper korrekt auf das Rennradbild.
+
+### 6.13 Footer und Impressum
+
+Das Impressum wurde aus dem normalen Inhaltsfluss herausgelöst und in einen eigenen Footer verschoben. Dadurch endet die Seite nicht mit einem losgelösten Inhaltsabschnitt, sondern mit einem klaren Seitenabschluss.
+
+Der Footer bündelt Impressum, Projektinformationen, Kontaktangaben und ergänzende Navigation. Die Umsetzung nutzt das semantische HTML-Element `footer` sowie `address` für die Kontaktinformationen. Damit wird die Seitenstruktur klarer und der rechtlich-organisatorische Bereich von den inhaltlichen Hauptabschnitten getrennt.
+
+Auf größeren Bildschirmen wird der Footer mehrspaltig dargestellt, während die Inhalte auf kleinen Bildschirmen untereinander angeordnet werden. Dadurch bleibt der Abschluss der Seite responsiv und konsistent zum restlichen Layout.
+
+
 
 
 
