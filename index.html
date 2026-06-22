@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meine sportliche Laufbahn</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </head>
 <body>
 
@@ -227,42 +227,53 @@
           alt="Stevens Rennrad von Christopher Berg mit markierten Komponenten"
         >
 
-        <button 
-        class="bike-hotspot bike-hotspot--di2" 
-        type="button" 
-        data-bike-part="di2" 
-        aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen">
+        <button
+          class="bike-hotspot bike-hotspot--di2 is-active"
+          type="button"
+          data-bike-part="di2"
+          aria-controls="bike-detail-card"
+          aria-pressed="true"
+          aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen"
+        >
           <span>1</span>
         </button>
 
         <button 
-        class="bike-hotspot bike-hotspot--wheels" 
-        type="button" 
-        data-bike-part="wheels" 
-        aria-label="Details zu den Carbon-Laufrädern anzeigen">
+          class="bike-hotspot bike-hotspot--wheels" 
+          type="button" 
+          data-bike-part="wheels" 
+          aria-controls="bike-detail-card"
+          aria-pressed="false"
+          aria-label="Details zu den Carbon-Laufrädern anzeigen">
           <span>2</span>
         </button>
 
         <button 
-        class="bike-hotspot bike-hotspot--tires"
+         class="bike-hotspot bike-hotspot--tires"
          type="button" 
          data-bike-part="tires" 
+         aria-controls="bike-detail-card"
+         aria-pressed="false"
          aria-label="Details zu den Reifen anzeigen">
           <span>3</span>
         </button>
 
         <button 
-        class="bike-hotspot bike-hotspot--powermeter"
+         class="bike-hotspot bike-hotspot--powermeter"
          type="button" 
          data-bike-part="powermeter"
+         aria-controls="bike-detail-card"
+         aria-pressed="false"
          aria-label="Details zum Powermeter anzeigen">
           <span>4</span>
         </button>
 
         <button 
-        class="bike-hotspot bike-hotspot--brakes"
+         class="bike-hotspot bike-hotspot--brakes"
          type="button" 
          data-bike-part="brakes" 
+         aria-controls="bike-detail-card"
+         aria-pressed="false"
          aria-label="Details zu den Scheibenbremsen anzeigen">
           <span>5</span>
         </button>

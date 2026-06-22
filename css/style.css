@@ -786,30 +786,29 @@ body {
 
 /* Hotspot-Positionen: werden passend zum konkreten Rennradbild feinjustiert. */
 .bike-hotspot--di2 {
-  top: 54%;
-  left: 55%;
+  top: 70%;
+  left: 72%;
 }
 
 .bike-hotspot--wheels {
-  top: 67%;
-  left: 78%;
+  top: 46%;
+  left: 80%;
 }
 
 .bike-hotspot--tires {
-  top: 75%;
-  left: 23%;
+  top: 85%;
+  left: 24%;
 }
 
 .bike-hotspot--powermeter {
-  top: 61%;
-  left: 46%;
+  top: 63%;
+  left: 54%;
 }
 
 .bike-hotspot--brakes {
-  top: 68%;
-  left: 70%;
+  top: 60%;
+  left: 20%;
 }
-
 
 /* Detailkarte: zeigt Informationen zur ausgewählten Rennrad-Komponente. */
 .bike-detail-card {
@@ -836,6 +835,28 @@ body {
 
 .bike-detail-card p:last-child {
   margin-bottom: 0;
+}
+
+.bike-hotspot.is-active {
+  color: var(--color-text);
+  background-color: var(--color-highlight);
+  animation: none;
+}
+
+.bike-detail-card.is-visible {
+  animation: bike-detail-pop 0.24s ease-out;
+}
+
+@keyframes bike-detail-pop {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /*-------------------BREAKPOINT DECLARATION ----------------------------*/
@@ -1163,6 +1184,9 @@ body {
   .bike-hotspot {
     animation: none;
   }
+  .bike-detail-card.is-visible {
+  animation: none;
+}
 }
 
 @keyframes hotspot-pulse {
