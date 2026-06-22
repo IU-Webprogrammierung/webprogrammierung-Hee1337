@@ -360,6 +360,13 @@ Der Footer bündelt Impressum, Projektinformationen, Kontaktangaben und ergänze
 
 Auf größeren Bildschirmen wird der Footer mehrspaltig dargestellt, während die Inhalte auf kleinen Bildschirmen untereinander angeordnet werden. Dadurch bleibt der Abschluss der Seite responsiv und konsistent zum restlichen Layout.
 
+### 6.14 Vereinfachung der Hauptnavigation
+
+Die Hauptnavigation wurde in Phase 2 bewusst verschlankt. Statt alle einzelnen Sportstationen direkt im Header aufzuführen, verweist die Hauptnavigation nun auf die größeren Inhaltsbereiche der Seite: persönliche Vorstellung, sportliche Laufbahn, Rennrad-Setup, Training, Glossar, Rennen und Impressum.
+
+Die Detailstationen Jugend, CrossFit, Hyrox und Rennrad bleiben weiterhin direkt erreichbar, werden aber über die klickbaren Hero-Overlays und den Bereich „Meine sportlichen Stationen“ abgebildet. Dadurch entsteht eine klare Trennung zwischen Hauptnavigation und Detailnavigation.
+
+Diese Entscheidung verbessert die Übersichtlichkeit im Header, besonders auf großen Desktop-Ansichten mit vielen Navigationspunkten. Gleichzeitig bleibt die Seite vollständig navigierbar. Die Desktop-Navigation wird zusätzlich durch dezente Trennstriche gegliedert, wodurch die einzelnen Links klarer voneinander unterscheidbar sind.
 
 
 
