@@ -222,66 +222,69 @@
 
     <div class="bike-setup-layout">
       <figure class="bike-figure">
-        <img
-          src="assets/images/rennrad-setup.png"
-          alt="Stevens Rennrad von Christopher Berg mit markierten Komponenten"
-        >
+        <div class="bike-image-wrapper">
+          <img
+            src="assets/images/rennrad-setup.png"
+            alt="Stevens Rennrad von Christopher Berg mit markierten Komponenten"
+          >
 
-        <button
-          class="bike-hotspot bike-hotspot--di2 is-active"
-          type="button"
-          data-bike-part="di2"
-          aria-controls="bike-detail-card"
-          aria-pressed="true"
-          aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen"
-        >
-          <span>1</span>
-        </button>
+          <button
+            class="bike-hotspot bike-hotspot--di2 is-active"
+            type="button"
+            data-bike-part="di2"
+            aria-controls="bike-detail-card"
+            aria-pressed="true"
+            aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen"
+          >
+            <span>1</span>
+          </button>
 
-        <button 
-          class="bike-hotspot bike-hotspot--wheels" 
+          <button 
+            class="bike-hotspot bike-hotspot--wheels" 
+            type="button" 
+            data-bike-part="wheels" 
+            aria-controls="bike-detail-card"
+            aria-pressed="false"
+            aria-label="Details zu den Carbon-Laufrädern anzeigen">
+            <span>2</span>
+          </button>
+
+          <button 
+          class="bike-hotspot bike-hotspot--tires"
           type="button" 
-          data-bike-part="wheels" 
+          data-bike-part="tires" 
           aria-controls="bike-detail-card"
           aria-pressed="false"
-          aria-label="Details zu den Carbon-Laufrädern anzeigen">
-          <span>2</span>
-        </button>
+          aria-label="Details zu den Reifen anzeigen">
+            <span>3</span>
+          </button>
 
-        <button 
-         class="bike-hotspot bike-hotspot--tires"
-         type="button" 
-         data-bike-part="tires" 
-         aria-controls="bike-detail-card"
-         aria-pressed="false"
-         aria-label="Details zu den Reifen anzeigen">
-          <span>3</span>
-        </button>
+          <button 
+          class="bike-hotspot bike-hotspot--powermeter"
+          type="button" 
+          data-bike-part="powermeter"
+          aria-controls="bike-detail-card"
+          aria-pressed="false"
+          aria-label="Details zum Powermeter anzeigen">
+            <span>4</span>
+          </button>
 
-        <button 
-         class="bike-hotspot bike-hotspot--powermeter"
-         type="button" 
-         data-bike-part="powermeter"
-         aria-controls="bike-detail-card"
-         aria-pressed="false"
-         aria-label="Details zum Powermeter anzeigen">
-          <span>4</span>
-        </button>
-
-        <button 
-         class="bike-hotspot bike-hotspot--brakes"
-         type="button" 
-         data-bike-part="brakes" 
-         aria-controls="bike-detail-card"
-         aria-pressed="false"
-         aria-label="Details zu den Scheibenbremsen anzeigen">
-          <span>5</span>
-        </button>
+          <button 
+          class="bike-hotspot bike-hotspot--brakes"
+          type="button" 
+          data-bike-part="brakes" 
+          aria-controls="bike-detail-card"
+          aria-pressed="false"
+          aria-label="Details zu den Scheibenbremsen anzeigen">
+            <span>5</span>
+          </button>
+        </div>
 
         <figcaption>
           Klickbare Hotspots erklären zentrale Komponenten meines Rennrad-Setups.
-        </figcaption>
-      </figure>
+          </figcaption>
+        </figure>
+        
 
       <article class="bike-detail-card" id="bike-detail-card" aria-live="polite">
         <p class="bike-detail-kicker">Ausgewählte Komponente</p>

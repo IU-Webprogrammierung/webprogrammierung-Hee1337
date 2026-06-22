@@ -726,7 +726,6 @@ body {
 }
 
 .bike-figure {
-  position: relative;
   margin: 0;
   overflow: hidden;
   border-radius: 1.25rem;
@@ -734,11 +733,16 @@ body {
   background-color: rgba(255, 255, 255, 0.04);
 }
 
-.bike-figure img {
+.bike-image-wrapper {
+  position: relative;
+}
+
+.bike-image-wrapper img {
   display: block;
   width: 100%;
   height: auto;
 }
+
 
 .bike-figure figcaption {
   padding: 0.85rem 1rem;
@@ -1245,6 +1249,16 @@ body {
   .bike-detail-card {
     position: sticky;
     top: 2rem;
+  }
+}
+
+/* hotspots ab Bildschirmbreite 767px  verkleinern. */
+@media (max-width: 767px) {
+  .bike-hotspot {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-width: 0.15rem;
+    font-size: 0.8rem;
   }
 }
 
