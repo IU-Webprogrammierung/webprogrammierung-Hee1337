@@ -1241,6 +1241,32 @@ body {
   }
 }
 
+/* Desktop-Navigation: schlanke Hauptnavigation mit Trennstrichen. */
+@media (min-width: 768px) {
+  .navigation-list--desktop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0;
+  }
+
+  .navigation-list--desktop li {
+    display: flex;
+    align-items: center;
+  }
+
+  .navigation-list--desktop li + li {
+    margin-left: clamp(0.65rem, 1vw, 1rem);
+    padding-left: clamp(0.65rem, 1vw, 1rem);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .navigation-list--desktop a {
+    white-space: nowrap;
+    font-size: clamp(0.9rem, 0.9vw, 1rem);
+  }
+}
+
 @media (min-width: 1024px) {
   .bike-setup-layout {
     grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.8fr);
