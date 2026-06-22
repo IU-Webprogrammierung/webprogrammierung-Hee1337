@@ -859,6 +859,74 @@ body {
   }
 }
 
+/* Footer: bündelt Impressum, Projektinfo und ergänzende Navigation am Seitenende. */
+.site-footer {
+  margin-top: var(--spacing-section);
+  padding: 3rem clamp(1.5rem, 4vw, 3rem);
+  background-color: rgba(8, 13, 24, 0.96);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-inner {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+
+  display: grid;
+  gap: 2rem;
+}
+
+.footer-brand h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.footer-brand p,
+.footer-note,
+.footer-contact {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.footer-contact {
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.footer-contact strong {
+  color: var(--color-text);
+}
+
+.site-footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--color-text);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.footer-navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-note {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+
 /*-------------------BREAKPOINT DECLARATION ----------------------------*/
 
 
@@ -1187,6 +1255,17 @@ body {
   .bike-detail-card.is-visible {
   animation: none;
 }
+}
+
+@media (min-width: 1024px) {
+  .footer-inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr) minmax(16rem, 0.8fr);
+    align-items: start;
+  }
+
+  .footer-note {
+    grid-column: 1 / -1;
+  }
 }
 
 @keyframes hotspot-pulse {
