@@ -82,125 +82,125 @@ body {
   letter-spacing: 0.08em;
 }
 
-/* Hauptnavigation: Mobile nutzt ein aufklappbares Menü, Desktop zeigt die Links direkt. */
+/* Hauptnavigation: mobile Toggle-Navigation und horizontale Desktop-Navigation. */
 .main-navigation {
   position: relative;
   margin-left: auto;
-}
 
-.navigation-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  & .navigation-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-.navigation-list--desktop {
-  display: none;
-}
-
-.navigation-toggle {
-  position: relative;
-}
-
-.navigation-toggle > summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 0.9rem;
-  color: var(--color-text);
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  font-weight: 700;
-  list-style: none;
-}
-
-.navigation-toggle > summary::-webkit-details-marker {
-  display: none;
-}
-
-.navigation-toggle > summary::marker {
-  content: "";
-}
-
-.navigation-icon {
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.navigation-list--mobile {
-  position: absolute;
-  top: calc(100% + 0.75rem);
-  right: 0;
-  z-index: 30;
-  display: grid;
-  gap: 0.5rem;
-  min-width: min(18rem, calc(100vw - 2rem));
-  padding: 0.75rem;
-  background-color: rgba(15, 23, 36, 0.96);
-  border: 1px solid var(--color-border);
-  border-radius: 1rem;
-}
-
-.navigation-toggle:not([open]) > .navigation-list--mobile {
-  display: none;
-}
-
-.main-navigation a {
-  display: block;
-  color: var(--color-text);
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: var(--radius-small);
-}
-
-.navigation-list--mobile a {
-  padding: 0.65rem 0.75rem;
-}
-
-.main-navigation a:hover,
-.main-navigation a:focus-visible,
-.navigation-toggle > summary:focus-visible {
-  color: var(--color-accent);
-  background-color: rgba(255, 255, 255, 0.08);
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-}
-
-/* Tablet- und Desktop-Navigation: horizontale Linkliste mit Trennstrichen. */
-@media (min-width: 768px) {
-  .navigation-toggle {
+  & .navigation-list--desktop {
     display: none;
   }
 
-  .navigation-list--desktop {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 0;
+  & .navigation-toggle {
+    position: relative;
   }
 
-  .navigation-list--desktop li {
-    display: flex;
+  & .navigation-toggle > summary {
+    display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
   }
 
-  .navigation-list--desktop li + li {
-    margin-left: clamp(0.65rem, 1vw, 1rem);
-    padding-left: clamp(0.65rem, 1vw, 1rem);
-    border-left: 1px solid var(--color-border);
+  & .navigation-toggle > summary::-webkit-details-marker {
+    display: none;
   }
 
-  .navigation-list--desktop a {
-    padding: 0.25rem 0;
-    white-space: nowrap;
-    font-size: clamp(0.9rem, 0.9vw, 1rem);
+  & .navigation-toggle > summary::marker {
+    content: "";
   }
 
-  .navigation-list--desktop a:hover,
-  .navigation-list--desktop a:focus-visible {
-    background-color: transparent;
+  & .navigation-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  & .navigation-list--mobile {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    z-index: 30;
+    display: grid;
+    gap: 0.5rem;
+    min-width: min(18rem, calc(100vw - 2rem));
+    padding: 0.75rem;
+    background-color: rgba(15, 23, 36, 0.96);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+  }
+
+  & .navigation-toggle:not([open]) > .navigation-list--mobile {
+    display: none;
+  }
+
+  & a {
+    display: block;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: var(--radius-small);
+  }
+
+  & .navigation-list--mobile a {
+    padding: 0.65rem 0.75rem;
+  }
+
+  & a:hover,
+  & a:focus-visible,
+  & .navigation-toggle > summary:focus-visible {
+    color: var(--color-accent);
+    background-color: rgba(255, 255, 255, 0.08);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Ab Tablet-Breite wird die Navigation horizontal dargestellt. */
+  @media (min-width: 768px) {
+    & .navigation-toggle {
+      display: none;
+    }
+
+    & .navigation-list--desktop {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0;
+    }
+
+    & .navigation-list--desktop li {
+      display: flex;
+      align-items: center;
+    }
+
+    & .navigation-list--desktop li + li {
+      margin-left: clamp(0.65rem, 1vw, 1rem);
+      padding-left: clamp(0.65rem, 1vw, 1rem);
+      border-left: 1px solid var(--color-border);
+    }
+
+    & .navigation-list--desktop a {
+      padding: 0.25rem 0;
+      white-space: nowrap;
+      font-size: clamp(0.9rem, 0.9vw, 1rem);
+    }
+
+    & .navigation-list--desktop a:hover,
+    & .navigation-list--desktop a:focus-visible {
+      background-color: transparent;
+    }
   }
 }
 
