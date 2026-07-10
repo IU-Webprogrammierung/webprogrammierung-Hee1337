@@ -522,7 +522,7 @@ body {
     flex-direction: column;
   }
 }
-  
+
 
 /* Content-Bereiche: Training und Rennen nutzen denselben Kartenstil wie der restliche Seitenaufbau. */
 .content-section {
@@ -1146,7 +1146,8 @@ body {
   
 }
 
-/* Handy: Hero-Sprungmarken werden ausgeblendet, weil die Hauptnavigation diese Funktion übernimmt. */
+/* Handy: Hero-Sprungmarken werden als vier klickbare Overlay-Flächen
+   auf dem mobilen Hero-Bild dargestellt. */
 @media (max-width: 767px) {
      .hero-media {
     position: relative;
@@ -1223,10 +1224,6 @@ body {
     border-radius: 999px;
   }
 
-  .station-subtitle {
-    display: block;
-  }
-
   .hero-content {
     position: static;
     padding: 2rem 1.25rem 0;
@@ -1242,7 +1239,6 @@ body {
   }
 
   
-
   .hero-media::after {
   display: none;
 }
@@ -1258,9 +1254,6 @@ body {
     display: inline;
   }
 
-  .station-subtitle {
-    display: block;
-  }
 }
 
 
