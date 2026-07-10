@@ -507,10 +507,14 @@ body {
   }
 }
 
+/* Große Desktop-Ansicht: Timeline-Inhalt und Überschrift werden
+   auf eine gut lesbare Breite begrenzt. */
 @media (min-width: 1440px) {
+  .timeline-section > h2,
   .timeline-grid {
     max-width: 90rem;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .timeline-card {
@@ -518,14 +522,7 @@ body {
     flex-direction: column;
   }
 }
-@media (min-width: 1440px) {
-  .timeline-section > h2 {
-    max-width: 90rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
+  
 
 /* Content-Bereiche: Training und Rennen nutzen denselben Kartenstil wie der restliche Seitenaufbau. */
 .content-section {
