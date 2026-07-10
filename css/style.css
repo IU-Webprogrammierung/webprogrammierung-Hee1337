@@ -1,5 +1,6 @@
 /* Grunddesign: zentrale Farb- und Layoutwerte für das dunkle Portfolio-Theme. */
 :root {
+  /* Farben */
   --color-bg: #0f1724;
   --color-bg-soft: #172033;
   --color-text: #f8fafc;
@@ -7,10 +8,23 @@
   --color-accent: #e7c9a9;
   --color-highlight: #ff3045;
   --color-border: rgba(255, 255, 255, 0.14);
-  
 
+  /* Layout */
   --max-width: 1600px;
+  --content-width: min(100% - 2rem, var(--max-width));
+  --section-padding-inline: clamp(1rem, 3vw, 3rem);
   --spacing-section: 4rem;
+
+  /* Komponenten */
+  --radius-small: 0.75rem;
+  --radius-medium: 1rem;
+  --radius-large: 1.25rem;
+  --radius-hero: 1.5rem;
+  --radius-pill: 999px;
+
+  /* Bewegung */
+  --transition-fast: 0.2s ease;
+  --transition-pop: 0.24s ease-out;
 }
 
 /* Basislayout: sorgt für ein einheitliches Box-Modell und eine dunkle Grundfläche. */
@@ -96,7 +110,7 @@ body {
   color: var(--color-text);
   background-color: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   font-weight: 700;
   list-style: none;
@@ -138,7 +152,7 @@ body {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 600;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-small);
 }
 
 .navigation-list--mobile a {
@@ -185,7 +199,7 @@ body {
   overflow: hidden;
   background-color: var(--color-bg-soft);
   border: 1px solid var(--color-border);
-  border-radius: 1.5rem;
+  border-radius: var(--radius-hero);
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.45);
 }
 
@@ -356,9 +370,9 @@ body {
 
 /* Über-mich-Bereich: persönliche Vorstellung im gleichen visuellen Stil wie die Timeline. */
 .about-section {
-  width: min(100% - 2rem, var(--max-width));
+  width: var(--content-width);
   margin: 0 auto var(--spacing-section);
-  padding: 0 clamp(1rem, 3vw, 3rem);
+  padding: 0 var(--section-padding-inline);
   scroll-margin-top: 6rem;
 }
 
@@ -378,7 +392,7 @@ body {
   padding: 1.5rem;
   background-color: var(--color-bg-soft);
   border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-large);
 }
 
 .about-text p {
@@ -422,9 +436,10 @@ body {
 
 /* Timeline: stellt die sportlichen Stationen als responsive Karten dar. */
 .timeline-section {
-  width: min(100% - 2rem, var(--max-width));
+  width: var(--content-width);
+  padding: 0 var(--section-padding-inline);
   margin: 0 auto var(--spacing-section);
-  padding: 0 clamp(1rem, 3vw, 3rem);
+  
 }
 
 .timeline-section > h2 {
@@ -444,7 +459,7 @@ body {
   padding: 1.5rem;
   background-color: var(--color-bg-soft);
   border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-large);
 }
 
 .timeline-year {
@@ -500,9 +515,9 @@ body {
 
 /* Content-Bereiche: Training und Rennen nutzen denselben Kartenstil wie der restliche Seitenaufbau. */
 .content-section {
-  width: min(100% - 2rem, var(--max-width));
+  width: var(--content-width);
+  padding: 0 var(--section-padding-inline);
   margin: 0 auto var(--spacing-section);
-  padding: 0 clamp(1rem, 3vw, 3rem);
   scroll-margin-top: 6rem;
 }
 
@@ -517,7 +532,7 @@ body {
   padding: 1.5rem;
   background-color: var(--color-bg-soft);
   border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-large);
 }
 
 .content-card--compact {
@@ -550,7 +565,7 @@ body {
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
-  border-radius: 1rem;
+  border-radius: var(--radius-medium);
 }
 
 .glossary-item summary {
@@ -606,9 +621,9 @@ body {
 /* Glossar-Animation: geöffnete Einträge erscheinen mit einem leichten Pop-Effekt. */
 .glossary-item {
   transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease;
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .glossary-item[open] {
@@ -622,8 +637,8 @@ body {
 
 .glossary-item summary::after {
   transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .glossary-item[open] summary::after {
@@ -692,7 +707,7 @@ body {
   padding: 0.85rem 1.1rem;
   color: var(--color-bg);
   background-color: var(--color-accent);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   text-decoration: none;
   font-weight: 700;
 }
@@ -725,7 +740,7 @@ body {
 .bike-figure {
   margin: 0;
   overflow: hidden;
-  border-radius: 1.25rem;
+  border-radius: var(--radius-large);
   border: 1px solid var(--color-border);
   background-color: rgba(255, 255, 255, 0.04);
 }
@@ -816,7 +831,7 @@ body {
   padding: 1.5rem;
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-large);
 }
 
 .bike-detail-kicker {
