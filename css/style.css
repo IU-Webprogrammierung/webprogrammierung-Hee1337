@@ -667,14 +667,7 @@ body {
     transform: translateY(0) scale(1);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .glossary-item,
-  .glossary-item summary::after,
-  .glossary-item[open] p {
-    animation: none;
-    transition: none;
-  }
-}
+
 
 /* Trainingstabelle: macht die Progression übersichtlich und auf kleinen Screens scrollbar. */
 .training-table {
@@ -954,7 +947,7 @@ body {
   font-size: 0.95rem;
 }
 
-/*-------------------BREAKPOINT DECLARATION ----------------------------*/
+
 
 
 
@@ -1278,14 +1271,6 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bike-hotspot {
-    animation: none;
-  }
-  .bike-detail-card.is-visible {
-  animation: none;
-}
-}
 
 @media (min-width: 1024px) {
   .footer-inner {
@@ -1306,5 +1291,24 @@ body {
 
   50% {
     transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+
+/* Reduzierte Bewegung: Animationen und weiches Scrollen werden
+   für Nutzer:innen mit entsprechender Systemeinstellung deaktiviert. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .glossary-item,
+  .glossary-item summary::after {
+    transition: none;
+  }
+
+  .glossary-item[open] p,
+  .bike-hotspot,
+  .bike-detail-card.is-visible {
+    animation: none;
   }
 }
