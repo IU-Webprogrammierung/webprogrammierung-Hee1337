@@ -205,179 +205,441 @@ body {
 }
 
 
-/* Hero-Bereich: kontrollierte Portfolio-Bühne statt randloser Fullscreen-Fläche. */
+/* Hero: Bildbühne, Texte, Sprungmarken und responsive Varianten. */
 #hero {
   position: relative;
-  width: min(100% - 2rem, var(--max-width));
+  width: var(--content-width);
   margin: 1.5rem auto var(--spacing-section);
   overflow: hidden;
   background-color: var(--color-bg-soft);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-hero);
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.45);
-}
 
-.hero-media {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
+  & .hero-media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
 
-.hero-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(15, 23, 36, 0.82) 0%,
-      rgba(15, 23, 36, 0.42) 42%,
-      rgba(15, 23, 36, 0.12) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(15, 23, 36, 0.75) 0%,
-      rgba(15, 23, 36, 0.05) 55%
-    );
-}
+  & .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(15, 23, 36, 0.82) 0%,
+        rgba(15, 23, 36, 0.42) 42%,
+        rgba(15, 23, 36, 0.12) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(15, 23, 36, 0.75) 0%,
+        rgba(15, 23, 36, 0.05) 55%
+      );
+  }
 
-.hero-image {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: clamp(30rem, 68vh, 48rem);
-  object-fit: cover;
-  object-position: center center;
-}
+  & .hero-picture {
+    display: block;
+  }
 
-.hero-picture {
-  display: block;
-}
+  & .hero-image {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: clamp(30rem, 68vh, 48rem);
+    object-fit: cover;
+    object-position: center center;
+  }
 
-/* Hero-Text: Headline und Introtext werden gemeinsam auf dem Bild positioniert. */
-.hero-content {
-  position: absolute;
-  z-index: 3;
-  left: clamp(1.5rem, 4vw, 4rem);
-  bottom: clamp(2rem, 5vw, 4rem);
-  max-width: 36rem;
-}
+  /* Headline und Einführungstext. */
+  & .hero-content {
+    position: absolute;
+    z-index: 3;
+    left: clamp(1.5rem, 4vw, 4rem);
+    bottom: clamp(2rem, 5vw, 4rem);
+    max-width: 36rem;
+  }
 
-/* Hero-Textvarianten: Desktop- und Mobile-Texte werden je nach Breakpoint ein- oder ausgeblendet. */
-.hero-heading-mobile,
-.hero-text-mobile {
-  display: none;
-}
+  & .hero-heading-mobile,
+  & .hero-text-mobile {
+    display: none;
+  }
 
-.hero-heading-desktop,
-.hero-text-desktop {
-  display: inline;
-}
+  & .hero-heading-desktop,
+  & .hero-text-desktop {
+    display: inline;
+  }
 
-.hero-content h2 {
-  margin: 0 0 1rem;
-  color: var(--color-text);
-  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
-  line-height: 0.92;
-  font-weight: 800;
-  letter-spacing: -0.05em;
-}
+  & .hero-content h2 {
+    margin: 0 0 1rem;
+    color: var(--color-text);
+    font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+    line-height: 0.92;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+  }
 
-.hero-content p {
-  margin: 0;
+  & .hero-content p {
+    margin: 0;
+    color: var(--color-text);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
 
-  color: var(--color-text);
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-}
+  & .hero-content p::after {
+    content: "";
+    display: block;
+    width: 4rem;
+    height: 0.2rem;
+    margin-top: 1.25rem;
+    background-color: var(--color-highlight);
+  }
 
-.hero-content p::after {
-  content: "";
-  display: block;
-  width: 4rem;
-  height: 0.2rem;
-  margin-top: 1.25rem;
-  background-color: var(--color-highlight);
-}
+  /* Sprungmarken zu den vier sportlichen Stationen. */
+  & .hero-station-navigation {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    margin: 0;
+    pointer-events: none;
+  }
 
-/* Hero-Sprungmarken: liegen als echte Links über der Bildcollage. */
-.hero-station-navigation {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  margin: 0;
-  pointer-events: none;
-}
+  & .hero-station-navigation ul {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-.hero-station-navigation ul {
-  position: absolute;
-  inset: 0;
+  & .hero-station {
+    position: absolute;
+  }
 
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  & .hero-station--youth {
+    top: 8%;
+    left: 13%;
+  }
 
-.hero-station {
-  position: absolute;
-}
+  & .hero-station--crossfit {
+    top: 8%;
+    left: 38%;
+  }
 
-.hero-station--youth {
-  top: 8%;
-  left: 13%;
-}
+  & .hero-station--hyrox {
+    top: 8%;
+    left: 61%;
+  }
 
-.hero-station--crossfit {
-  top: 8%;
-  left: 38%;
-}
+  & .hero-station--cycling {
+    top: 8%;
+    right: 14%;
+  }
 
-.hero-station--hyrox {
-  top: 8%;
-  left: 61%;
-}
+  & .station-title,
+  & .station-subtitle {
+    display: block;
+  }
 
-.hero-station--cycling {
-  top: 8%;
-  right: 14%;
-}
+  & .station-subtitle {
+    display: none;
+    margin-top: 0.2rem;
+    color: var(--color-accent);
+    font-size: 0.85em;
+    font-weight: 500;
+  }
 
-/* Hero-Stationen: Titel und Zusatztext können je nach Breakpoint unterschiedlich dargestellt werden. */
-.station-title,
-.station-subtitle {
-  display: block;
-}
+  & .hero-station-navigation a {
+    pointer-events: auto;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 700;
+  }
 
-.station-subtitle {
-  display: none;
-  margin-top: 0.2rem;
-  color: var(--color-accent);
-  font-size: 0.85em;
-  font-weight: 500;
-}
+  & .hero-station-navigation a::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 0.12rem;
+    margin-top: 0.5rem;
+    background-color: currentColor;
+  }
 
-.hero-station-navigation a {
-  pointer-events: auto;
+  & .hero-station-navigation a:hover,
+  & .hero-station-navigation a:focus-visible {
+    color: var(--color-text);
+    outline: none;
+  }
 
-  color: var(--color-accent);
-  text-decoration: none;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-weight: 700;
-}
+  /* Große Desktop-Ansicht. */
+  @media (min-width: 1440px) {
+    & .hero-content {
+      left: 5rem;
+      bottom: 5.5rem;
+    }
 
-.hero-station-navigation a::after {
-  content: "";
-  display: block;
-  width: 3rem;
-  height: 0.12rem;
-  margin-top: 0.5rem;
-  background-color: currentColor;
-}
+    & .hero-content h2 {
+      font-size: clamp(3.8rem, 4.8vw, 5.4rem);
+    }
 
-.hero-station-navigation a:hover,
-.hero-station-navigation a:focus-visible {
-  color: var(--color-text);
-  outline: none;
+    & .hero-station--youth {
+      left: 12%;
+    }
+
+    & .hero-station--crossfit {
+      left: 36%;
+    }
+
+    & .hero-station--hyrox {
+      left: 60%;
+    }
+
+    & .hero-station--cycling {
+      right: 12%;
+    }
+  }
+
+  /* Mittlere Desktop-Ansicht. */
+  @media (min-width: 1200px) and (max-width: 1439px) {
+    & .hero-content {
+      bottom: 4rem;
+    }
+
+    & .hero-content h2 {
+      font-size: clamp(3.2rem, 4.5vw, 4.4rem);
+    }
+  }
+
+  /* Mobile und Tablet: Bild und Text werden kompakter angeordnet. */
+  @media (max-width: 1199px) {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+
+    & .hero-media {
+      order: 1;
+      overflow: visible;
+    }
+
+    & .hero-media::after {
+      display: none;
+    }
+
+    & .hero-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center top;
+    }
+
+    & .hero-station-navigation {
+      position: static;
+      margin: 1rem;
+      pointer-events: auto;
+    }
+
+    & .hero-station-navigation ul {
+      position: static;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    & .hero-station {
+      position: static;
+    }
+
+    & .hero-station-navigation a {
+      font-size: 0.95rem;
+      background-color: var(--color-bg-soft);
+    }
+
+    & .hero-content {
+      position: static;
+      order: 2;
+      max-width: none;
+      padding: 2rem 1.25rem 0;
+    }
+
+    & .hero-content h2 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.75rem, 15vw, 4.5rem);
+    }
+
+    & .hero-content p {
+      font-size: 1rem;
+    }
+  }
+
+  /* Tablet: Bild bleibt überlagert, Texte und Links werden kompakter. */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    & .hero-media {
+      position: relative;
+    }
+
+    & .hero-image {
+      height: clamp(28rem, 58vw, 36rem);
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    & .hero-media::after {
+      display: block;
+    }
+
+    & .hero-station-navigation {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    & .hero-station-navigation ul {
+      position: absolute;
+      top: 2rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    & .hero-station-navigation a {
+      pointer-events: auto;
+      font-size: clamp(0.75rem, 1.7vw, 0.95rem);
+      white-space: nowrap;
+    }
+
+    & .hero-content {
+      position: absolute;
+      z-index: 3;
+      left: 2rem;
+      bottom: 2rem;
+      max-width: calc(100% - 18rem);
+      padding: 0;
+    }
+
+    & .hero-content h2 {
+      margin-bottom: 0.75rem;
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    & .hero-content h2 br {
+      display: none;
+    }
+
+    & .hero-content p {
+      max-width: 24rem;
+      font-size: 1rem;
+    }
+  }
+
+  /* Smartphone: vier klickbare Overlay-Flächen auf dem mobilen Bild. */
+  @media (max-width: 767px) {
+    & .hero-media {
+      position: relative;
+    }
+
+    & .hero-media::after {
+      display: none;
+    }
+
+    & .hero-station-navigation {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      margin: 0;
+      padding: 1rem;
+      pointer-events: none;
+    }
+
+    & .hero-station-navigation ul {
+      position: absolute;
+      inset: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    & .hero-station {
+      position: static;
+      display: flex;
+      align-items: end;
+    }
+
+    & .hero-station-navigation a {
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: center;
+      width: 100%;
+      min-height: 6.5rem;
+      padding: 1rem 0.75rem;
+      color: var(--color-text);
+      text-align: center;
+      text-decoration: none;
+      background: rgba(8, 19, 40, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-medium);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    & .station-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    & .station-subtitle {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--color-accent);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    & .hero-station-navigation a::after {
+      width: 3.25rem;
+      height: 0.15rem;
+      margin: 0.75rem auto 0;
+      background-color: var(--color-accent);
+      border-radius: var(--radius-pill);
+    }
+
+    & .hero-content {
+      position: static;
+      padding: 2rem 1.25rem 0;
+    }
+
+    & .hero-content h2 {
+      font-size: clamp(2.5rem, 13vw, 4rem);
+      line-height: 0.95;
+    }
+
+    & .hero-content h2 br {
+      display: block;
+    }
+
+    & .hero-heading-desktop,
+    & .hero-text-desktop {
+      display: none;
+    }
+
+    & .hero-heading-mobile,
+    & .hero-text-mobile {
+      display: inline;
+    }
+  }
 }
 
 
@@ -945,308 +1207,6 @@ body {
   padding-top: 1.5rem;
   border-top: 1px solid var(--color-border);
   font-size: 0.95rem;
-}
-
-
-
-
-
-/* Große Desktop-Ansicht: Hero-Elemente werden auf breiten Screens kontrollierter positioniert. */
-@media (min-width: 1440px) {
-  .hero-content {
-    left: 5rem;
-    bottom: 5.5rem;
-  }
-
-  .hero-content h2 {
-    font-size: clamp(3.8rem, 4.8vw, 5.4rem);
-  }
-  .hero-station--youth {
-    left: 12%;
-  }
-
-  .hero-station--crossfit {
-    left: 36%;
-  }
-
-  .hero-station--hyrox {
-    left: 60%;
-  }
-
-  .hero-station--cycling {
-    right: 12%;
-  }
-
-}
-
-
-/* Mittlere Desktop-Ansicht: Portrait kleiner und kontrollierter positionieren. */
-@media (min-width: 1200px) and (max-width: 1439px) {
-
-  .hero-content {
-    bottom: 4rem;
-  }
-
-  .hero-content h2 {
-    font-size: clamp(3.2rem, 4.5vw, 4.4rem);
-  }
-}
-
-
-/* Mobile Hero: Auf kleinen Screens wird das Overlay-Layout zu einem gut bedienbaren Stapel-Layout. */
-@media (max-width: 1199px) {
-  #hero {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3rem;
-  }
-
-  .hero-media {
-    order: 1;
-    overflow: visible;
-  }
-
-  .hero-media::after {
-    display: none;
-  }
-
- .hero-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center top;
-}
-
-  .hero-station-navigation {
-    position: static;
-    margin: 1rem;
-    pointer-events: auto;
-  }
-
-  .hero-station-navigation ul {
-    position: static;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .hero-station {
-    position: static;
-  }
-
-  .hero-station-navigation a {
-    font-size: 0.95rem;
-    background-color: var(--color-bg-soft);
-  }
-
-  .hero-content {
-    position: static;
-    order: 2;
-    max-width: none;
-    padding: 2rem 1.25rem 0;
-  }
-
-  .hero-content h2 {
-    margin-bottom: 1rem;
-    font-size: clamp(2.75rem, 15vw, 4.5rem);
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-
-  
-}
-
-/* Tablet: Hero bleibt bildbasiert, aber Texte und Sprungmarken werden kompakter. */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .hero-media {
-    position: relative;
-  }
-
-  .hero-image {
-  height: clamp(28rem, 58vw, 36rem);
-  object-fit: cover;
-  object-position: center center;
-}
-
-  .hero-media::after {
-    display: block;
-  }
-
-  .hero-station-navigation {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    margin: 0;
-    pointer-events: none;
-  }
-
-  .hero-station-navigation ul {
-    position: absolute;
-    top: 2rem;
-    left: 1.5rem;
-    right: 1.5rem;
-
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-
-    margin: 0;
-    padding: 0;
-  }
-
-  .hero-station {
-    position: static;
-  }
-
-  .hero-station-navigation a {
-    pointer-events: auto;
-    font-size: clamp(0.75rem, 1.7vw, 0.95rem);
-    white-space: nowrap;
-  }
-
-  .hero-content {
-    position: absolute;
-    z-index: 3;
-    left: 2rem;
-    bottom: 2rem;
-
-    max-width: calc(100% - 18rem);
-    padding: 0;
-  }
-
-  .hero-content h2 {
-    margin-bottom: 0.75rem;
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  .hero-content h2 br {
-    display: none;
-  }
-
-  .hero-content p {
-    max-width: 24rem;
-    font-size: 1rem;
-  }
-
-  
-}
-
-/* Handy: Hero-Sprungmarken werden als vier klickbare Overlay-Flächen
-   auf dem mobilen Hero-Bild dargestellt. */
-@media (max-width: 767px) {
-     .hero-media {
-    position: relative;
-  }
-
-  .hero-station-navigation {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    margin: 0;
-    pointer-events: none;
-    padding: 1rem;
-  }
-
-  .hero-station-navigation ul {
-    position: absolute;
-    inset: 1rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 0.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .hero-station {
-    position: static;
-    display: flex;
-    align-items: end;
-  }
-
-  .hero-station-navigation a {
-    pointer-events: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    width: 100%;
-    min-height: 6.5rem;
-    padding: 1rem 0.75rem;
-    text-align: center;
-    text-decoration: none;
-    color: var(--color-text);
-    background: rgba(8, 19, 40, 0.52);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 1rem;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-
-  .station-title {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .station-subtitle {
-    display: block;
-    margin-top: 0.35rem;
-    color: var(--color-accent);
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
-
-  .hero-station-navigation a::after {
-    content: "";
-    display: block;
-    width: 3.25rem;
-    height: 0.15rem;
-    margin: 0.75rem auto 0;
-    background-color: var(--color-accent);
-    border-radius: 999px;
-  }
-
-  .hero-content {
-    position: static;
-    padding: 2rem 1.25rem 0;
-  }
-
-  .hero-content h2 {
-    font-size: clamp(2.5rem, 13vw, 4rem);
-    line-height: 0.95;
-  }
-
-  .hero-content h2 br {
-    display: block;
-  }
-
-  
-  .hero-media::after {
-  display: none;
-}
-
-  /* Mobile Hero-Texte: Auf kleinen Screens wird die mobile Hero-Botschaft angezeigt. */
-  .hero-heading-desktop,
-  .hero-text-desktop {
-    display: none;
-  }
-
-  .hero-heading-mobile,
-  .hero-text-mobile {
-    display: inline;
-  }
-
 }
 
 
