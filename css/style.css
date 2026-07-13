@@ -24,7 +24,7 @@
 
   /* Bewegung */
   --transition-fast: 0.2s ease;
-  --transition-pop: 0.24s ease-out;
+  
 }
 
 /* Basislayout: sorgt für ein einheitliches Box-Modell und eine dunkle Grundfläche. */
@@ -42,6 +42,28 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+}
+
+/* Skip-Link: bleibt visuell verborgen und erscheint bei Tastaturfokus. */
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border-radius: var(--radius-small);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--transition-fast);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
 }
 
 /* Header: Seitenkopf mit Logo, verstecktem Seitentitel und Navigation. */
@@ -541,13 +563,7 @@ body {
 
   /* Smartphone: vier klickbare Overlay-Flächen auf dem mobilen Bild. */
   @media (max-width: 767px) {
-    & .hero-media {
-      position: relative;
-    }
 
-    & .hero-media::after {
-      display: none;
-    }
 
     & .hero-station-navigation {
       display: block;
@@ -614,10 +630,7 @@ body {
       border-radius: var(--radius-pill);
     }
 
-    & .hero-content {
-      position: static;
-      padding: 2rem 1.25rem 0;
-    }
+    
 
     & .hero-content h2 {
       font-size: clamp(2.5rem, 13vw, 4rem);
@@ -1240,14 +1253,15 @@ body {
     scroll-behavior: auto;
   }
 
-  .glossary-item,
-  .glossary-item summary::after {
+  .skip-link,
+  #trainings-glossar .glossary-item,
+  #trainings-glossar .glossary-item summary::after {
     transition: none;
   }
 
-  .glossary-item[open] p,
-  .bike-hotspot,
-  .bike-detail-card.is-visible {
+  #trainings-glossar .glossary-item[open] p,
+  #rennrad-setup .bike-hotspot,
+  #rennrad-setup .bike-detail-card.is-visible {
     animation: none;
   }
 }
