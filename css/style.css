@@ -1224,18 +1224,6 @@ body {
   }
 }
 
-
-@media (min-width: 1024px) {
-  .footer-inner {
-    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr) minmax(16rem, 0.8fr);
-    align-items: start;
-  }
-
-  .footer-note {
-    grid-column: 1 / -1;
-  }
-}
-
 @keyframes hotspot-pulse {
   0%,
   100% {
