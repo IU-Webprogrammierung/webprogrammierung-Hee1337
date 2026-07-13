@@ -947,44 +947,47 @@ body {
    * data-journey-item direkt auf der Card oder auf der Section.
    */
   & [data-journey-item].content-card,
-  & [data-journey-item] > .content-card {
-    --journey-card-progress: 0%;
+  &   [data-journey-item] > .content-card {
+    --journey-card-angle: 0deg;
 
     position: relative;
   }
 
-  /*
-   * Der farbige Rahmen wird von oben nach unten freigelegt.
-   * Das entspricht optisch dem wachsenden Fortschrittsbalken.
-   */
+    /*
+  * Der Rahmen startet oben in der Mitte und läuft gleichzeitig
+  * im und gegen den Uhrzeigersinn um die Karte.
+  */
   & [data-journey-item].content-card::after,
   & [data-journey-item] > .content-card::after {
     content: "";
     position: absolute;
-    inset: -1px;
+    inset: 0;
     z-index: 2;
-    border: 2px solid var(--color-accent);
+    box-sizing: border-box;
+    padding: 2px;
     border-radius: inherit;
-    clip-path: inset(
-      0
-      0
-      calc(100% - var(--journey-card-progress))
-      0
-      round var(--radius-large)
-    );
     pointer-events: none;
-  }
 
-  /* Die aktuell durchlaufene Karte wird zusätzlich hervorgehoben. */
-  & .content-card.is-journey-active {
-    box-shadow:
-      0 0 0 1px rgba(231, 201, 169, 0.2),
-      0 1rem 2.5rem rgba(0, 0, 0, 0.28);
-  }
+    background: conic-gradient(
+      from 0deg,
+      var(--color-accent) 0 var(--journey-card-angle),
+      transparent
+        var(--journey-card-angle)
+        calc(360deg - var(--journey-card-angle)),
+      var(--color-accent)
+        calc(360deg - var(--journey-card-angle))
+        360deg
+    );
 
-  /* Vollständig erreichte Karten behalten ihren farbigen Rahmen. */
-  & .content-card.is-journey-complete {
-    border-color: rgba(231, 201, 169, 0.45);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
   }
 }
 
