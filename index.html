@@ -203,241 +203,245 @@
     </article>
   </div>
 </section>
+
+<!-- Fortsetzung der Laufbahn: verbindet Setup, Training, Glossar und Rennen. -->
+<div class="journey-continuation" data-journey>
       
-<section id="rennrad-setup" class="content-section bike-setup-section" aria-labelledby="bike-setup-heading">
-  <h2 id="bike-setup-heading">Mein Rennrad-Setup</h2>
+  <section id="rennrad-setup" class="content-section bike-setup-section" aria-labelledby="bike-setup-heading">
+    <h2 id="bike-setup-heading">Mein Rennrad-Setup</h2>
 
-  <div class="content-card bike-setup-card">
-    <div class="bike-setup-intro">
-      <p>
-        Mein Rennrad ist nicht nur Sportgerät, sondern ein wichtiger Teil meines strukturierten Trainings.
-        Die markierten Komponenten zeigen, welche Technik mich im Training und auf längeren Ausfahrten unterstützt.
-      </p>
-    </div>
+    <div class="content-card bike-setup-card" data-journey-item>
+      <div class="bike-setup-intro">
+        <p>
+          Mein Rennrad ist nicht nur Sportgerät, sondern ein wichtiger Teil meines strukturierten Trainings.
+          Die markierten Komponenten zeigen, welche Technik mich im Training und auf längeren Ausfahrten unterstützt.
+        </p>
+      </div>
 
-    <div class="bike-setup-layout">
-      <figure class="bike-figure">
-        <div class="bike-image-wrapper">
-          <img
-            src="assets/images/rennrad-setup.png"
-            alt="Stevens Rennrad von Christopher Berg mit markierten Komponenten"
-          >
+      <div class="bike-setup-layout">
+        <figure class="bike-figure">
+          <div class="bike-image-wrapper">
+            <img
+              src="assets/images/rennrad-setup.png"
+              alt="Stevens Rennrad von Christopher Berg mit markierten Komponenten"
+            >
 
-          <button
-            class="bike-hotspot bike-hotspot--di2 is-active"
-            type="button"
-            data-bike-part="di2"
-            aria-controls="bike-detail-card"
-            aria-pressed="true"
-            aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen"
-          >
-            <span>1</span>
-          </button>
+            <button
+              class="bike-hotspot bike-hotspot--di2 is-active"
+              type="button"
+              data-bike-part="di2"
+              aria-controls="bike-detail-card"
+              aria-pressed="true"
+              aria-label="Details zur Shimano 105 Di2 Schaltung anzeigen"
+            >
+              <span>1</span>
+            </button>
 
-          <button 
-            class="bike-hotspot bike-hotspot--wheels" 
+            <button 
+              class="bike-hotspot bike-hotspot--wheels" 
+              type="button" 
+              data-bike-part="wheels" 
+              aria-controls="bike-detail-card"
+              aria-pressed="false"
+              aria-label="Details zu den Carbon-Laufrädern anzeigen">
+              <span>2</span>
+            </button>
+
+            <button 
+            class="bike-hotspot bike-hotspot--tires"
             type="button" 
-            data-bike-part="wheels" 
+            data-bike-part="tires" 
             aria-controls="bike-detail-card"
             aria-pressed="false"
-            aria-label="Details zu den Carbon-Laufrädern anzeigen">
-            <span>2</span>
-          </button>
+            aria-label="Details zu den Reifen anzeigen">
+              <span>3</span>
+            </button>
 
-          <button 
-          class="bike-hotspot bike-hotspot--tires"
-          type="button" 
-          data-bike-part="tires" 
-          aria-controls="bike-detail-card"
-          aria-pressed="false"
-          aria-label="Details zu den Reifen anzeigen">
-            <span>3</span>
-          </button>
+            <button 
+            class="bike-hotspot bike-hotspot--powermeter"
+            type="button" 
+            data-bike-part="powermeter"
+            aria-controls="bike-detail-card"
+            aria-pressed="false"
+            aria-label="Details zum Powermeter anzeigen">
+              <span>4</span>
+            </button>
 
-          <button 
-          class="bike-hotspot bike-hotspot--powermeter"
-          type="button" 
-          data-bike-part="powermeter"
-          aria-controls="bike-detail-card"
-          aria-pressed="false"
-          aria-label="Details zum Powermeter anzeigen">
-            <span>4</span>
-          </button>
+            <button 
+            class="bike-hotspot bike-hotspot--brakes"
+            type="button" 
+            data-bike-part="brakes" 
+            aria-controls="bike-detail-card"
+            aria-pressed="false"
+            aria-label="Details zu den Scheibenbremsen anzeigen">
+              <span>5</span>
+            </button>
+          </div>
 
-          <button 
-          class="bike-hotspot bike-hotspot--brakes"
-          type="button" 
-          data-bike-part="brakes" 
-          aria-controls="bike-detail-card"
-          aria-pressed="false"
-          aria-label="Details zu den Scheibenbremsen anzeigen">
-            <span>5</span>
-          </button>
-        </div>
+          <figcaption>
+            Klickbare Hotspots erklären zentrale Komponenten meines Rennrad-Setups.
+            </figcaption>
+          </figure>
+          
 
-        <figcaption>
-          Klickbare Hotspots erklären zentrale Komponenten meines Rennrad-Setups.
-          </figcaption>
-        </figure>
-        
-
-      <article class="bike-detail-card" id="bike-detail-card" aria-live="polite">
-        <p class="bike-detail-kicker">Ausgewählte Komponente</p>
-        <h3 id="bike-detail-title">Shimano 105 Di2</h3>
-        <p id="bike-detail-text">
-          Die elektronische Shimano 105 Di2 sorgt für präzise Schaltvorgänge und unterstützt ein gleichmäßiges Fahren bei wechselnden Belastungen.
-        </p>
-      </article>
+        <article class="bike-detail-card" id="bike-detail-card" aria-live="polite">
+          <p class="bike-detail-kicker">Ausgewählte Komponente</p>
+          <h3 id="bike-detail-title">Shimano 105 Di2</h3>
+          <p id="bike-detail-text">
+            Die elektronische Shimano 105 Di2 sorgt für präzise Schaltvorgänge und unterstützt ein gleichmäßiges Fahren bei wechselnden Belastungen.
+          </p>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="training" class="content-section" aria-labelledby="training-heading">
-  <h2 id="training-heading">Einblick ins strukturierte Rennradtraining</h2>
-  <div class="content-card">
-    <p>FTP, Schwelle, Sweetspot, Watt pro Kilogramm – am Anfang waren das für mich Begriffe, mit denen ich wenig anfangen konnte. Gleichzeitig merkte ich schnell, dass Rennradfahren deutlich strukturierter trainiert werden kann, als einfach nur möglichst oft loszufahren.</p>
-    <p>Mit ChatGPT als digitalem Trainer entwickelte ich mir einen Wintertrainingsplan für die Offseason. Zum ersten Mal trainierte ich auf dem Fahrrad gezielt nach Leistung, Belastungsbereichen und Fortschritt.</p>
-    <p>Es folgte mein erster FTP-Test, der bei 238 Watt landete. Im Radsport ist das eher ein bescheidener Einstieg, wenn man bedenkt, dass Profis teilweise deutlich über 400 Watt an der Schwelle treten.</p>
-    <p>Danach folgten viele Trainingseinheiten mit dem Ziel, meine Schwelle nach oben zu verschieben. Dabei wurde häufig eine bestimmte Zeit knapp unterhalb der FTP gefahren.</p>
-    <p>Eine typische Progression bei einer FTP von 238 Watt kann zum Beispiel so aussehen:</p>
+  <section id="training" class="content-section" aria-labelledby="training-heading" data-journey-item>
+    <h2 id="training-heading">Einblick ins strukturierte Rennradtraining</h2>
+    <div class="content-card">
+      <p>FTP, Schwelle, Sweetspot, Watt pro Kilogramm – am Anfang waren das für mich Begriffe, mit denen ich wenig anfangen konnte. Gleichzeitig merkte ich schnell, dass Rennradfahren deutlich strukturierter trainiert werden kann, als einfach nur möglichst oft loszufahren.</p>
+      <p>Mit ChatGPT als digitalem Trainer entwickelte ich mir einen Wintertrainingsplan für die Offseason. Zum ersten Mal trainierte ich auf dem Fahrrad gezielt nach Leistung, Belastungsbereichen und Fortschritt.</p>
+      <p>Es folgte mein erster FTP-Test, der bei 238 Watt landete. Im Radsport ist das eher ein bescheidener Einstieg, wenn man bedenkt, dass Profis teilweise deutlich über 400 Watt an der Schwelle treten.</p>
+      <p>Danach folgten viele Trainingseinheiten mit dem Ziel, meine Schwelle nach oben zu verschieben. Dabei wurde häufig eine bestimmte Zeit knapp unterhalb der FTP gefahren.</p>
+      <p>Eine typische Progression bei einer FTP von 238 Watt kann zum Beispiel so aussehen:</p>
 
-    <!-- Tabelle: Die Trainingsprogression besteht aus vergleichbaren Daten und wird deshalb semantisch als Tabelle dargestellt. -->
-    <table class="training-table">
-      <caption>Beispielhafte Sweetspot-Progression im Rennradtraining</caption>
-      <thead>
+      <!-- Tabelle: Die Trainingsprogression besteht aus vergleichbaren Daten und wird deshalb semantisch als Tabelle dargestellt. -->
+      <table class="training-table">
+        <caption>Beispielhafte Sweetspot-Progression im Rennradtraining</caption>
+        <thead>
+          <tr>
+          <th scope="col">Woche</th>
+          <th scope="col">Einheit</th>
+          <th scope="col">Zielbereich</th>
+            <th scope="col">Ziel der Einheit</th>
+          </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td>Woche 1</td>
+            <td>2 × 10 Minuten</td>
+            <td>215–225 Watt</td>
+            <td>Einstieg in längere Sweetspot-Belastungen</td>
+          </tr>
         <tr>
-        <th scope="col">Woche</th>
-        <th scope="col">Einheit</th>
-        <th scope="col">Zielbereich</th>
-          <th scope="col">Ziel der Einheit</th>
-        </tr>
-    </thead>
-      <tbody>
-        <tr>
-          <td>Woche 1</td>
-          <td>2 × 10 Minuten</td>
-          <td>215–225 Watt</td>
-          <td>Einstieg in längere Sweetspot-Belastungen</td>
-        </tr>
-      <tr>
-          <td>Woche 2</td>
-          <td>2 × 12 Minuten</td>
-          <td>215–225 Watt</td>
-          <td>Belastungsdauer kontrolliert erhöhen</td>
-        </tr>
-        <tr>
-          <td>Woche 3</td>
-          <td>1 × 20 Minuten</td>
-          <td>215–225 Watt</td>
-          <td>Längere gleichmäßige Belastung stabil fahren</td>
-        </tr>
-    </tbody>
-    </table>
-    <p>Die Zeit in diesem Leistungsbereich wird also schrittweise erhöht. Dadurch lernt der Körper, höhere Wattwerte länger zu halten.</p>
-    <p>Viel Trainingszeit in dieser Zone hilft dabei, die Schwelle und damit auch die FTP langfristig zu verbessern. Genau dieser strukturierte Ansatz hat meinen Blick auf Training stark verändert.</p>
-    
-    <p class="download-note">
-      Der folgende Beispielplan zeigt, wie eine strukturierte Trainingswoche im Rennradtraining aufgebaut sein kann.
-    </p>
+            <td>Woche 2</td>
+            <td>2 × 12 Minuten</td>
+            <td>215–225 Watt</td>
+            <td>Belastungsdauer kontrolliert erhöhen</td>
+          </tr>
+          <tr>
+            <td>Woche 3</td>
+            <td>1 × 20 Minuten</td>
+            <td>215–225 Watt</td>
+            <td>Längere gleichmäßige Belastung stabil fahren</td>
+          </tr>
+      </tbody>
+      </table>
+      <p>Die Zeit in diesem Leistungsbereich wird also schrittweise erhöht. Dadurch lernt der Körper, höhere Wattwerte länger zu halten.</p>
+      <p>Viel Trainingszeit in dieser Zone hilft dabei, die Schwelle und damit auch die FTP langfristig zu verbessern. Genau dieser strukturierte Ansatz hat meinen Blick auf Training stark verändert.</p>
+      
+      <p class="download-note">
+        Der folgende Beispielplan zeigt, wie eine strukturierte Trainingswoche im Rennradtraining aufgebaut sein kann.
+      </p>
 
 
-    <a class="button-link" href="assets/downloads/beispiel-trainingsplan.pdf" download>
-      Beispiel-Trainingsplan herunterladen
-    </a>
+      <a class="button-link" href="assets/downloads/beispiel-trainingsplan.pdf" download>
+        Beispiel-Trainingsplan herunterladen
+      </a>
 
-  </div>
-</section>
-
-<section id="trainings-glossar" class="content-section" aria-labelledby="glossary-heading">
-  <h2 id="glossary-heading">Trainings-Glossar</h2>
-
-  <div class="content-card">
-    <p class="glossary-intro">
-      Einige Begriffe tauchen im strukturierten Rennradtraining immer wieder auf.
-      Das Glossar erklärt sie kurz und verständlich.</p>
-
-    <div class="glossary-list">
-      <details class="glossary-item" open>
-        <summary>
-          <span>FTP</span>
-        </summary>
-        <p>
-          FTP steht für Functional Threshold Power. Damit ist die Leistung gemeint,
-          die ein Fahrer ungefähr 60 Minuten lang möglichst konstant halten kann.
-          Sie dient als Grundlage für Trainingsbereiche und Leistungssteuerung.
-        </p>
-      </details>
-
-      <details class="glossary-item">
-        <summary>
-          <span>Sweetspot</span>
-        </summary>
-        <p>
-          Sweetspot beschreibt einen intensiven, aber noch kontrollierbaren Trainingsbereich
-          knapp unterhalb der Schwelle. Er wird häufig genutzt, um Ausdauer und
-          Leistungsfähigkeit effizient zu verbessern.
-        </p>
-      </details>
-
-      <details class="glossary-item">
-        <summary>
-          <span>VO<sub>2</sub>max</span>
-        </summary>
-        <p>
-          VO<sub>2</sub>max beschreibt die maximale Sauerstoffaufnahme des Körpers.
-          Im Training steht der Begriff oft für sehr intensive Intervalle, die das
-          Herz-Kreislauf-System stark fordern.
-        </p>
-      </details>
-
-      <details class="glossary-item">
-        <summary>
-          <span>Zone 2</span>
-        </summary>
-        <p>
-          Zone 2 ist ein ruhiger Ausdauerbereich. Er fühlt sich kontrolliert an,
-          ermöglicht längere Einheiten und bildet eine wichtige Grundlage für
-          längere Rennradfahrten.
-        </p>
-      </details>
-
-      <details class="glossary-item">
-        <summary>
-          <span>Kadenz</span>
-        </summary>
-        <p>
-          Die Kadenz beschreibt die Trittfrequenz beim Radfahren, also wie oft die
-          Kurbel pro Minute gedreht wird. Sie beeinflusst Belastung, Fahrgefühl und
-          Effizienz.
-        </p>
-      </details>
-
-      <details class="glossary-item">
-        <summary>
-          <span>Watt pro Kilogramm</span>
-        </summary>
-        <p>
-          Watt pro Kilogramm setzt die getretene Leistung ins Verhältnis zum Körpergewicht.
-          Dieser Wert ist besonders an Anstiegen wichtig, weil dort nicht nur die absolute
-          Leistung zählt, sondern auch das Gewicht des Fahrers.
-        </p>
-      </details>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="rennen" class="content-section" aria-labelledby="rennen-heading">
-  <h2 id="rennen-heading">Mein erstes Rennen</h2>
+  <section id="trainings-glossar" class="content-section" aria-labelledby="glossary-heading" data-journey-item>
+    <h2 id="glossary-heading">Trainings-Glossar</h2>
 
-  <div class="content-card content-card--compact">
-    <p>Nach langem Training, ersten Bergerfahrungen im Harz und sichtbaren Fortschritten entstand der Wunsch, mich auch einmal direkt mit anderen zu messen.</p>
-    <p>Nach meinem ersten Bikefitting in Kiel wurde mir von einer Kieler Rennserie erzählt. Kurz darauf meldete ich mich an und stand vor einer völlig neuen Erfahrung im Radsport.</p>
-    <p>Im Training ging es bisher vor allem darum, bestimmte Wattwerte möglichst lange und kontrolliert zu halten. Im Rennen war plötzlich etwas ganz anderes gefragt.</p>
-    <p>Ich musste wiederholt Lücken schließen, beschleunigen, aufmerksam bleiben und im Feld reagieren. Diese Belastung war deutlich unruhiger und dynamischer als meine bisherigen Einheiten.</p>
-    <p>Am Ende fuhr mir der Pulk davon, und ich kämpfte allein im Wind weiter. Genau diese Erfahrung zeigte mir sehr klar, woran ich arbeiten muss.</p>
-    <p>Für das zweite Rennen wurde deshalb ein neues Ziel gesetzt: besser im Feld bleiben, wiederholte Beschleunigungen trainieren und die rennspezifische Härte gezielt verbessern.</p>
-  </div>
-</section>
+    <div class="content-card">
+      <p class="glossary-intro">
+        Einige Begriffe tauchen im strukturierten Rennradtraining immer wieder auf.
+        Das Glossar erklärt sie kurz und verständlich.</p>
+
+      <div class="glossary-list">
+        <details class="glossary-item" open>
+          <summary>
+            <span>FTP</span>
+          </summary>
+          <p>
+            FTP steht für Functional Threshold Power. Damit ist die Leistung gemeint,
+            die ein Fahrer ungefähr 60 Minuten lang möglichst konstant halten kann.
+            Sie dient als Grundlage für Trainingsbereiche und Leistungssteuerung.
+          </p>
+        </details>
+
+        <details class="glossary-item">
+          <summary>
+            <span>Sweetspot</span>
+          </summary>
+          <p>
+            Sweetspot beschreibt einen intensiven, aber noch kontrollierbaren Trainingsbereich
+            knapp unterhalb der Schwelle. Er wird häufig genutzt, um Ausdauer und
+            Leistungsfähigkeit effizient zu verbessern.
+          </p>
+        </details>
+
+        <details class="glossary-item">
+          <summary>
+            <span>VO<sub>2</sub>max</span>
+          </summary>
+          <p>
+            VO<sub>2</sub>max beschreibt die maximale Sauerstoffaufnahme des Körpers.
+            Im Training steht der Begriff oft für sehr intensive Intervalle, die das
+            Herz-Kreislauf-System stark fordern.
+          </p>
+        </details>
+
+        <details class="glossary-item">
+          <summary>
+            <span>Zone 2</span>
+          </summary>
+          <p>
+            Zone 2 ist ein ruhiger Ausdauerbereich. Er fühlt sich kontrolliert an,
+            ermöglicht längere Einheiten und bildet eine wichtige Grundlage für
+            längere Rennradfahrten.
+          </p>
+        </details>
+
+        <details class="glossary-item">
+          <summary>
+            <span>Kadenz</span>
+          </summary>
+          <p>
+            Die Kadenz beschreibt die Trittfrequenz beim Radfahren, also wie oft die
+            Kurbel pro Minute gedreht wird. Sie beeinflusst Belastung, Fahrgefühl und
+            Effizienz.
+          </p>
+        </details>
+
+        <details class="glossary-item">
+          <summary>
+            <span>Watt pro Kilogramm</span>
+          </summary>
+          <p>
+            Watt pro Kilogramm setzt die getretene Leistung ins Verhältnis zum Körpergewicht.
+            Dieser Wert ist besonders an Anstiegen wichtig, weil dort nicht nur die absolute
+            Leistung zählt, sondern auch das Gewicht des Fahrers.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="rennen" class="content-section" aria-labelledby="rennen-heading" data-journey-item>
+    <h2 id="rennen-heading">Mein erstes Rennen</h2>
+
+    <div class="content-card content-card--compact">
+      <p>Nach langem Training, ersten Bergerfahrungen im Harz und sichtbaren Fortschritten entstand der Wunsch, mich auch einmal direkt mit anderen zu messen.</p>
+      <p>Nach meinem ersten Bikefitting in Kiel wurde mir von einer Kieler Rennserie erzählt. Kurz darauf meldete ich mich an und stand vor einer völlig neuen Erfahrung im Radsport.</p>
+      <p>Im Training ging es bisher vor allem darum, bestimmte Wattwerte möglichst lange und kontrolliert zu halten. Im Rennen war plötzlich etwas ganz anderes gefragt.</p>
+      <p>Ich musste wiederholt Lücken schließen, beschleunigen, aufmerksam bleiben und im Feld reagieren. Diese Belastung war deutlich unruhiger und dynamischer als meine bisherigen Einheiten.</p>
+      <p>Am Ende fuhr mir der Pulk davon, und ich kämpfte allein im Wind weiter. Genau diese Erfahrung zeigte mir sehr klar, woran ich arbeiten muss.</p>
+      <p>Für das zweite Rennen wurde deshalb ein neues Ziel gesetzt: besser im Feld bleiben, wiederholte Beschleunigungen trainieren und die rennspezifische Härte gezielt verbessern.</p>
+    </div>
+  </section>
+</div>
 
 </main>
 
