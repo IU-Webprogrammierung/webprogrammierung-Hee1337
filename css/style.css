@@ -44,42 +44,40 @@ body {
   line-height: 1.6;
 }
 
-/* Header: full-width Navigationsleiste im dunklen Portfolio-Look. */
+/* Header: Seitenkopf mit Logo, verstecktem Seitentitel und Navigation. */
 .site-header {
   position: relative;
   z-index: 10;
   background-color: rgba(15, 23, 36, 0.96);
   border-bottom: 1px solid var(--color-border);
-}
 
-/* Header-Inhalt: Logo links, Navigation rechts. */
-.header-inner {
-  width: 100%;
-  padding: 1.25rem clamp(1.5rem, 4vw, 3rem);
+  & .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    padding: 1.25rem clamp(1.5rem, 4vw, 3rem);
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
+  /* Der Seitentitel bleibt semantisch vorhanden, wird visuell ausgeblendet. */
+  & .site-branding {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 
-/* Der Seitentitel bleibt semantisch im HTML, wird im visuellen Header aber ausgeblendet. */
-.site-branding {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* Logo/Kürzel: persönliches Branding links im Header. */
-.site-logo {
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: 1.75rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  /* Persönliches Kürzel als Sprunglink zum Seitenanfang. */
+  & .site-logo {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
 }
 
 /* Hauptnavigation: mobile Toggle-Navigation und horizontale Desktop-Navigation. */
