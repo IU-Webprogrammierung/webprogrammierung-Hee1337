@@ -735,6 +735,8 @@ body {
 
   /* Mobile und Tablet: vertikale Linie links neben den Karten. */
   & .timeline-grid {
+    --timeline-progress: 0%;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -750,6 +752,18 @@ body {
     left: 0.75rem;
     width: 0.15rem;
     background-color: var(--color-border);
+    border-radius: var(--radius-pill);
+  }
+
+  /* Farbige Linie zeigt später den aktuellen Scroll-Fortschritt. */
+  & .timeline-grid::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0.75rem;
+    width: 0.15rem;
+    height: var(--timeline-progress);
+    background-color: var(--color-accent);
     border-radius: var(--radius-pill);
   }
 
@@ -830,6 +844,11 @@ body {
     }
 
     & .timeline-grid::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    & .timeline-grid::after {
       left: 50%;
       transform: translateX(-50%);
     }
