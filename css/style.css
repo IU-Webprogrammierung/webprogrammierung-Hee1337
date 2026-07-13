@@ -724,6 +724,7 @@ body {
   width: var(--content-width);
   margin: 0 auto var(--spacing-section);
   padding: 0 var(--section-padding-inline);
+  scroll-margin-top: 6rem;
 
   & > h2 {
     margin: 0 0 2rem;
@@ -732,17 +733,58 @@ body {
     letter-spacing: -0.04em;
   }
 
+  /* Mobile und Tablet: vertikale Linie links neben den Karten. */
   & .timeline-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-left: 2.5rem;
   }
 
-  & .timeline-card {
+  & .timeline-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0.75rem;
+    width: 0.15rem;
+    background-color: var(--color-border);
+    border-radius: var(--radius-pill);
+  }
+
+  & [data-timeline-item] {
+    position: relative;
+    z-index: 1;
     padding: 1.5rem;
     background-color: var(--color-bg-soft);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-large);
+  }
+
+  /* Marker auf der Timeline-Linie. */
+  & [data-timeline-item]::before {
+    content: "";
+    position: absolute;
+    top: 1.75rem;
+    left: -2.35rem;
+    z-index: 2;
+    width: 1.15rem;
+    height: 1.15rem;
+    background-color: var(--color-bg);
+    border: 0.25rem solid var(--color-accent);
+    border-radius: 50%;
+  }
+
+  /* Verbindung zwischen Linie und Karte. */
+  & [data-timeline-item]::after {
+    content: "";
+    position: absolute;
+    top: 2.25rem;
+    left: -1.75rem;
+    width: 1.75rem;
+    height: 0.15rem;
+    background-color: var(--color-border);
   }
 
   & .timeline-year {
@@ -769,25 +811,69 @@ body {
     margin-top: 1rem;
   }
 
-  /* Tablet: Die Timeline wird zweispaltig dargestellt. */
-  @media (min-width: 768px) {
+  /* Vorbereitung für die spätere Scroll-Aktivierung. */
+  & [data-timeline-item].is-active {
+    border-color: rgba(231, 201, 169, 0.65);
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.25);
+  }
+
+  & [data-timeline-item].is-active::before {
+    background-color: var(--color-highlight);
+    border-color: var(--color-text);
+  }
+
+  /* Desktop: Karten wechseln zwischen linker und rechter Seite. */
+  @media (min-width: 1024px) {
     & .timeline-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem;
+      padding-left: 0;
+    }
+
+    & .timeline-grid::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    & [data-timeline-item] {
+      width: calc(50% - 2rem);
+    }
+
+    & [data-timeline-item]:nth-child(odd) {
+      align-self: flex-start;
+    }
+
+    & [data-timeline-item]:nth-child(even) {
+      align-self: flex-end;
+    }
+
+    & [data-timeline-item]:nth-child(odd)::before {
+      right: -2.58rem;
+      left: auto;
+    }
+
+    & [data-timeline-item]:nth-child(even)::before {
+      left: -2.58rem;
+    }
+
+    & [data-timeline-item]:nth-child(odd)::after {
+      right: -2rem;
+      left: auto;
+      width: 2rem;
+    }
+
+    & [data-timeline-item]:nth-child(even)::after {
+      left: -2rem;
+      width: 2rem;
     }
   }
 
-  /* Große Desktop-Ansicht: Timeline-Inhalt bleibt gut lesbar begrenzt. */
+  /* Große Desktop-Ansicht: Timeline bleibt lesbar begrenzt. */
   @media (min-width: 1440px) {
     & > h2,
     & .timeline-grid {
       max-width: 90rem;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    & .timeline-card {
-      display: flex;
-      flex-direction: column;
     }
   }
 }
