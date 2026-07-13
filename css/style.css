@@ -873,99 +873,88 @@ body {
   }
 }
 
-/* Trainings-Glossar: aufklappbare Begriffserklärungen mit nativer HTML-Interaktion. */
-.glossary-intro {
-  max-width: 52rem;
-  margin-bottom: 1.5rem;
-}
+/* Trainings-Glossar: native, aufklappbare Begriffserklärungen. */
+#trainings-glossar {
+  & .glossary-intro {
+    max-width: 52rem;
+    margin-bottom: 1.5rem;
+  }
 
-.glossary-list {
-  display: grid;
-  gap: 0.75rem;
-}
+  & .glossary-list {
+    display: grid;
+    gap: 0.75rem;
+  }
 
-.glossary-item {
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-medium);
-}
+  & .glossary-item {
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    transition:
+      border-color var(--transition-fast),
+      background-color var(--transition-fast),
+      transform var(--transition-fast);
 
-.glossary-item summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+    & summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      color: var(--color-text);
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
 
-  padding: 1rem 1.1rem;
-  color: var(--color-text);
-  font-weight: 700;
-  cursor: pointer;
-  list-style: none;
-}
+    & summary::-webkit-details-marker {
+      display: none;
+    }
 
-.glossary-item summary::-webkit-details-marker {
-  display: none;
-}
+    & summary::after {
+      content: "+";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      color: var(--color-bg);
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      font-weight: 800;
+      line-height: 1;
+      transition:
+        transform var(--transition-fast),
+        background-color var(--transition-fast);
+    }
 
-.glossary-item summary::after {
-  content: "+";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    & summary:hover,
+    & summary:focus-visible {
+      color: var(--color-accent);
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
 
-  width: 1.75rem;
-  height: 1.75rem;
+    & p {
+      margin: 0;
+      padding: 0 1.1rem 1.1rem;
+      color: var(--color-text-muted);
+    }
 
-  color: var(--color-bg);
-  background-color: var(--color-accent);
-  border-radius: 50%;
-  font-weight: 800;
-  line-height: 1;
-}
+    &[open] {
+      background-color: rgba(255, 255, 255, 0.07);
+      border-color: rgba(231, 201, 169, 0.45);
+    }
 
-.glossary-item[open] summary::after {
-  content: "–";
-}
+    &[open] summary::after {
+      content: "–";
+      transform: rotate(180deg);
+    }
 
-.glossary-item p {
-  margin: 0;
-  padding: 0 1.1rem 1.1rem;
-  color: var(--color-text-muted);
-}
-
-.glossary-item summary:hover,
-.glossary-item summary:focus-visible {
-  color: var(--color-accent);
-  outline: 2px solid var(--color-accent);
-  outline-offset: -2px;
-}
-
-/* Glossar-Animation: geöffnete Einträge erscheinen mit einem leichten Pop-Effekt. */
-.glossary-item {
-  transition:
-    border-color var(--transition-fast),
-    background-color var(--transition-fast),
-    transform var(--transition-fast);
-}
-
-.glossary-item[open] {
-  background-color: rgba(255, 255, 255, 0.07);
-  border-color: rgba(231, 201, 169, 0.45);
-}
-
-.glossary-item[open] p {
-  animation: glossary-pop 0.22s ease-out;
-}
-
-.glossary-item summary::after {
-  transition:
-    transform var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-.glossary-item[open] summary::after {
-  transform: rotate(180deg);
+    &[open] p {
+      animation: glossary-pop 0.22s ease-out;
+    }
+  }
 }
 
 @keyframes glossary-pop {
