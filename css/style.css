@@ -708,78 +708,76 @@ body {
   }
 }
 
-/* Timeline: stellt die sportlichen Stationen als responsive Karten dar. */
+/* Timeline: chronologische Darstellung der sportlichen Stationen. */
 .timeline-section {
   width: var(--content-width);
-  padding: 0 var(--section-padding-inline);
   margin: 0 auto var(--spacing-section);
-  
-}
+  padding: 0 var(--section-padding-inline);
 
-.timeline-section > h2 {
-  margin: 0 0 2rem;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.timeline-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-.timeline-card {
-  padding: 1.5rem;
-  background-color: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-large);
-}
-
-.timeline-year {
-  margin: 0 0 0.75rem;
-  color: var(--color-accent);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.timeline-card h3 {
-  margin: 0 0 1rem;
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  line-height: 1.15;
-}
-
-.timeline-card p {
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
-.timeline-card p + p {
-  margin-top: 1rem;
-}
-
-/* Timeline-Grid: Textlastige Karten bleiben auf großen Screens maximal zweispaltig lesbar. */
-@media (min-width: 768px) {
-  .timeline-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Große Desktop-Ansicht: Timeline-Inhalt und Überschrift werden
-   auf eine gut lesbare Breite begrenzt. */
-@media (min-width: 1440px) {
-  .timeline-section > h2,
-  .timeline-grid {
-    max-width: 90rem;
-    margin-left: auto;
-    margin-right: auto;
+  & > h2 {
+    margin: 0 0 2rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
 
-  .timeline-card {
-    display: flex;
-    flex-direction: column;
+  & .timeline-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  & .timeline-card {
+    padding: 1.5rem;
+    background-color: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+  }
+
+  & .timeline-year {
+    margin: 0 0 0.75rem;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  & .timeline-card h3 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    line-height: 1.15;
+  }
+
+  & .timeline-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  & .timeline-card p + p {
+    margin-top: 1rem;
+  }
+
+  /* Tablet: Die Timeline wird zweispaltig dargestellt. */
+  @media (min-width: 768px) {
+    & .timeline-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Große Desktop-Ansicht: Timeline-Inhalt bleibt gut lesbar begrenzt. */
+  @media (min-width: 1440px) {
+    & > h2,
+    & .timeline-grid {
+      max-width: 90rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    & .timeline-card {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
