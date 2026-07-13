@@ -897,6 +897,96 @@ body {
   }
 }
 
+/* Fortsetzung der Laufbahn: verbindet Setup, Training, Glossar und Rennen. */
+.journey-continuation {
+  --journey-progress: 0;
+
+  position: relative;
+  display: flow-root;
+
+  /*
+   * Die Grundlinie beginnt oberhalb des Wrappers und schließt dadurch
+   * optisch an das Ende der eigentlichen Timeline an.
+   */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--spacing-section));
+    bottom: var(--spacing-section);
+    left: 50%;
+    z-index: 0;
+    width: 0.15rem;
+    border-radius: var(--radius-pill);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  /* Neutrale Linie für den noch nicht erreichten Verlauf. */
+  &::before {
+    background-color: var(--color-border);
+  }
+
+  /* Farbige Linie wächst später passend zum Scroll-Fortschritt. */
+  &::after {
+    background-color: var(--color-accent);
+    transform:
+      translateX(-50%)
+      scaleY(var(--journey-progress));
+    transform-origin: top;
+  }
+
+  /* Die Inhaltsbereiche liegen vor der zentralen Linie. */
+  & > .content-section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /*
+   * Unterstützt beide vorhandenen Strukturen:
+   * data-journey-item direkt auf der Card oder auf der Section.
+   */
+  & [data-journey-item].content-card,
+  & [data-journey-item] > .content-card {
+    --journey-card-progress: 0%;
+
+    position: relative;
+  }
+
+  /*
+   * Der farbige Rahmen wird von oben nach unten freigelegt.
+   * Das entspricht optisch dem wachsenden Fortschrittsbalken.
+   */
+  & [data-journey-item].content-card::after,
+  & [data-journey-item] > .content-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 2;
+    border: 2px solid var(--color-accent);
+    border-radius: inherit;
+    clip-path: inset(
+      0
+      0
+      calc(100% - var(--journey-card-progress))
+      0
+      round var(--radius-large)
+    );
+    pointer-events: none;
+  }
+
+  /* Die aktuell durchlaufene Karte wird zusätzlich hervorgehoben. */
+  & .content-card.is-journey-active {
+    box-shadow:
+      0 0 0 1px rgba(231, 201, 169, 0.2),
+      0 1rem 2.5rem rgba(0, 0, 0, 0.28);
+  }
+
+  /* Vollständig erreichte Karten behalten ihren farbigen Rahmen. */
+  & .content-card.is-journey-complete {
+    border-color: rgba(231, 201, 169, 0.45);
+  }
+}
 
 /* Content-Bereiche: gemeinsame Grundlage für Setup, Training, Glossar und Rennen. */
 .content-section {
