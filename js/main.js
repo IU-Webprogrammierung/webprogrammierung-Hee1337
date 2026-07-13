@@ -51,3 +51,90 @@ hotspotButtons.forEach((button) => {
     detailCard.classList.add("is-visible");
   });
 });
+
+/* Scroll-aktive Timeline: aktualisiert Fortschrittslinie und aktive Station. */
+const timelineSection = document.querySelector("[data-timeline]");
+const timelineGrid = timelineSection?.querySelector(".timeline-grid");
+const timelineItems = timelineSection
+  ? [...timelineSection.querySelectorAll("[data-timeline-item]")]
+  : [];
+
+if (timelineSection && timelineGrid && timelineItems.length > 0) {
+  let updateRequested = false;
+
+  const clamp = (value, minimum, maximum) => {
+    return Math.min(Math.max(value, minimum), maximum);
+  };
+
+  const updateTimeline = () => {
+    const gridRectangle = timelineGrid.getBoundingClientRect();
+
+    /*
+     * Die Aktivierungslinie liegt leicht unterhalb der Bildschirmmitte.
+     * Dadurch wird eine Station hervorgehoben, sobald sie gut lesbar ist.
+     */
+    const activationLine = window.innerHeight * 0.55;
+
+    /*
+     * Der Fortschritt ergibt sich aus der Position der Aktivierungslinie
+     * innerhalb des gesamten Timeline-Grids.
+     */
+    const progress = clamp(
+      (activationLine - gridRectangle.top) /
+        Math.max(gridRectangle.height, 1),
+      0,
+      1
+    );
+
+    timelineGrid.style.setProperty(
+      "--timeline-progress",
+      `${progress * 100}%`
+    );
+
+    /*
+     * Aktiv wird die Station, deren Mittelpunkt der Aktivierungslinie
+     * aktuell am nächsten liegt.
+     */
+    let activeItem = timelineItems[0];
+    let smallestDistance = Number.POSITIVE_INFINITY;
+
+    timelineItems.forEach((item) => {
+      const itemRectangle = item.getBoundingClientRect();
+      const itemCenter =
+        itemRectangle.top + itemRectangle.height / 2;
+      const distance = Math.abs(itemCenter - activationLine);
+
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+        activeItem = item;
+      }
+    });
+
+    timelineItems.forEach((item) => {
+      item.classList.toggle("is-active", item === activeItem);
+    });
+
+    updateRequested = false;
+  };
+
+  /*
+   * requestAnimationFrame verhindert unnötig viele Berechnungen
+   * während eines einzelnen Scrollvorgangs.
+   */
+  const requestTimelineUpdate = () => {
+    if (updateRequested) {
+      return;
+    }
+
+    updateRequested = true;
+    window.requestAnimationFrame(updateTimeline);
+  };
+
+  window.addEventListener("scroll", requestTimelineUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("resize", requestTimelineUpdate);
+
+  requestTimelineUpdate();
+}
