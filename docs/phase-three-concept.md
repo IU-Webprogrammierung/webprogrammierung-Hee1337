@@ -29,7 +29,7 @@ Der Hero soll weniger randlos und weniger fullscreenartig wirken. Dafür werden 
 
 ### 2.2 CSS-Struktur refaktorieren
 
-Die CSS-Datei wird strukturell überarbeitet. Wiederkehrende Werte sollen als Variablen zentral gepflegt, doppelte oder widersprüchliche Regeln entfernt und Media Queries den jeweiligen Komponenten zugeordnet werden. Natives CSS-Nesting wird gezielt dort eingesetzt, wo es die Lesbarkeit verbessert.
+Die CSS-Datei wird strukturell überarbeitet. Wiederkehrende Werte sollen als Variablen zentral gepflegt, doppelte oder widersprüchliche Regeln entfernt und Media Queries den jeweiligen Komponenten zugeordnet werden. Natives CSS-Nesting wird komponentenbezogen eingesetzt, damit Basisgestaltung, Zustände und responsives Verhalten eines Bereichs gemeinsam nachvollzogen werden können.
 
 ### 2.3 Bilddateien und Bilddarstellung prüfen
 
@@ -100,7 +100,7 @@ Der Hero wurde von einer randlosen Fläche zu einer zentrierten Portfolio-Bühne
 - reduzierte maximale Bildhöhe,
 - kleinere responsive Überschrift.
 
-Die zentrale Grundstruktur lautet:
+Die zentrale Grundstruktur ist innerhalb eines gemeinsamen Komponentenblocks organisiert:
 
 ```css
 #hero {
@@ -111,15 +111,14 @@ Die zentrale Grundstruktur lautet:
   background-color: var(--color-bg-soft);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-hero);
-  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.45);
-}
 
-.hero-image {
-  display: block;
-  width: 100%;
-  height: clamp(30rem, 68vh, 48rem);
-  object-fit: cover;
-  object-position: center center;
+  & .hero-image {
+    display: block;
+    width: 100%;
+    height: clamp(30rem, 68vh, 48rem);
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 ```
 
@@ -148,32 +147,30 @@ Der Hero wirkt weiterhin prägnant, ist aber klarer in das Gesamtlayout eingebun
 
 ---
 
-### 4.2 Refactoring der CSS-Struktur
+### 4.2 Refactoring und komponentenbezogene Organisation der CSS-Datei
 
 #### Ausgangsproblem
 
-Die CSS-Datei war durch die schrittweise Entwicklung in Phase 2 gewachsen. Mehrere wiederkehrende Werte waren als feste Einzelwerte eingetragen. Einzelne Regeln derselben Komponente lagen in verschiedenen Media Queries. Teilweise wurden frühere Deklarationen später erneut überschrieben.
+Die CSS-Datei war durch die schrittweise Entwicklung in Phase 2 gewachsen. Wiederkehrende Werte waren teilweise mehrfach als feste Einzelwerte eingetragen. Regeln derselben Komponente lagen an unterschiedlichen Stellen der Datei und die zugehörigen Media Queries befanden sich teilweise gesammelt am Dateiende.
 
-Die Gestaltung funktionierte, aber die Struktur war nicht an jeder Stelle sofort nachvollziehbar. Für eine externe Agentur wäre unnötige Suche erforderlich gewesen, um Basisgestaltung, Zustände und responsives Verhalten einer Komponente zusammenzuführen.
+Die Gestaltung funktionierte, aber eine externe Agentur hätte Basisgestaltung, Zustände und responsives Verhalten einzelner Bereiche zunächst zusammensuchen müssen. Zusätzlich enthielt die Datei doppelte oder später überschriebene Regeln.
 
 #### Begründung der Änderung
 
-Wiederkehrende Gestaltungswerte sollen zentral gepflegt werden können. Regeln derselben Komponente sollen möglichst zusammenstehen. Doppelte oder widersprüchliche Deklarationen sollen entfernt werden, ohne das sichtbare Layout unnötig zu verändern.
+Die CSS-Datei soll denselben Grundsatz erfüllen wie das Konzept: Ein Bereich muss vollständig nachvollziehbar sein, ohne seine Regeln über die gesamte Datei zusammensuchen zu müssen.
 
-Media Queries werden grundsätzlich direkt bei der jeweiligen Komponente angeordnet. Gleiche Breakpoints für unterschiedliche Komponenten bleiben bewusst getrennt. Zusammengeführt werden nur Regeln, die dieselbe Komponente und denselben Darstellungszustand betreffen.
+Deshalb wurden folgende Strukturziele festgelegt:
+
+- wiederkehrende Werte zentral definieren,
+- jede größere Seitenkomponente in einem eigenen Block organisieren,
+- untergeordnete Elemente und Zustände mit nativem CSS-Nesting zuordnen,
+- komponentenspezifische Media Queries direkt bei der Komponente belassen,
+- nur tatsächlich doppelte oder widersprüchliche Regeln zusammenführen,
+- globale Regeln weiterhin eindeutig global halten.
 
 #### Zentralisierung wiederkehrender Werte
 
-Im `:root`-Bereich wurden zusätzliche CSS-Variablen eingeführt. Sie steuern unter anderem:
-
-- gemeinsame Inhaltsbreite,
-- horizontale Innenabstände der Inhaltsbereiche,
-- verschiedene Radiusstufen,
-- Radius für Pill-Elemente,
-- kurze Übergangsgeschwindigkeiten,
-- Geschwindigkeit kleiner Pop-Animationen.
-
-Beispiel:
+Im `:root`-Bereich wurden zusätzliche CSS-Variablen für gemeinsame Layout- und Komponentenwerte eingeführt:
 
 ```css
 :root {
@@ -187,70 +184,134 @@ Beispiel:
   --radius-pill: 999px;
 
   --transition-fast: 0.2s ease;
-  --transition-pop: 0.24s ease-out;
 }
 ```
 
-Die Bereiche „Das bin ich“, Timeline und allgemeine Content-Sections verwenden dadurch dieselben Variablen für Breite und Innenabstände. Wiederkehrende Radien und Übergänge müssen nicht mehr an mehreren Stellen als feste Werte gepflegt werden.
+Die gemeinsame Inhaltsbreite und die horizontalen Innenabstände werden von About-Bereich, Timeline und allgemeinen Content-Bereichen genutzt. Unterschiedliche Radiusstufen machen außerdem nachvollziehbar, welche Rundung für kleine Bedienelemente, Cards, den Hero und Pill-Elemente vorgesehen ist.
 
-#### Bereinigung doppelter Regeln
+Eine zunächst angelegte, aber nicht verwendete Animationsvariable wurde beim abschließenden CSS-Check wieder entfernt. Dadurch enthält der Variablenbereich nur Werte, die tatsächlich eingesetzt werden.
 
-Die CSS-Datei wurde gezielt auf echte Doppelungen geprüft. Dabei wurden folgende Bereiche bereinigt:
+#### Komponentenbezogene CSS-Struktur
 
-- Zwei Media Queries der Navigation ab 768px wurden zu einem gemeinsamen Block zusammengeführt.
-- Zwei Timeline-Regeln ab 1440px wurden vereinigt.
-- Mehrfach eingetragene mobile Hero-Regeln wurden entfernt, sofern sie keine bewusste Korrektur einer vorherigen Breakpoint-Regel darstellten.
-- Kommentare wurden an das tatsächliche Verhalten des Codes angepasst.
+Die CSS-Datei wurde nach den sichtbaren Bereichen der Website organisiert. Folgende Komponenten besitzen nun jeweils einen zusammenhängenden Block:
 
-Die getrennten Media Queries für About-Bereich, Rennrad-Setup und Footer bleiben bestehen, obwohl sie teilweise denselben Breakpoint verwenden. Sie gehören zu unterschiedlichen Komponenten und stehen deshalb weiterhin direkt beim jeweiligen Bereich.
+1. Header,
+2. Hauptnavigation,
+3. Hero,
+4. „Das bin ich“,
+5. Timeline,
+6. allgemeine Content- und Trainingsbereiche,
+7. Trainings-Glossar,
+8. interaktives Rennrad-Setup,
+9. Footer.
+
+Innerhalb der Komponenten stehen:
+
+- Grundlayout,
+- Regeln für untergeordnete Elemente,
+- Hover-, Fokus-, Offen- oder Aktivzustände,
+- zugehörige responsive Anpassungen.
+
+Beispiel für die Grundlogik:
+
+```css
+.about-section {
+  width: var(--content-width);
+
+  & .about-card {
+    display: grid;
+  }
+
+  & .about-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1024px) {
+    & .about-card {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+}
+```
+
+Das `&` verweist auf den übergeordneten Komponentenblock. Dadurch bleibt erkennbar, dass Card, Portrait und Desktop-Regel zum Bereich „Das bin ich“ gehören.
+
+#### Einsatz von nativem CSS-Nesting
+
+Das Nesting wurde zunächst an der Navigation erprobt und anschließend auf alle größeren Komponenten übertragen. Dabei wurde bewusst keine unnötig tiefe Verschachtelung verwendet.
+
+Die Hauptkomponente bildet jeweils die äußere Ebene. Untergeordnete Selektoren werden nur so weit verschachtelt, wie es für ihre eindeutige Zuordnung erforderlich ist. Globale Elemente wie `:root`, `html`, `body`, `@keyframes` und `prefers-reduced-motion` bleiben außerhalb der Komponentenblöcke.
+
+Diese Struktur ermöglicht einer Agentur, das vollständige Verhalten eines Bereichs an einer Stelle zu lesen und bei Bedarf zu verändern.
 
 #### Komponentenbezogene Media Queries
 
-Basisgestaltung und responsive Erweiterung einer Komponente stehen möglichst zusammen. Dadurch kann eine externe Agentur das vollständige Verhalten eines Bereichs an einer Stelle nachvollziehen.
+Media Queries wurden nicht in einem einzigen globalen Breakpoint-Abschnitt gesammelt. Sie stehen direkt innerhalb der Komponente, deren Darstellung sie verändern.
 
-Globale Sonderregeln, die mehrere Komponenten betreffen, bleiben am Ende der Datei gesammelt. Dazu gehört insbesondere `prefers-reduced-motion`.
+Beispiele:
 
-#### Natives CSS-Nesting in der Navigation
+- Navigation ab 768px,
+- Hero für Smartphone, Tablet/Laptop und Desktop,
+- About-Bereich ab 1024px,
+- Timeline ab 768px und 1440px,
+- Rennrad-Setup unter 768px und ab 1024px,
+- Footer ab 1024px.
 
-Die Hauptnavigation wurde als erste Komponente mit nativem CSS-Nesting strukturiert. Untergeordnete Listen, Links, Zustände und der responsive Wechsel ab 768px befinden sich innerhalb des gemeinsamen Blocks `.main-navigation`.
+Gleiche Breakpoints für unterschiedliche Komponenten bleiben bewusst getrennt. Dadurch ist beispielsweise die Footer-Regel ab 1024px direkt im Footer-Block auffindbar und nicht in einem entfernten Sammelblock.
 
-Beispiel:
+#### Bereinigung doppelter und widersprüchlicher Regeln
+
+Im Verlauf des Refactorings wurden unter anderem folgende Stellen bereinigt:
+
+- zwei Navigations-Media-Queries ab 768px,
+- zwei Timeline-Regeln ab 1440px,
+- wiederholte mobile Hero-Regeln,
+- ausgelagerte Breakpoints für About, Bike-Setup und Footer,
+- veraltete oder nicht mehr zutreffende Kommentare,
+- eine nicht verwendete CSS-Variable.
+
+Das Ziel war nicht, identische Breakpoint-Zahlen pauschal zusammenzufassen. Entfernt oder vereinigt wurden nur Regeln, die tatsächlich dieselbe Komponente und denselben Zustand betrafen.
+
+#### Globale Animationen und Keyframes
+
+Die Animationen `glossary-pop`, `bike-detail-pop` und `hotspot-pulse` bleiben als globale `@keyframes` außerhalb der Komponentenblöcke. Die Komponenten verweisen lediglich auf diese Animationen.
+
+Diese Trennung wurde gewählt, weil `@keyframes` eigenständige globale Definitionen sind und nicht wie normale untergeordnete Elementselektoren behandelt werden.
+
+#### Sichtbarer Skip-Link
+
+Der bereits im HTML vorhandene Skip-Link erhielt im Rahmen des abschließenden CSS-Checks eine eigene Gestaltung. Im Normalzustand liegt er außerhalb des sichtbaren Bereichs. Sobald er per Tastatur fokussiert wird, erscheint er oben links mit deutlich erkennbarem Kontrast und Fokusrahmen.
 
 ```css
-.main-navigation {
-  position: relative;
-  margin-left: auto;
+.skip-link {
+  position: fixed;
+  transform: translateY(-200%);
+  transition: transform var(--transition-fast);
+}
 
-  & a {
-    color: var(--color-text);
-    text-decoration: none;
-  }
-
-  @media (min-width: 768px) {
-    & .navigation-toggle {
-      display: none;
-    }
-
-    & .navigation-list--desktop {
-      display: flex;
-    }
-  }
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 ```
 
-Das Nesting wird nicht pauschal auf die gesamte CSS-Datei übertragen. Es wird nur dort verwendet, wo es die Zugehörigkeit der Selektoren klarer darstellt. Zu tiefe Verschachtelungen werden vermieden.
+Dadurch ist die vorhandene semantische Funktion nicht nur technisch vorhanden, sondern auch praktisch per Tastatur nutzbar.
 
 #### Reduzierte Bewegung
 
-Die vorher getrennten Regeln für Glossar und Rennrad-Setup wurden in einem gemeinsamen globalen Block zusammengeführt. Bei aktivierter Systemeinstellung `prefers-reduced-motion: reduce` werden deaktiviert:
+Die Regeln für reduzierte Bewegung bleiben als globaler Block am Dateiende bestehen, weil sie mehrere Komponenten gleichzeitig betreffen.
 
-- weiches Scrollen,
-- Glossar-Pop-Animation,
-- Übergänge des Plus-/Minus-Symbols,
-- Pulsieren der Rennrad-Hotspots,
-- Pop-Animation der Rennrad-Detailkarte.
+Bei `prefers-reduced-motion: reduce` werden:
 
-Beispiel:
+- weiches Scrollen deaktiviert,
+- die Bewegung des Skip-Links nicht animiert,
+- Glossar-Übergänge deaktiviert,
+- die Glossar-Pop-Animation entfernt,
+- das Pulsieren der Rennrad-Hotspots abgeschaltet,
+- die Detailkarten-Animation deaktiviert.
+
+Nach dem komponentenbezogenen Nesting wurden die Selektoren im Reduced-Motion-Block an die höhere Spezifität der Komponentenregeln angepasst. Dadurch überschreiben sie die Animationen weiterhin zuverlässig.
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -258,29 +319,49 @@ Beispiel:
     scroll-behavior: auto;
   }
 
-  .glossary-item,
-  .glossary-item summary::after {
+  .skip-link,
+  #trainings-glossar .glossary-item,
+  #trainings-glossar .glossary-item summary::after {
     transition: none;
   }
 
-  .glossary-item[open] p,
-  .bike-hotspot,
-  .bike-detail-card.is-visible {
+  #trainings-glossar .glossary-item[open] p,
+  #rennrad-setup .bike-hotspot,
+  #rennrad-setup .bike-detail-card.is-visible {
     animation: none;
   }
 }
 ```
 
+#### Responsives Verhalten
+
+Das Refactoring sollte das sichtbare Verhalten der Website nicht grundlegend verändern. Nach jedem Komponentenumbau wurden die relevanten Breakpoints und Interaktionen kontrolliert.
+
+Besonders geprüft wurden:
+
+- Wechsel zwischen mobiler und horizontaler Navigation bei 768px,
+- Hero-Darstellung an den Übergängen 767/768px, 1199/1200px und 1439/1440px,
+- About-Layout ab 1024px,
+- ein- und zweispaltige Timeline,
+- horizontales Scrollen der Trainingstabelle,
+- Glossarzustände,
+- Rennrad-Hotspots und Detailkarte,
+- Footer-Layout ab 1024px.
+
 #### Ergebnis
 
-Das sichtbare Layout wurde durch das Refactoring bewusst nicht grundlegend verändert. Der Mehrwert liegt in:
+Das CSS-Refactoring ist abgeschlossen. Der sichtbare Webauftritt blieb dabei weitgehend unverändert, die Codebasis wurde jedoch deutlich nachvollziehbarer.
 
-- konsistenteren Gestaltungswerten,
-- weniger doppelten oder widersprüchlichen Regeln,
-- klarerer Zuordnung von Komponenten und Breakpoints,
-- leichterer Wartbarkeit,
-- besser nachvollziehbarer CSS-Struktur,
-- konsequenter Berücksichtigung reduzierter Bewegung.
+Die wichtigsten Ergebnisse sind:
+
+- zentrale und tatsächlich verwendete CSS-Variablen,
+- vollständige komponentenbezogene Organisation,
+- natives CSS-Nesting für alle größeren Seitenbereiche,
+- direkt zugeordnete Media Queries,
+- weniger doppelte oder überschreibende Regeln,
+- klar getrennte globale Keyframes und Reduced-Motion-Regeln,
+- sichtbarer und tastaturbedienbarer Skip-Link,
+- bessere Wartbarkeit für die weitere Timeline- und Animationsentwicklung.
 
 ---
 
@@ -352,6 +433,7 @@ Zusätzlich werden geprüft:
 
 - mobile Navigation,
 - alle Hauptnavigations- und Hero-Sprunglinks,
+- Skip-Link,
 - Tastaturbedienung und sichtbare Fokuszustände,
 - Glossar-Interaktion,
 - Rennrad-Hotspots und Detailkarte,
@@ -375,10 +457,14 @@ Für die finale Abgabe werden vorbereitet:
 
 ## 7. Zwischenfazit
 
-Die ersten Arbeitsschritte der Finalisierung wurden abgeschlossen. Der Hero wurde von einer randlosen, sehr dominanten Fläche zu einer kontrollierten Portfolio-Bühne weiterentwickelt. Der problematische Übergang bei ungefähr 1024px wurde durch angepasste Breakpoints korrigiert und die Hero-Typografie verkleinert.
+Die ersten beiden großen Arbeitspakete der Finalisierung wurden abgeschlossen.
 
-Die CSS-Datei wurde strukturell überarbeitet. Wiederkehrende Werte werden zentral gepflegt, echte Doppelungen wurden entfernt, Media Queries bleiben komponentennah und die Hauptnavigation nutzt gezieltes natives CSS-Nesting. Die Berücksichtigung reduzierter Bewegung wurde in einem gemeinsamen globalen Block zusammengeführt.
+Der Hero wurde von einer randlosen, sehr dominanten Fläche zu einer kontrollierten Portfolio-Bühne weiterentwickelt. Der problematische Übergang bei ungefähr 1024px wurde durch angepasste Breakpoints korrigiert und die Hero-Typografie verkleinert.
+
+Die CSS-Datei wurde vollständig komponentenbezogen neu organisiert. Header, Navigation, Hero, About-Bereich, Timeline, allgemeine Content-Bereiche, Glossar, Rennrad-Setup und Footer enthalten nun ihre untergeordneten Elemente, Zustände und Media Queries in zusammenhängenden Blöcken. Wiederkehrende Werte werden zentral gepflegt, echte Doppelungen wurden entfernt und globale Animationen sowie Reduced-Motion-Regeln bleiben klar getrennt.
+
+Zusätzlich wurde der vorhandene Skip-Link visuell und per Tastatur nutzbar gemacht. Die Regeln für reduzierte Bewegung wurden nach dem Nesting so angepasst, dass sie die komponentenspezifischen Animationen weiterhin zuverlässig deaktivieren.
 
 Die eingebundenen Bilddateien wurden geprüft. Da sie bereits in angemessenen Größen vorliegen, konzentriert sich Phase 3 auf eine bessere Bilddarstellung statt auf eine unnötige erneute Komprimierung.
 
-Die nächsten Ergänzungen dieses Dokuments erfolgen nach der tatsächlichen Umsetzung der Timeline, ihrer Scroll-Interaktion, der Micro-Animationen und der abschließenden Tests.
+Als nächster Entwicklungsschritt wird die bestehende Card-Darstellung der sportlichen Stationen zu einer visuellen Timeline mit Linie und Markern weiterentwickelt. Anschließend folgen die scroll-aktive Hervorhebung, gezielte Micro-Animationen und die abschließende Dokumentation der Tests und Abgabevorbereitung.
