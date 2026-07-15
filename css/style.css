@@ -844,6 +844,10 @@ body {
     background-color: var(--color-bg-soft);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-large);
+
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
   }
 
   /* Marker auf der Timeline-Linie. */
@@ -978,6 +982,11 @@ body {
    * Die Grundlinie beginnt oberhalb des Wrappers und schließt dadurch
    * optisch an das Ende der eigentlichen Timeline an.
    */
+
+   & .content-card.is-journey-active {
+      box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.25);
+      
+    }
   &::before,
   &::after {
     content: "";
@@ -1021,6 +1030,7 @@ body {
     --journey-card-angle: 0deg;
 
     position: relative;
+    transition: box-shadow var(--transition-fast);
   }
 
     /*
@@ -1546,6 +1556,9 @@ body {
   #hero .hero-station-navigation a,
   #hero .hero-station-navigation a::after,
   .content-section .button-link,
+  .timeline-section [data-timeline-item],
+  .journey-continuation [data-journey-item].content-card,
+  .journey-continuation [data-journey-item] > .content-card,
   #trainings-glossar .glossary-item,
   #trainings-glossar .glossary-item summary::after {
     transition: none;
