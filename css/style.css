@@ -1448,6 +1448,229 @@ body {
   }
 }
 
+/* Kontaktabschluss: Ausblick auf die nächste sportliche Etappe. */
+.contact-section {
+  width: var(--content-width);
+  margin: 0 auto var(--spacing-section);
+  padding: 0 var(--section-padding-inline);
+  scroll-margin-top: 6rem;
+
+  & .contact-stage {
+    padding: clamp(1.5rem, 4vw, 3rem);
+    overflow: hidden;
+    background-color: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+  }
+
+  & .contact-intro {
+    max-width: 52rem;
+  }
+
+  & .contact-kicker {
+    margin: 0 0 0.75rem;
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  & h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  & .contact-intro > p:last-child {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.75;
+  }
+
+  & .bike-route {
+  position: relative;
+  height: 8rem;
+  margin: 2.5rem 0;
+  }
+
+  & .bike-route-line {
+    position: absolute;
+    right: 0;
+    bottom: 1.5rem;
+    left: 0;
+    height: 0.15rem;
+    background-color: var(--color-border);
+    border-radius: var(--radius-pill);
+  }
+
+  & .bike-route-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-accent);
+    border-radius: inherit;
+    transform: scaleX(var(--route-progress, 0));
+    transform-origin: left;
+  }
+
+  & .contact-bike {
+    position: absolute;
+    bottom: 1.65rem;
+    left: 0;
+    z-index: 2;
+    width: clamp(5.5rem, 12vw, 9rem);
+    height: auto;
+    filter: invert(1);
+
+    transform:
+      translateX(var(--bike-position, 0px))
+      scaleX(-1);
+  }
+
+  & .bike-route-finish {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  align-items: end;
+  gap: 0.2rem;
+  height: 4rem;
+}
+
+  & .bike-route-finish span {
+    width: 0.45rem;
+    background-color: var(--color-accent);
+    border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+  }
+
+  & .bike-route-finish span:nth-child(1) {
+    height: 2rem;
+  }
+
+  & .bike-route-finish span:nth-child(2) {
+    height: 3rem;
+  }
+
+  & .bike-route-finish span:nth-child(3) {
+    height: 4rem;
+  }
+
+  & .contact-form {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 52rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+  }
+
+  & .form-field {
+  display: grid;
+  gap: 0.5rem;
+  }
+
+  & .form-field label {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  & .form-optional {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  & .form-field input,
+  & .form-field select,
+  & .form-field textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+    font: inherit;
+  }
+
+  & .form-field textarea {
+    resize: vertical;
+  }
+
+  & .form-field input:focus-visible,
+  & .form-field select:focus-visible,
+  & .form-field textarea:focus-visible {
+    border-color: var(--color-accent);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  & .form-submit {
+    justify-self: start;
+    padding: 0.85rem 1.25rem;
+    color: var(--color-bg);
+    background-color: var(--color-accent);
+    border: 0;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+    transition:
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  & .form-submit:hover,
+  & .form-submit:focus-visible {
+    background-color: var(--color-text);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    transform: translateY(-0.15rem);
+  }
+
+  & .form-submit:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+
+  & .form-note,
+  & .form-status {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  & .form-status {
+    min-height: 1.5rem;
+    font-weight: 700;
+  }
+
+  & .form-status.is-success {
+    color: var(--color-accent);
+  }
+
+
+}
+
+@keyframes contact-bike-ride {
+  from {
+    transform:
+      translateX(0)
+      scaleX(-1);
+  }
+
+  to {
+    transform:
+      translateX(var(--bike-travel-distance, 0))
+      scaleX(-1);
+  }
+}
+
 /* Footer: Projektinformationen, Kontakt und ergänzende Navigation. */
 .site-footer {
   margin-top: var(--spacing-section);
@@ -1560,7 +1783,8 @@ body {
   .journey-continuation [data-journey-item].content-card,
   .journey-continuation [data-journey-item] > .content-card,
   #trainings-glossar .glossary-item,
-  #trainings-glossar .glossary-item summary::after {
+  #trainings-glossar .glossary-item summary::after,
+  .contact-section .form-submit {
     transition: none;
   }
 

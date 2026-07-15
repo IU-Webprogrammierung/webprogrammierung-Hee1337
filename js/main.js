@@ -4,23 +4,14 @@
    Gemeinsame Hilfsfunktionen
    ========================================================= */
 
-/**
- * Begrenzt einen Zahlenwert auf einen festgelegten Bereich.
- */
 const clamp = (value, minimum, maximum) => {
   return Math.min(Math.max(value, minimum), maximum);
 };
 
-/**
- * Mischt zwei Werte anhand eines Fortschritts zwischen 0 und 1.
- */
 const interpolate = (start, end, progress) => {
   return start + (end - start) * progress;
 };
 
-/**
- * Wandelt einen berechneten CSS-Pixelwert in eine Zahl um.
- */
 const parsePixelValue = (value) => {
   const parsedValue = Number.parseFloat(value);
 
@@ -157,6 +148,42 @@ const initializeBikeSetup = () => {
 
 
 /* =========================================================
+   Kontaktformular: lokale Portfolio-Demonstration
+   ========================================================= */
+
+const initializeContactForm = () => {
+  const contactForm =
+    document.querySelector("[data-contact-form]");
+
+  const statusMessage =
+    document.querySelector("[data-form-status]");
+
+  if (
+    !contactForm ||
+    !statusMessage
+  ) {
+    return;
+  }
+
+  contactForm.addEventListener(
+    "submit",
+    (event) => {
+      event.preventDefault();
+
+      statusMessage.textContent =
+        "Vielen Dank! Dein Tipp wurde in dieser Demo erfolgreich verarbeitet.";
+
+      statusMessage.classList.add(
+        "is-success"
+      );
+
+      contactForm.reset();
+    }
+  );
+};
+
+
+/* =========================================================
    Scroll-Orientierung vor der Haupt-Timeline
    ========================================================= */
 
@@ -211,6 +238,7 @@ const createIntroStageUpdater = () => {
   };
 };
 
+
 /* =========================================================
    Scroll-aktive Haupt-Timeline
    ========================================================= */
@@ -246,10 +274,6 @@ const createTimelineUpdater = () => {
     const gridRectangle =
       timelineGrid.getBoundingClientRect();
 
-    /*
-     * Gedachte Leselinie leicht unterhalb
-     * der Bildschirmmitte.
-     */
     const activationLine =
       window.innerHeight * 0.55;
 
@@ -271,10 +295,6 @@ const createTimelineUpdater = () => {
       `${timelineProgress * 100}%`
     );
 
-    /*
-     * Die Karte, deren Mittelpunkt der Leselinie
-     * am nächsten liegt, wird hervorgehoben.
-     */
     let activeItem =
       timelineItems[0];
 
@@ -319,12 +339,6 @@ const createTimelineUpdater = () => {
    Erweiterter Verlauf bis „Mein erstes Rennen“
    ========================================================= */
 
-/*
- * Diese Werte steuern das Verhalten zentral.
- *
- * Ein Exponent von 1 wäre vollständig linear.
- * Werte leicht über 1 sorgen für einen ruhigeren Start.
- */
 const journeySettings = {
   activationLineRatio: 0.55,
   lineProgressExponent: 1.08,
@@ -332,12 +346,6 @@ const journeySettings = {
   pageEndAssistDistanceRatio: 0.65
 };
 
-/**
- * Findet die sichtbare Inhaltskarte eines Journey-Elements.
- *
- * Bei manchen Bereichen liegt data-journey-item direkt
- * auf der Card. Bei section#rennen liegt es auf der Section.
- */
 const findJourneyCard = (item) => {
   if (
     item.matches(".content-card")
@@ -388,10 +396,6 @@ const createJourneyUpdater = () => {
     const journeyRectangle =
       journeySection.getBoundingClientRect();
 
-    /*
-     * Die tatsächlichen Start- und Endwerte der
-     * CSS-Grundlinie werden ausgelesen.
-     */
     const trackStyle =
       window.getComputedStyle(
         journeySection,
@@ -408,19 +412,11 @@ const createJourneyUpdater = () => {
         trackStyle.bottom
       );
 
-    /*
-     * Absolute Position des Linienanfangs
-     * innerhalb des gesamten Dokuments.
-     */
     const trackStart =
       scrollPosition +
       journeyRectangle.top +
       trackTopOffset;
 
-    /*
-     * Absolute Position des Linienendes
-     * innerhalb des gesamten Dokuments.
-     */
     const trackEnd =
       scrollPosition +
       journeyRectangle.bottom -
@@ -431,9 +427,6 @@ const createJourneyUpdater = () => {
       1
     );
 
-    /*
-     * Absolute Position der gedachten Leselinie.
-     */
     const activationPosition =
       scrollPosition +
       window.innerHeight *
@@ -450,9 +443,6 @@ const createJourneyUpdater = () => {
       1
     );
 
-    /*
-     * Leicht verlangsamter Verlauf zu Beginn.
-     */
     const naturalLineProgress =
       Math.pow(
         rawLineProgress,
@@ -465,11 +455,6 @@ const createJourneyUpdater = () => {
       trackLength *
         naturalLineProgress;
 
-    /*
-     * Am Seitenende fehlt natürlicherweise Scrollweg.
-     * Erst im letzten Teil der Journey wird deshalb
-     * ein sanfter Abschlussausgleich verwendet.
-     */
     const distanceToPageEnd =
       Math.max(
         document.documentElement
@@ -497,10 +482,6 @@ const createJourneyUpdater = () => {
           )
         : 0;
 
-    /*
-     * Dieser Linienkopf ist die gemeinsame Grundlage
-     * für Mittellinie, Kartenrahmen und aktive Station.
-     */
     const lineHead =
       interpolate(
         naturalLineHead,
@@ -523,10 +504,6 @@ const createJourneyUpdater = () => {
       journeyProgress.toFixed(4)
     );
 
-    /*
-     * Geometrie aller Journey-Cards
-     * in absoluten Dokumentkoordinaten.
-     */
     const itemGeometry =
       journeyItems.map(
         ({ item, card }) => {
@@ -549,10 +526,6 @@ const createJourneyUpdater = () => {
         }
       );
 
-    /*
-     * Aktiv ist die letzte Karte,
-     * deren Oberkante der Linienkopf erreicht hat.
-     */
     let activeIndex = -1;
 
     itemGeometry.forEach(
@@ -576,13 +549,6 @@ const createJourneyUpdater = () => {
         },
         index
       ) => {
-        /*
-         * Der Rahmen beginnt erst, wenn der Linienkopf
-         * die Oberkante der Karte erreicht.
-         *
-         * Dadurch kann sich der Kartenrahmen nicht mehr
-         * vor der vertikalen Linie füllen.
-         */
         const rawCardProgress =
           clamp(
             (
@@ -601,13 +567,6 @@ const createJourneyUpdater = () => {
               .cardProgressExponent
           );
 
-        /*
-         * Der conic-gradient läuft gleichzeitig
-         * nach links und rechts.
-         *
-         * 180 Grad pro Richtung ergeben
-         * zusammen einen vollständigen Rahmen.
-         */
         card.style.setProperty(
           "--journey-card-angle",
           `${
@@ -632,10 +591,6 @@ const createJourneyUpdater = () => {
           isComplete
         );
 
-        /*
-         * Bei „Mein erstes Rennen“ liegt
-         * aria-current korrekt auf section#rennen.
-         */
         if (isActive) {
           item.setAttribute(
             "aria-current",
@@ -647,6 +602,119 @@ const createJourneyUpdater = () => {
           );
         }
       }
+    );
+  };
+};
+
+
+/* =========================================================
+   Kontaktabschluss: scrollabhängige Rennradfahrt
+   ========================================================= */
+
+const createContactStageUpdater = () => {
+  const contactSection =
+    document.querySelector(
+      "[data-contact-stage]"
+    );
+
+  const bikeRoute =
+    contactSection?.querySelector(
+      ".bike-route"
+    );
+
+  const contactBike =
+    bikeRoute?.querySelector(
+      ".contact-bike"
+    );
+
+  const finishLine =
+    bikeRoute?.querySelector(
+      ".bike-route-finish"
+    );
+
+  if (
+    !contactSection ||
+    !bikeRoute ||
+    !contactBike ||
+    !finishLine
+  ) {
+    return null;
+  }
+
+  return () => {
+    const routeRectangle =
+      bikeRoute.getBoundingClientRect();
+
+    const routeWidth =
+      bikeRoute.clientWidth;
+
+    const bikeWidth =
+      contactBike
+        .getBoundingClientRect()
+        .width;
+
+    const finishWidth =
+      finishLine
+        .getBoundingClientRect()
+        .width;
+
+    const travelDistance = Math.max(
+      routeWidth -
+        bikeWidth -
+        finishWidth -
+        24,
+      0
+    );
+
+    /*
+     * Bei reduzierter Bewegung steht das Rad direkt
+     * am Ziel und die Strecke ist vollständig gefüllt.
+     */
+    const prefersReducedMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+    let routeProgress = 1;
+
+    if (!prefersReducedMotion) {
+      /*
+       * Die Fahrt beginnt, wenn die Strecke den unteren
+       * Viewportbereich erreicht, und endet weiter oben.
+       */
+      const animationStart =
+        window.innerHeight * 0.85;
+
+      const animationEnd =
+        window.innerHeight * 0.25;
+
+      routeProgress = clamp(
+        (
+          animationStart -
+          routeRectangle.top
+        ) /
+          Math.max(
+            animationStart -
+              animationEnd,
+            1
+          ),
+        0,
+        1
+      );
+    }
+
+    const bikePosition =
+      travelDistance *
+      routeProgress;
+
+    contactSection.style.setProperty(
+      "--bike-position",
+      `${bikePosition}px`
+    );
+
+    contactSection.style.setProperty(
+      "--route-progress",
+      routeProgress.toFixed(4)
     );
   };
 };
@@ -685,10 +753,6 @@ const startViewportUpdates = (
     );
   };
 
-  /*
-   * Alle Scroll-Berechnungen werden über
-   * einen gemeinsamen requestAnimationFrame gesteuert.
-   */
   const requestUpdate = () => {
     if (updateRequested) {
       return;
@@ -723,9 +787,11 @@ const startViewportUpdates = (
    ========================================================= */
 
 initializeBikeSetup();
+initializeContactForm();
 
 startViewportUpdates([
   createIntroStageUpdater(),
   createTimelineUpdater(),
-  createJourneyUpdater()
+  createJourneyUpdater(),
+  createContactStageUpdater()
 ]);

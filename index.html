@@ -465,6 +465,117 @@
   </section>
 </div>
 
+  <section
+    id="kontakt"
+    class="contact-section"
+    aria-labelledby="contact-heading"
+    data-contact-stage
+  >
+    <div class="contact-stage">
+      <div class="contact-intro">
+        <p class="contact-kicker">Die nächste Etappe</p>
+
+        <h2 id="contact-heading">
+          Dein Tipp für mein nächstes Rennen
+        </h2>
+
+        <p>
+          Mein erstes Rennen hat gezeigt, woran ich noch arbeiten muss.
+          Du hast selbst Rennerfahrung oder einen guten Tipp zu Training,
+          Taktik, Material oder Ernährung? Dann teile ihn mit mir.
+        </p>
+      </div>
+
+      <div class="bike-route" aria-hidden="true">
+        <div class="bike-route-line"></div>
+
+        <img
+          class="contact-bike"
+          src="assets/icons/rad-icon.svg"
+          alt=""
+        >
+        <div class="bike-route-finish">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <form class="contact-form" data-contact-form>
+        <div class="form-field">
+          <label for="contact-name">Dein Name</label>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="contact-email">
+            E-Mail-Adresse
+            <span class="form-optional">(optional)</span>
+          </label>
+
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="contact-topic">Thema des Tipps</label>
+
+          <select
+            id="contact-topic"
+            name="topic"
+            required
+          >
+            <option value="">Bitte auswählen</option>
+            <option value="training">Training</option>
+            <option value="taktik">Renntaktik</option>
+            <option value="material">Material</option>
+            <option value="ernaehrung">Ernährung</option>
+            <option value="sonstiges">Sonstiges</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="contact-message">
+            Dein Tipp
+          </label>
+
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="6"
+            minlength="20"
+            required
+          ></textarea>
+        </div>
+
+        <p class="form-note">
+          Dieses Formular ist eine lokale Portfolio-Demonstration.
+          Es werden keine Daten übertragen oder gespeichert.
+        </p>
+
+        <button class="form-submit" type="submit">
+          Tipp absenden
+        </button>
+
+        <p
+          class="form-status"
+          data-form-status
+          aria-live="polite"
+        ></p>
+      </form>
+    </div>
+  </section>
+
 </main>
 
 
