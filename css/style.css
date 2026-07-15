@@ -99,6 +99,18 @@ body {
     font-size: 1.75rem;
     font-weight: 400;
     letter-spacing: 0.08em;
+
+    transition:
+      color var(--transition-fast),
+      text-shadow var(--transition-fast);
+  }
+
+  & .site-logo:hover,
+  & .site-logo:focus-visible {
+    color: var(--color-accent);
+    text-shadow: 0 0 1rem rgba(231, 201, 169, 0.35);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
   }
 }
 
@@ -133,6 +145,12 @@ body {
     cursor: pointer;
     font-weight: 700;
     list-style: none;
+
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
+
   }
 
   & .navigation-toggle > summary::-webkit-details-marker {
@@ -172,7 +190,11 @@ body {
     text-decoration: none;
     font-weight: 600;
     border-radius: var(--radius-small);
-  }
+
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+      }
 
   & .navigation-list--mobile a {
     padding: 0.65rem 0.75rem;
@@ -377,6 +399,10 @@ body {
     text-decoration: none;
     font-size: clamp(1rem, 1.5vw, 1.25rem);
     font-weight: 700;
+
+    transition:
+      color var(--transition-fast),
+      transform var(--transition-fast);  
   }
 
   & .hero-station-navigation a::after {
@@ -386,12 +412,22 @@ body {
     height: 0.12rem;
     margin-top: 0.5rem;
     background-color: currentColor;
+
+    transition:
+      width var(--transition-fast),
+      background-color var(--transition-fast);
   }
 
   & .hero-station-navigation a:hover,
   & .hero-station-navigation a:focus-visible {
     color: var(--color-text);
     outline: none;
+    transform: translateY(-0.15rem);
+  }
+
+  & .hero-station-navigation a:hover::after,
+  & .hero-station-navigation a:focus-visible::after {
+    width: 4rem;
   }
 
   /* Große Desktop-Ansicht. */
@@ -1072,14 +1108,28 @@ body {
     border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 700;
+
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
   }
 
   & .button-link:hover,
   & .button-link:focus-visible {
+    color: var(--color-bg);
     background-color: var(--color-text);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
+    transform: translateY(-0.15rem);
   }
+
+  & .button-link:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
 }
 
 /* Trainings-Glossar: native, aufklappbare Begriffserklärungen. */
@@ -1452,6 +1502,12 @@ body {
   }
 
   .skip-link,
+  .site-header .site-logo,
+  .main-navigation a,
+  .main-navigation .navigation-toggle > summary,
+  #hero .hero-station-navigation a,
+  #hero .hero-station-navigation a::after,
+  .content-section .button-link,
   #trainings-glossar .glossary-item,
   #trainings-glossar .glossary-item summary::after {
     transition: none;
