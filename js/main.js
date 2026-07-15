@@ -157,6 +157,61 @@ const initializeBikeSetup = () => {
 
 
 /* =========================================================
+   Scroll-Orientierung vor der Haupt-Timeline
+   ========================================================= */
+
+const createIntroStageUpdater = () => {
+  const heroSection =
+    document.querySelector("#hero");
+
+  const aboutSection =
+    document.querySelector(".about-section");
+
+  const timelineSection =
+    document.querySelector("[data-timeline]");
+
+  if (
+    !heroSection ||
+    !aboutSection ||
+    !timelineSection
+  ) {
+    return null;
+  }
+
+  return () => {
+    const activationLine =
+      window.innerHeight * 0.55;
+
+    const aboutTop =
+      aboutSection
+        .getBoundingClientRect()
+        .top;
+
+    const timelineTop =
+      timelineSection
+        .getBoundingClientRect()
+        .top;
+
+    const heroIsActive =
+      aboutTop > activationLine;
+
+    const aboutIsActive =
+      aboutTop <= activationLine &&
+      timelineTop > activationLine;
+
+    heroSection.classList.toggle(
+      "is-active",
+      heroIsActive
+    );
+
+    aboutSection.classList.toggle(
+      "is-active",
+      aboutIsActive
+    );
+  };
+};
+
+/* =========================================================
    Scroll-aktive Haupt-Timeline
    ========================================================= */
 
@@ -670,6 +725,7 @@ const startViewportUpdates = (
 initializeBikeSetup();
 
 startViewportUpdates([
+  createIntroStageUpdater(),
   createTimelineUpdater(),
   createJourneyUpdater()
 ]);
