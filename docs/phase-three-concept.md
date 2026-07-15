@@ -393,26 +393,191 @@ Die vorhandenen Bilddateien bleiben bestehen. Der Tutor:innen-Hinweis wurde durc
 
 ---
 
+### 4.4 Visuelle Weiterentwicklung der sportlichen Timeline
+
+#### Ausgangsproblem
+
+Die vier sportlichen Stationen waren in Phase 2 als gleichartige Cards in einem responsiven Grid angeordnet. Die Inhalte waren gut lesbar, der zeitliche Verlauf von Jugend über CrossFit und Hyrox bis zum Rennrad wurde visuell jedoch nur durch die Reihenfolge der Texte vermittelt. Ab 768px standen jeweils zwei Cards nebeneinander, wodurch die Laufbahn eher wie eine Sammlung einzelner Themen wirkte.
+
+#### Begründung der Änderung
+
+Die Gestaltung soll den Leitgedanken „Meine sportliche Laufbahn“ deutlicher unterstützen. Eine sichtbare Linie mit Markern macht die chronologische Reihenfolge unmittelbar erkennbar und verbessert gleichzeitig die Orientierung beim Scrollen.
+
+#### Vorbereitung im HTML
+
+Der Timeline-Bereich erhielt `data-timeline`. Die vier zugehörigen Artikel wurden mit `data-timeline-item` gekennzeichnet.
+
+```html
+<section id="laufbahn" class="timeline-section"
+  aria-labelledby="laufbahn-heading" data-timeline>
+```
+
+```html
+<article id="jugend" class="timeline-card"
+  aria-labelledby="jugend-heading" data-timeline-item>
+```
+
+Die Datenattribute verändern weder Semantik noch Darstellung. Sie dienen als eindeutige Anknüpfungspunkte für CSS und JavaScript.
+
+#### Technische Umsetzung
+
+Das bisherige Grid wurde durch eine vertikale Flex-Anordnung ersetzt. Eine neutrale Grundlinie entsteht über ein Pseudoelement des Timeline-Containers. Jede Station besitzt einen Marker sowie eine kurze Verbindung zwischen Linie und Card.
+
+Eine zweite, farbige Linie liegt über der Grundlinie. Ihre Höhe wird über die CSS-Variable `--timeline-progress` gesteuert.
+
+```css
+.timeline-grid {
+  --timeline-progress: 0%;
+}
+
+.timeline-grid::after {
+  height: var(--timeline-progress);
+  background-color: var(--color-accent);
+}
+```
+
+#### Responsives Verhalten
+
+- **Bis 1023px:** Die Linie liegt links neben den Cards. Alle Stationen stehen untereinander.
+- **Ab 1024px:** Die Linie liegt mittig. Ungerade und gerade Cards wechseln zwischen linker und rechter Seite.
+- **Ab 1440px:** Überschrift und Timeline bleiben auf maximal 90rem begrenzt.
+
+Die frühere zweispaltige Grid-Darstellung ab 768px wurde entfernt, damit die zeitliche Reihenfolge auch auf Tablets eindeutig bleibt.
+
+#### Ergebnis
+
+Die vier Sportstationen werden als zusammenhängende Entwicklung wahrgenommen. Linie, Marker und wechselnde Desktop-Anordnung verstärken den erzählerischen Charakter der Seite, ohne Inhalte auszublenden oder die mobile Lesbarkeit zu verschlechtern.
+
+---
+
+### 4.5 Scroll-aktive Timeline und Fortführung bis zum ersten Rennen
+
+#### Ziel der Interaktion
+
+Die Timeline soll beim Scrollen anzeigen, wie weit die sportliche Entwicklung bereits durchlaufen wurde. Die Interaktion dient damit nicht nur der Gestaltung, sondern auch der Orientierung innerhalb des langen Onepagers.
+
+Da die Entwicklung nach dem Einstieg in den Rennradsport weitergeht, wurde die Darstellung über die ursprüngliche Timeline hinaus fortgeführt. Sie verbindet nun Rennrad-Setup, strukturiertes Training, Trainings-Glossar und den Abschnitt „Mein erstes Rennen“.
+
+#### Scroll-Aktivierung der Haupt-Timeline
+
+JavaScript berechnet eine gedachte Leselinie innerhalb des Viewports. Aus ihrer Position im Timeline-Grid entsteht ein Fortschrittswert zwischen 0 und 1. Dieser Wert wird an `--timeline-progress` übergeben.
+
+```js
+const timelineProgress = clamp(
+  (activationLine - gridRectangle.top) /
+    Math.max(gridRectangle.height, 1),
+  0,
+  1
+);
+```
+
+Zusätzlich erhält die Timeline-Card, deren Mittelpunkt der Leselinie am nächsten liegt, die Klasse `is-active`. CSS hebt dadurch Card und Marker hervor.
+
+#### Fortsetzung der Laufbahn
+
+Unterhalb der ursprünglichen Timeline wurde ein gemeinsamer Wrapper ergänzt:
+
+```html
+<div class="journey-continuation" data-journey>
+  <!-- Rennrad-Setup, Training, Glossar und Rennen -->
+</div>
+```
+
+Die Stationen werden mit `data-journey-item` gekennzeichnet. Das Attribut kann direkt auf einer `.content-card` oder auf der umgebenden Section liegen.
+
+Beim letzten Bereich befindet es sich auf:
+
+```html
+<section id="rennen" class="content-section"
+  aria-labelledby="rennen-heading" data-journey-item>
+```
+
+JavaScript erkennt beide Varianten und ermittelt jeweils die sichtbare `.content-card`.
+
+#### Zentrale Journey-Linie
+
+Die Journey besitzt eine neutrale Grundlinie und eine darüberliegende farbige Fortschrittslinie. Die farbige Linie wird über `--journey-progress` skaliert und schließt optisch an die Haupt-Timeline an.
+
+```css
+.journey-continuation {
+  --journey-progress: 0;
+
+  &::after {
+    transform:
+      translateX(-50%)
+      scaleY(var(--journey-progress));
+    transform-origin: top;
+  }
+}
+```
+
+#### Umlaufende Kartenrahmen
+
+Sobald der Kopf der farbigen Linie die Oberkante einer Journey-Card erreicht, beginnt ein Rahmen von der oberen Mitte aus gleichzeitig nach links und rechts um die Card zu laufen. Dafür wird ein `conic-gradient` verwendet. Seine sichtbare Länge steuert `--journey-card-angle`.
+
+Da der Rahmen in zwei Richtungen läuft, entsprechen 180 Grad je Richtung einem vollständig geschlossenen Rahmen.
+
+#### Synchronisierung von Linie und Karten
+
+Während der Entwicklung zeigte sich, dass getrennte Berechnungen für Linie und Kartenrahmen zu sichtbaren Abweichungen führten. Ein Rahmen konnte bereits wachsen, obwohl die Linie die Card noch nicht erreicht hatte.
+
+Die Logik wurde deshalb refaktoriert. Nun wird ein gemeinsamer Linienkopf berechnet. Dieser eine Wert steuert:
+
+- die vertikale Fortschrittslinie,
+- den Beginn und Verlauf jedes Kartenrahmens,
+- die aktuell markierte Journey-Station.
+
+```js
+const rawCardProgress = clamp(
+  (lineHead - cardTop) / cardHeight,
+  0,
+  1
+);
+```
+
+Dadurch kann ein Kartenrahmen nicht mehr vor der Linie starten.
+
+#### Abschluss der letzten Station
+
+Am Seitenende fehlt natürlicherweise Scrollweg. Deshalb wird erst im letzten Abschnitt der Journey ein zusätzlicher Abschlusswert aus der verbleibenden Entfernung zum Seitenende berechnet. So schließen Linie und Rahmen von „Mein erstes Rennen“ vollständig, ohne den früheren Verlauf vorzeitig zu beschleunigen.
+
+#### JavaScript-Struktur
+
+Die JavaScript-Datei wurde neu gegliedert. Rennrad-Hotspots, Haupt-Timeline und Journey sind funktional getrennt. Timeline und Journey werden über einen gemeinsamen Scroll- und Resize-Mechanismus aktualisiert. `requestAnimationFrame()` verhindert dabei mehrere unnötige Berechnungen innerhalb eines Browser-Frames.
+
+```js
+initializeBikeSetup();
+
+startViewportUpdates([
+  createTimelineUpdater(),
+  createJourneyUpdater()
+]);
+```
+
+#### Semantik und progressive Erweiterung
+
+Die aktuelle Journey-Station erhält `aria-current="step"`. Bei „Mein erstes Rennen“ wird das Attribut korrekt auf `section#rennen` gesetzt.
+
+Ohne JavaScript bleiben Texte, Überschriften, Cards und die statische Grundstruktur sichtbar. Lediglich die scrollabhängige Füllung, die umlaufenden Rahmen und die aktive Hervorhebung entfallen.
+
+#### Ergebnis
+
+Die sportliche Entwicklung wird nun als durchgehender Weg dargestellt. Haupt-Timeline und nachfolgende Inhaltsbereiche bilden visuell und funktional ein gemeinsames System. Die gemeinsame Fortschrittsberechnung hält Linie, Kartenrahmen und aktive Station synchron.
+
+---
+
 ## 5. Fortführung der Dokumentation
 
-Die weiteren Abschnitte werden jeweils nach ihrer tatsächlichen Umsetzung ergänzt. Dabei wird dieselbe Struktur verwendet:
-
-1. Ausgangsproblem oder Ziel,
-2. Begründung der Entscheidung,
-3. technische Umsetzung,
-4. responsives Verhalten,
-5. Ergebnis.
+Die weiteren Abschnitte werden jeweils nach ihrer tatsächlichen Umsetzung ergänzt. Hero-Überarbeitung, CSS-Refactoring, Bildprüfung sowie die visuelle und scroll-aktive Timeline sind abgeschlossen und in diesem Dokument beschrieben.
 
 Als nächste Umsetzungsbereiche folgen:
 
-- visuelle Timeline-Struktur,
-- Scroll-Aktivierung der Timeline,
-- gezielte Micro-Animationen,
+- gezielte Micro-Animationen und Bedienrückmeldungen,
 - abschließende Responsive-, Tastatur- und Reduced-Motion-Tests,
 - Erweiterung der README,
 - Vorbereitung von Screenshot-PDF und finaler ZIP-Datei.
 
-Geplante Funktionen werden in diesem Dokument nicht vorab als bereits umgesetzt beschrieben. Die Konzeptfortschreibung bleibt dadurch wahrheitsgetreu und bildet den tatsächlichen Entwicklungsstand ab.
+Geplante Funktionen werden nicht vorab als bereits umgesetzt beschrieben. Die Konzeptfortschreibung bleibt dadurch wahrheitsgetreu.
 
 ---
 
@@ -437,6 +602,10 @@ Zusätzlich werden geprüft:
 - Tastaturbedienung und sichtbare Fokuszustände,
 - Glossar-Interaktion,
 - Rennrad-Hotspots und Detailkarte,
+- Haupt-Timeline mit Fortschrittslinie und aktiver Station,
+- Journey-Fortsetzung bis `section#rennen`,
+- Synchronität von Mittellinie und umlaufenden Kartenrahmen,
+- vollständiger Abschluss der letzten Journey-Station,
 - Verhalten bei `prefers-reduced-motion: reduce`,
 - JavaScript-Konsole auf Fehler,
 - Download-Link,
@@ -457,14 +626,16 @@ Für die finale Abgabe werden vorbereitet:
 
 ## 7. Zwischenfazit
 
-Die ersten beiden großen Arbeitspakete der Finalisierung wurden abgeschlossen.
+Die zentralen strukturellen und interaktiven Arbeitspakete der Finalisierung sind abgeschlossen.
 
-Der Hero wurde von einer randlosen, sehr dominanten Fläche zu einer kontrollierten Portfolio-Bühne weiterentwickelt. Der problematische Übergang bei ungefähr 1024px wurde durch angepasste Breakpoints korrigiert und die Hero-Typografie verkleinert.
+Der Hero wurde von einer randlosen, sehr dominanten Fläche zu einer kontrollierten Portfolio-Bühne weiterentwickelt. Die CSS-Datei wurde vollständig komponentenbezogen organisiert. Wiederkehrende Werte werden zentral gepflegt, echte Doppelungen wurden entfernt und Media Queries stehen direkt bei den jeweiligen Komponenten.
 
-Die CSS-Datei wurde vollständig komponentenbezogen neu organisiert. Header, Navigation, Hero, About-Bereich, Timeline, allgemeine Content-Bereiche, Glossar, Rennrad-Setup und Footer enthalten nun ihre untergeordneten Elemente, Zustände und Media Queries in zusammenhängenden Blöcken. Wiederkehrende Werte werden zentral gepflegt, echte Doppelungen wurden entfernt und globale Animationen sowie Reduced-Motion-Regeln bleiben klar getrennt.
+Zusätzlich wurde der Skip-Link visuell und per Tastatur nutzbar gemacht. Die Bilddateien wurden erneut geprüft. Da sie bereits in angemessenen Größen vorliegen, konzentrierte sich Phase 3 auf eine bessere Bilddarstellung statt auf unnötige weitere Komprimierung.
 
-Zusätzlich wurde der vorhandene Skip-Link visuell und per Tastatur nutzbar gemacht. Die Regeln für reduzierte Bewegung wurden nach dem Nesting so angepasst, dass sie die komponentenspezifischen Animationen weiterhin zuverlässig deaktivieren.
+Die sportlichen Stationen wurden von einer zweispaltigen Card-Sammlung zu einer klar erkennbaren Timeline mit Linie, Markern und wechselnder Desktop-Anordnung weiterentwickelt. JavaScript ergänzt eine scrollabhängige Fortschrittsanzeige und markiert die jeweils relevante Station.
 
-Die eingebundenen Bilddateien wurden geprüft. Da sie bereits in angemessenen Größen vorliegen, konzentriert sich Phase 3 auf eine bessere Bilddarstellung statt auf eine unnötige erneute Komprimierung.
+Der Verlauf endet nicht mehr beim Einstieg in den Rennradsport. Eine zentrale Journey-Linie führt über Rennrad-Setup, strukturiertes Training und Trainings-Glossar bis zum Bereich „Mein erstes Rennen“. Die Cards werden beim Scrollen mit umlaufenden Rahmen markiert. Linie, Rahmen und aktive Station basieren auf einem gemeinsamen berechneten Linienkopf und bleiben dadurch synchron.
 
-Als nächster Entwicklungsschritt wird die bestehende Card-Darstellung der sportlichen Stationen zu einer visuellen Timeline mit Linie und Markern weiterentwickelt. Anschließend folgen die scroll-aktive Hervorhebung, gezielte Micro-Animationen und die abschließende Dokumentation der Tests und Abgabevorbereitung.
+Die JavaScript-Datei wurde dafür neu strukturiert. Rennrad-Hotspots, Haupt-Timeline und Journey sind funktional getrennt, während Scroll- und Resize-Aktualisierungen gemeinsam über `requestAnimationFrame()` gesteuert werden.
+
+Als nächste Arbeitsschritte folgen gezielte Micro-Animationen und Bedienrückmeldungen sowie die abschließenden Responsive-, Tastatur- und Reduced-Motion-Tests. Danach werden README, Screenshot-PDF und finale ZIP-Abgabe vorbereitet.
