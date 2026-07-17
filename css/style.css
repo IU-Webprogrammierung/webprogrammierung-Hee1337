@@ -1590,6 +1590,19 @@ body {
     background-color: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-large);
+
+    transition:
+      border-color 0.5s ease,
+      box-shadow 0.5s ease,
+      background-color 0.5s ease;
+  }
+
+  &.is-complete .contact-form {
+    background-color: rgba(255, 255, 255, 0.07);
+    border-color: rgba(231, 201, 169, 0.85);
+    box-shadow:
+      0 1rem 2.5rem rgba(0, 0, 0, 0.25),
+      0 0 2rem rgba(231, 201, 169, 0.18);
   }
 
   & .form-field {
