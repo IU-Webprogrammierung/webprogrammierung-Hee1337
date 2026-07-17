@@ -112,6 +112,14 @@ body {
     outline: 2px solid var(--color-accent);
     outline-offset: 4px;
   }
+
+  @media (min-width: 768px) {
+    & .header-inner {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 1.25rem 0;
+    }
+  }
 }
 
 /* Hauptnavigation: mobile Toggle-Navigation und horizontale Desktop-Navigation. */
