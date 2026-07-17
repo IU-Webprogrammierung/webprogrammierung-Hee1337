@@ -683,10 +683,10 @@ const createContactStageUpdater = () => {
        * Viewportbereich erreicht, und endet weiter oben.
        */
       const animationStart =
-        window.innerHeight * 0.85;
+        window.innerHeight * 0.7;
 
       const animationEnd =
-        window.innerHeight * 0.25;
+        window.innerHeight * 0.12;
 
       routeProgress = clamp(
         (
@@ -714,6 +714,21 @@ const createContactStageUpdater = () => {
 
     contactSection.style.setProperty(
       "--route-progress",
+      routeProgress.toFixed(4)
+    );
+
+    contactSection.classList.toggle(
+      "is-reached",
+      routeProgress > 0.05
+    );
+
+    contactSection.classList.toggle(
+      "is-complete",
+      routeProgress >= 0.995
+    );
+
+    contactSection.style.setProperty(
+      "--contact-progress",
       routeProgress.toFixed(4)
     );
   };
