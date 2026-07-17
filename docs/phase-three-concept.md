@@ -65,7 +65,8 @@ Die Phase-2-Version ist ein statischer, responsiver Onepager mit HTML, CSS und k
 6. Trainingsbereich mit semantischer Tabelle und Download-Link,
 7. Trainings-Glossar mit `details` und `summary`,
 8. Bereich „Mein erstes Rennen“,
-9. Footer mit Impressum, Kontakt und ergänzender Navigation.
+9. Abschlussbereich „Die nächste Etappe“ mit scrollabhängiger Fahrradstrecke und Formular-Demo,
+10. Footer mit Impressum, Kontakt und ergänzender Navigation.
 
 Bereits eingesetzt werden unter anderem semantische HTML-Strukturelemente, CSS Grid, Flexbox, Media Queries, CSS-Variablen, responsive Bildvarianten über `picture`, native HTML-Interaktionen und Vanilla JavaScript für das Rennrad-Setup.
 
@@ -203,7 +204,8 @@ Die CSS-Datei wurde nach den sichtbaren Bereichen der Website organisiert. Folge
 6. allgemeine Content- und Trainingsbereiche,
 7. Trainings-Glossar,
 8. interaktives Rennrad-Setup,
-9. Footer.
+9. Kontaktabschluss mit Formular-Demo,
+10. Footer.
 
 Innerhalb der Komponenten stehen:
 
@@ -566,24 +568,445 @@ Die sportliche Entwicklung wird nun als durchgehender Weg dargestellt. Haupt-Tim
 
 ---
 
-## 5. Fortführung der Dokumentation
 
-Die weiteren Abschnitte werden jeweils nach ihrer tatsächlichen Umsetzung ergänzt. Hero-Überarbeitung, CSS-Refactoring, Bildprüfung sowie die visuelle und scroll-aktive Timeline sind abgeschlossen und in diesem Dokument beschrieben.
+### 4.6 Mobile CTAs und durchgehende Scroll-Orientierung vor der Timeline
 
-Als nächste Umsetzungsbereiche folgen:
+#### Ausgangsproblem
 
-- gezielte Micro-Animationen und Bedienrückmeldungen,
-- abschließende Responsive-, Tastatur- und Reduced-Motion-Tests,
-- Erweiterung der README,
-- Vorbereitung von Screenshot-PDF und finaler ZIP-Datei.
+Die vier Sportflächen innerhalb der mobilen Hero-Bildvariante waren vollständig klickbar. Titel, Untertitel und eine kurze horizontale Akzentlinie vermittelten jedoch nicht eindeutig, dass es sich um Sprunglinks handelt.
 
-Geplante Funktionen werden nicht vorab als bereits umgesetzt beschrieben. Die Konzeptfortschreibung bleibt dadurch wahrheitsgetreu.
+Auf Desktop-Geräten kann ein Hover-Zustand auf Interaktivität hinweisen. Auf Smartphones und Tablets fehlt diese Rückmeldung vor dem ersten Antippen. Dadurch bestand die Gefahr, dass die Flächen als reine Bildbeschriftungen wahrgenommen werden.
+
+Zusätzlich begann die scrollabhängige Orientierung erst mit der eigentlichen Timeline. Hero und „Das bin ich“ wirkten dadurch wie vorgelagerte, nicht verbundene Bereiche.
+
+#### Erste Überlegung und Anpassung
+
+Zunächst wurde ein CTA testweise nur bei der Handball-Card ergänzt. Beim Vergleich wurde deutlich, dass diese Lösung ein falsches Muster erzeugt: Eine einzelne Card mit CTA wirkt klickbar, während die anderen drei wie nicht interaktive Inhalte erscheinen.
+
+Deshalb erhielten alle vier mobilen Sport-Cards denselben Handlungsaufruf:
+
+```html
+<span class="station-action" aria-hidden="true">
+  Zur Station
+  <span>→</span>
+</span>
+```
+
+Der Text ist mit `aria-hidden="true"` ausgezeichnet, weil die jeweilige Sportbezeichnung den Link bereits verständlich benennt. Der CTA dient als zusätzlicher visueller Hinweis und soll den zugänglichen Namen nicht unnötig verlängern.
+
+#### Entscheidung über die Sichtbarkeit
+
+Eine erste technische Überlegung war, den CTA über Eingabegeräteigenschaften einzublenden:
+
+```css
+@media (hover: none) and (pointer: coarse)
+```
+
+Diese Variante wurde verworfen. Sie hätte den CTA auch auf breiten Tablet- oder Touch-Laptop-Ansichten eingeblendet, obwohl dort bereits die kompakte breite Hero-Darstellung mit gut sichtbaren Sprungmarken verwendet wird.
+
+Die finale Entscheidung koppelt den CTA an die mobile Bildvariante und damit an denselben Breakpoint:
+
+```css
+@media (max-width: 767px) {
+  & .station-action {
+    display: inline-flex;
+  }
+}
+```
+
+Damit gilt:
+
+- mobile hochformatige Hero-Variante: dauerhafter CTA,
+- breite Hero-Variante ab 768px: kompakte Sprungmarken ohne CTA,
+- Desktop mit Maus: zusätzlicher Hover-Zustand,
+- Tastatur: sichtbarer Fokuszustand.
+
+#### Entfernung der mobilen Akzentlinie
+
+Nach Einbau des CTA standen unter jeder mobilen Sportbezeichnung gleichzeitig ein Handlungsbutton und die bisherige horizontale Akzentlinie. Beide Elemente erfüllten eine ähnliche Aufgabe.
+
+Die Linie wurde in der mobilen Ansicht deshalb entfernt:
+
+```css
+@media (max-width: 767px) {
+  & .hero-station-navigation a::after {
+    display: none;
+  }
+}
+```
+
+Dadurch wurden die Cards kompakter und die visuelle Hierarchie eindeutiger.
+
+#### Scroll-Orientierung für Hero und Vorstellung
+
+Hero und About-Card erhielten denselben aktiven Rahmen- und Schattenstil wie die späteren Timeline-Stationen. Eine neue JavaScript-Funktion ermittelt anhand derselben gedachten Leselinie, welcher Bereich aktiv ist:
+
+```js
+const createIntroStageUpdater = () => {
+  const activationLine =
+    window.innerHeight * 0.55;
+
+  const heroIsActive =
+    aboutTop > activationLine;
+
+  const aboutIsActive =
+    aboutTop <= activationLine &&
+    timelineTop > activationLine;
+};
+```
+
+Die Klassen werden mit `classList.toggle()` gesetzt. Sobald die Timeline die Leselinie erreicht, übernimmt das bestehende Timeline-System.
+
+#### Warum keine vertikale Linie verwendet wird
+
+Eine Verlängerung der Timeline-Linie bis in den Hero wurde bewusst verworfen. Hero und „Das bin ich“ sind Einführung und persönliche Einordnung, aber keine chronologischen Sportstationen.
+
+Die einheitliche Akzentfarbe, der aktive Rahmen und der Schatten verbinden die Bereiche ausreichend, ohne eine falsche zeitliche Bedeutung zu erzeugen.
+
+#### Ergebnis
+
+Die Website zeigt nun vom Seitenanfang an eine zusammenhängende Orientierung. Mobile Nutzer:innen erkennen die Hero-Flächen eindeutig als Sprunglinks. Die Lösung berücksichtigt den Unterschied zwischen Touch- und Mausbedienung, ohne die breite Hero-Darstellung unnötig mit zusätzlichen Buttons zu überladen.
 
 ---
 
-## 6. Vorgaben für Tests und finale Abgabe
+### 4.7 Micro-Animationen, Zustandswechsel und reduzierte Bewegung
 
-Nach Abschluss der technischen Umsetzung wird die Website bei folgenden Breiten geprüft:
+#### Ziel
+
+Animationen sollen nur eingesetzt werden, wenn sie Bedienung, Orientierung oder Zustandswechsel unterstützen. Die Website soll nicht durch permanente Bewegung ablenken.
+
+#### Verfeinerte Bedienelemente
+
+Folgende Elemente erhielten kurze Übergänge:
+
+- Logo,
+- Navigation und Menü-Toggle,
+- Hero-Sprungmarken,
+- Download-Link,
+- Formular-Button,
+- Timeline-Cards,
+- Journey-Cards,
+- Kontakt-Card und Formularkasten.
+
+Die Übergänge beschränken sich überwiegend auf:
+
+- Farbe,
+- Hintergrundfarbe,
+- Rahmenfarbe,
+- Schatten,
+- geringe Translation bei Hover oder aktivem Button.
+
+Cards werden durch Scrollzustände nicht vergrößert oder verschoben. Dadurch bleibt das Layout stabil.
+
+#### Timeline- und Journey-Zustände
+
+Die aktive Timeline-Card und die aktive Journey-Card erhalten denselben zurückhaltenden Schatten. Die `transition` liegt jeweils im Grundzustand und nicht ausschließlich in der aktiven Klasse. Dadurch funktioniert die Überblendung beim Aktivieren und beim Verlassen.
+
+#### Reduced Motion
+
+Der globale Block `prefers-reduced-motion: reduce` wurde nach jeder neuen Animation erweitert.
+
+Bei reduzierter Bewegung werden unter anderem deaktiviert:
+
+- weiches Scrollen,
+- Skip-Link-Übergang,
+- Logo-, Navigations- und Button-Transitions,
+- Timeline- und Journey-Schattenübergänge,
+- Glossar-Pop-Animation,
+- Hotspot-Puls,
+- Detailkarten-Pop-Animation,
+- Formular-Button-Übergänge.
+
+Aktive Zustände bleiben sichtbar, wechseln jedoch sofort.
+
+#### Ergebnis
+
+Die Animationen bleiben funktional und begründet. Es gibt keine flächendeckenden Einblendungen oder dauerhaften Card-Bewegungen. Nutzer:innen mit reduzierter Bewegung erhalten weiterhin sämtliche Inhalte und Zustandsinformationen.
+
+---
+
+### 4.8 Abschlussbereich „Die nächste Etappe“
+
+#### Ausgangsproblem
+
+Die Seite endete zunächst nach dem Abschnitt „Mein erstes Rennen“. Inhaltlich war die Entwicklung damit verständlich, dramaturgisch wirkte der Übergang zum Footer jedoch abrupt.
+
+Der letzte Renntext beschreibt neue Trainingsziele. Daraus entstand die Idee, den Blick nicht nur zurück, sondern auf die nächste sportliche Etappe zu richten.
+
+#### Inhaltliches Ziel
+
+Der neue Abschlussbereich soll:
+
+- einen Ausblick auf kommende Rennen geben,
+- Besucher:innen aktiv einbeziehen,
+- die bisherige vertikale Laufbahn in eine neue horizontale Strecke überführen,
+- eine zusätzliche HTML- und JavaScript-Interaktion zeigen.
+
+Der Bereich trägt deshalb die Überschrift „Dein Tipp für mein nächstes Rennen“.
+
+#### Formular als lokale Demonstration
+
+Das Formular enthält:
+
+- Name als Pflichtfeld,
+- optionale E-Mail-Adresse,
+- Themenauswahl,
+- Textfeld mit Mindestlänge,
+- Absende-Button,
+- Hinweis auf die lokale Demonstration,
+- Statusmeldung mit `aria-live="polite"`.
+
+Es wurde bewusst kein externer Formulardienst eingebunden. Ein realer Versand hätte eine externe Abhängigkeit, Datenschutzfragen und gegebenenfalls Backend-Konfiguration erfordert.
+
+Die finale Lösung demonstriert native Validierung und JavaScript-Verarbeitung, überträgt oder speichert aber keine Daten:
+
+```js
+contactForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  statusMessage.textContent =
+    "Vielen Dank! Dein Tipp wurde in dieser Demo erfolgreich verarbeitet.";
+
+  contactForm.reset();
+});
+```
+
+#### Entwicklung der Fahrradgrafik
+
+Zunächst wurde ein stark reduziertes Inline-SVG aus Kreisen und Linien verwendet. Die Grafik war technisch leicht animierbar, wirkte aber im Vergleich zur übrigen Gestaltung zu schematisch.
+
+Sie wurde durch ein detaillierteres Rennrad-SVG ersetzt und als externe Datei eingebunden:
+
+```html
+<img
+  class="contact-bike"
+  src="assets/icons/rad-icon.svg"
+  alt=""
+>
+```
+
+Das leere `alt`-Attribut ist korrekt, weil das Fahrrad rein dekorativ ist und keine zusätzliche Inhaltsinformation vermittelt.
+
+#### Erste Animationsidee und Verwerfung
+
+Die erste Version nutzte einen `IntersectionObserver`. Sobald der Kontaktbereich sichtbar wurde, fuhr das Rad einmal automatisch bis zum Ziel.
+
+Diese Lösung wurde verworfen, weil:
+
+- die Bewegung unabhängig vom tatsächlichen Scrollen begann,
+- das Rad teilweise schon losfuhr, bevor der Bereich bewusst erreicht wurde,
+- die Animation beim Zurückscrollen nicht nachvollziehbar zurücklief,
+- die Fahrt wie eine automatische, losgelöste Bewegung wirkte.
+
+Zusätzlich zeigte die SVG-Datei zunächst in die falsche Richtung. Sie wurde über `scaleX(-1)` horizontal gespiegelt.
+
+#### Scrollgebundene Fahrradfahrt
+
+Die finale Lösung berechnet den Fortschritt aus der Position der horizontalen Strecke im Viewport:
+
+```js
+routeProgress = clamp(
+  (animationStart - routeRectangle.top) /
+    Math.max(animationStart - animationEnd, 1),
+  0,
+  1
+);
+```
+
+Der Startwert wurde während des visuellen Tests angepasst. Ein zunächst verwendeter Wert von `0.85` ließ das Fahrrad zu früh losfahren. Die finale Abstimmung verwendet ungefähr `0.70` der Viewporthöhe.
+
+Aus `routeProgress` entstehen:
+
+- die horizontale Fahrradposition,
+- die Füllung der Strecke,
+- die Helligkeit der äußeren Kontakt-Card,
+- der Abschlusszustand des Formulars.
+
+```js
+const bikePosition =
+  travelDistance * routeProgress;
+
+contactSection.style.setProperty(
+  "--bike-position",
+  `${bikePosition}px`
+);
+
+contactSection.style.setProperty(
+  "--route-progress",
+  routeProgress.toFixed(4)
+);
+
+contactSection.style.setProperty(
+  "--contact-progress",
+  routeProgress.toFixed(4)
+);
+```
+
+Beim Zurückscrollen laufen Fahrrad, Linie und Card-Hervorhebung entsprechend zurück.
+
+#### Übergang von der Journey zum Kontaktbereich
+
+Der Kontaktbereich wurde zunächst als reguläres `data-journey-item` in den bestehenden Journey-Wrapper aufgenommen. Dadurch entstanden gleichzeitig:
+
+- vertikale Fortschrittslinie,
+- umlaufender Card-Rahmen,
+- horizontale Fahrradstrecke mit eigener Füllung.
+
+Diese Kombination wurde im Test als visuell überladen bewertet und verworfen.
+
+Die finale Lösung:
+
+- lässt den Kontaktbereich innerhalb von `.journey-continuation`,
+- entfernt `data-journey-item`,
+- führt die vertikale Linie optisch bis zur Card,
+- legt die deckende Contact-Card mit höherem `z-index` über die Linie,
+- verzichtet auf den umlaufenden Journey-Rahmen,
+- übergibt die visuelle Führung anschließend an die horizontale Fahrradstrecke.
+
+Damit entsteht eine klare Bedeutungsaufteilung:
+
+- vertikale Linie: bisheriger sportlicher Weg,
+- horizontale Strecke: nächste Etappe.
+
+#### Fortschrittsabhängige Hervorhebung
+
+Die äußere Kontakt-Card wird nicht über eine separate Animation aufgehellt. Rahmen und Schatten hängen direkt an `--contact-progress`.
+
+Bei Fahrtbeginn bleibt die Card zurückhaltend. Mit wachsendem Fortschritt werden Rahmen und Akzentschatten stärker. Im Ziel erreicht die Card ihre höchste Helligkeit.
+
+Sobald `routeProgress >= 0.995` gilt, erhält der Kontaktbereich `is-complete`. Dadurch wird erst dann der innere Formularkasten hervorgehoben:
+
+```css
+.contact-section.is-complete .contact-form {
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(231, 201, 169, 0.85);
+}
+```
+
+Die visuelle Reihenfolge lautet damit:
+
+1. Journey erreicht den Abschlussbereich,
+2. Fahrrad und horizontale Linie bewegen sich,
+3. äußere Card wird proportional heller,
+4. Fahrrad erreicht das Ziel,
+5. Formular wird als nächste Handlung hervorgehoben.
+
+#### Reduced Motion
+
+Bei `prefers-reduced-motion: reduce` wird keine scrollabhängige Fahrt gezeigt. JavaScript setzt den Fortschritt direkt auf 1.
+
+Dadurch:
+
+- steht das Fahrrad am Ziel,
+- ist die Strecke vollständig gefüllt,
+- ist der Endzustand des Formulars sichtbar,
+- gehen keine Informationen verloren.
+
+#### Responsives Verhalten
+
+- Die Kontakt-Card verwendet dieselbe Inhaltsbreite wie die übrigen Bereiche.
+- Überschrift und Abstände skalieren mit `clamp()`.
+- Die Fahrradgröße passt sich über `clamp()` an.
+- Formularfelder belegen immer die verfügbare Breite.
+- Das Textfeld bleibt vertikal vergrößerbar.
+- Die horizontale Strecke berechnet ihre Fahrdistanz aus der tatsächlichen Breite von Strecke, Fahrrad und Zielmarkierung.
+
+#### Ergebnis
+
+Der Abschlussbereich verbindet Inhalt, Interaktion und Animation zu einem nachvollziehbaren Ende. Die Seite endet nicht mehr abrupt, sondern zeigt eine nächste Etappe und bietet eine lokale Interaktionsmöglichkeit.
+
+---
+
+### 4.9 Finale Layoutkorrekturen
+
+#### Breite der Renn-Card
+
+Die Card „Mein erstes Rennen“ war durch die zusätzliche Klasse `content-card--compact` schmaler als die übrigen Journey-Cards.
+
+Da der Abschnitt Teil derselben visuellen Reise ist, wurde die Sonderklasse entfernt. Die Renn-Card verwendet nun dieselbe volle Breite wie Setup, Training und Glossar.
+
+#### Ausrichtung von Header und Hero
+
+Auf großen Bildschirmen endete die Navigation weiter rechts als die Hero-Fläche. Dadurch fehlte eine gemeinsame Fluchtlinie.
+
+Ab 768px verwendet `.header-inner` deshalb dieselbe Inhaltsbreite wie der Hero:
+
+```css
+@media (min-width: 768px) {
+  & .header-inner {
+    width: var(--content-width);
+    margin: 0 auto;
+    padding: 1.25rem 0;
+  }
+}
+```
+
+Logo, Navigation und Hero schließen seitdem links und rechts bündig ab.
+
+#### Ergebnis
+
+Die letzten sichtbaren Breitenunterschiede wurden beseitigt. Header, Hero und Content-Bereiche folgen einer gemeinsamen Layoutlogik.
+
+---
+
+### 4.10 Zusammenfassung angepasster und verworfener Ansätze
+
+| Ansatz | Entscheidung | Begründung |
+|---|---|---|
+| CTA nur auf einer mobilen Hero-Card | verworfen | ließ nur eine Card klickbar wirken |
+| CTA nach Eingabegerät statt Bildvariante | verworfen | hätte auch breite Touchansichten unnötig erweitert |
+| CTA auf allen mobilen Sport-Cards | umgesetzt | konsistenter und verständlicher Bedienhinweis |
+| mobile Akzentlinie zusätzlich zum CTA | entfernt | doppelte visuelle Aussage und zusätzlicher Platzbedarf |
+| vertikale Linie bereits in Hero und About | verworfen | diese Bereiche sind keine chronologischen Stationen |
+| getrennte Berechnung von Journey-Linie und Rahmen | refaktoriert | führte zu sichtbarer Desynchronisierung |
+| Kontakt als reguläre Journey-Card mit umlaufendem Rahmen | verworfen | vertikale Linie, Rahmen und Fahrradstrecke wirkten gleichzeitig überladen |
+| einmalige Fahrradfahrt per `IntersectionObserver` | verworfen | Bewegung war vom Scrollen entkoppelt |
+| scrollabhängige Fahrradfahrt | umgesetzt | nachvollziehbar, reversibel und mit der Linie synchron |
+| sofortiger heller Kontakt-Rahmen | verworfen | Zustandswechsel war zu schwach begründet und zu abrupt |
+| Helligkeit proportional zum Fahrradfortschritt | umgesetzt | gemeinsame visuelle Ursache und klare Steigerung |
+| echtes versendendes Kontaktformular | verworfen | kein Backend, externe Abhängigkeit und Datenschutzaufwand |
+| lokale Formulardemo | umgesetzt | zeigt Validierung und JS-Reaktion ohne Datenübertragung |
+
+---
+
+## 5. Stand der Finalisierung
+
+Die gestalterische und technische Umsetzung der Website ist abgeschlossen.
+
+Umgesetzt und dokumentiert sind:
+
+- Hero-Überarbeitung,
+- Prüfung der Bilddateien,
+- komponentenbezogenes CSS-Refactoring,
+- visuelle und scroll-aktive Timeline,
+- erweiterte Journey bis zum ersten Rennen,
+- mobile CTAs,
+- Scroll-Orientierung für Hero und About,
+- Micro-Animationen,
+- Reduced-Motion-Verhalten,
+- Kontaktabschluss mit Fahrradstrecke,
+- lokale Formular-Demo,
+- finale Breiten- und Ausrichtungskorrekturen.
+
+Vor der Abgabe folgen noch:
+
+- abschließender Testdurchlauf,
+- Dokumentation der konkreten Testergebnisse,
+- Übertragung der Konzeptfortschreibung in die finale Abgabeunterlage,
+- Erstellung des Screenshot-PDF,
+- Prüfung ungenutzter Dateien,
+- Kontrolle von Git-Verlauf und `main`-Branch,
+- Erstellung und Prüfung der ZIP-Datei inklusive `.git`.
+
+Geplante Funktionen werden weiterhin nicht als bereits getestet oder abgeschlossen beschrieben. Die Dokumentation bleibt dadurch wahrheitsgetreu.
+
+---
+
+## 6. Testplan und finale Abgabe
+
+### 6.1 Responsive Tests
+
+Die Website wird bei folgenden Breiten geprüft:
 
 - 360px,
 - 767px,
@@ -594,48 +1017,96 @@ Nach Abschluss der technischen Umsetzung wird die Website bei folgenden Breiten 
 - 1440px,
 - 1920px.
 
-Zusätzlich werden geprüft:
+Besonders kontrolliert werden:
 
+- Wechsel der Hero-Bildvariante,
+- Ein- und Ausblenden der mobilen CTAs,
+- Umschaltung der Navigation,
+- Bildausschnitt des Hero,
+- About-Layout,
+- mobile und wechselnde Desktop-Timeline,
+- horizontale Trainingstabelle,
+- Rennrad-Setup,
+- Journey-Rahmen,
+- vollständige Renn-Card,
+- Fahrradstrecke,
+- Formularbreite und Textumbrüche,
+- gemeinsame Fluchtlinien von Header und Hero.
+
+### 6.2 Funktionsprüfungen
+
+- alle Hauptnavigationseinträge,
+- Hero-Sprungmarken,
 - mobile Navigation,
-- alle Hauptnavigations- und Hero-Sprunglinks,
 - Skip-Link,
-- Tastaturbedienung und sichtbare Fokuszustände,
-- Glossar-Interaktion,
-- Rennrad-Hotspots und Detailkarte,
-- Haupt-Timeline mit Fortschrittslinie und aktiver Station,
-- Journey-Fortsetzung bis `section#rennen`,
-- Synchronität von Mittellinie und umlaufenden Kartenrahmen,
-- vollständiger Abschluss der letzten Journey-Station,
-- Verhalten bei `prefers-reduced-motion: reduce`,
-- JavaScript-Konsole auf Fehler,
-- Download-Link,
-- ungenutzte Dateien,
-- sauberer Git-Status.
+- Rennrad-Hotspots,
+- `aria-pressed`,
+- Detailkarte,
+- Trainingsplan-Download,
+- Glossar,
+- Haupt-Timeline,
+- Journey-Linie,
+- Kartenrahmen,
+- Rückwärtsscrollen,
+- Kontaktstrecke,
+- Zielzustand,
+- native Formularvalidierung,
+- Erfolgsmeldung,
+- Formular-Reset,
+- JavaScript-Konsole.
 
-Die README wird am Ende um die tatsächlich eingesetzten Technologien, Methoden, Refactorings, Animationen, Barrierefreiheitsmaßnahmen und Tests ergänzt.
+### 6.3 Barrierefreiheit
 
-Für die finale Abgabe werden vorbereitet:
+- vollständige Tastaturbedienung,
+- sichtbare Fokuszustände,
+- verständliche Link- und Buttonnamen,
+- semantische Überschriftenstruktur,
+- Alternativtexte,
+- dekoratives SVG ohne unnötige Screenreader-Ausgabe,
+- `aria-live`-Bereiche,
+- `aria-current`,
+- `aria-pressed`,
+- Touchflächen,
+- `prefers-reduced-motion: reduce`.
+
+### 6.4 Finale Abgabebestandteile
 
 1. finaler Projektstand im `main`-Branch,
-2. aktualisierte README.md,
-3. Screenshot-PDF mit maximal zwölf Screenshots,
-4. lokaler Projektordner als ZIP-Datei inklusive `.git`-Ordner,
-5. die zusätzlich geforderten Portfoliobestandteile aus den vorherigen Phasen.
+2. mindestens 30 nachvollziehbare Commits,
+3. aktualisierte `README.md`,
+4. finale Konzept- und Reflexionsdokumentation,
+5. Screenshot-PDF mit maximal zwölf Screenshots,
+6. lokaler Projektordner als ZIP inklusive `.git`,
+7. Kontrolle der Dateigröße und Dateibenennung,
+8. zusätzlich verlangte Portfoliobestandteile aus Phase 1 und Phase 2,
+9. elektronische eidesstattliche Erklärung über myCampus.
 
 ---
 
-## 7. Zwischenfazit
+## 7. Technisches Fazit vor dem Abgabecheck
 
-Die zentralen strukturellen und interaktiven Arbeitspakete der Finalisierung sind abgeschlossen.
+Phase 3 hat den vorhandenen Onepager nicht vollständig neu gestaltet, sondern gezielt weiterentwickelt.
 
-Der Hero wurde von einer randlosen, sehr dominanten Fläche zu einer kontrollierten Portfolio-Bühne weiterentwickelt. Die CSS-Datei wurde vollständig komponentenbezogen organisiert. Wiederkehrende Werte werden zentral gepflegt, echte Doppelungen wurden entfernt und Media Queries stehen direkt bei den jeweiligen Komponenten.
+Der Hero wurde kontrollierter in das Layout eingebunden. Die CSS-Datei wurde komponentenbezogen refaktoriert und wiederkehrende Werte wurden zentralisiert. Die sportlichen Inhalte wurden zu einer echten visuellen Timeline und einer daran anschließenden Journey weiterentwickelt.
 
-Zusätzlich wurde der Skip-Link visuell und per Tastatur nutzbar gemacht. Die Bilddateien wurden erneut geprüft. Da sie bereits in angemessenen Größen vorliegen, konzentrierte sich Phase 3 auf eine bessere Bilddarstellung statt auf unnötige weitere Komprimierung.
+JavaScript übernimmt gezielt Aufgaben, die mit statischem HTML und CSS nicht gleichwertig lösbar wären:
 
-Die sportlichen Stationen wurden von einer zweispaltigen Card-Sammlung zu einer klar erkennbaren Timeline mit Linie, Markern und wechselnder Desktop-Anordnung weiterentwickelt. JavaScript ergänzt eine scrollabhängige Fortschrittsanzeige und markiert die jeweils relevante Station.
+- aktive Scrollzustände,
+- synchronisierte Timeline- und Journey-Fortschritte,
+- interaktive Hotspots,
+- lokale Formularreaktion,
+- scrollabhängige Fahrradstrecke.
 
-Der Verlauf endet nicht mehr beim Einstieg in den Rennradsport. Eine zentrale Journey-Linie führt über Rennrad-Setup, strukturiertes Training und Trainings-Glossar bis zum Bereich „Mein erstes Rennen“. Die Cards werden beim Scrollen mit umlaufenden Rahmen markiert. Linie, Rahmen und aktive Station basieren auf einem gemeinsamen berechneten Linienkopf und bleiben dadurch synchron.
+Während der Umsetzung wurden mehrere Ideen nicht nur ergänzt, sondern nach visuellen Tests wieder reduziert oder verworfen. Besonders der Kontaktabschluss zeigt diesen Prozess: Eine technisch mögliche Kombination aus vertikaler Linie, umlaufendem Rahmen und horizontaler Strecke wurde zugunsten einer klareren visuellen Übergabe vereinfacht.
 
-Die JavaScript-Datei wurde dafür neu strukturiert. Rennrad-Hotspots, Haupt-Timeline und Journey sind funktional getrennt, während Scroll- und Resize-Aktualisierungen gemeinsam über `requestAnimationFrame()` gesteuert werden.
+Die finale Website verbindet:
 
-Als nächste Arbeitsschritte folgen gezielte Micro-Animationen und Bedienrückmeldungen sowie die abschließenden Responsive-, Tastatur- und Reduced-Motion-Tests. Danach werden README, Screenshot-PDF und finale ZIP-Abgabe vorbereitet.
+- semantisches HTML,
+- responsive Layouttechniken,
+- native Interaktionen,
+- bewusst eingesetztes JavaScript,
+- Barrierefreiheit,
+- nachvollziehbare Animationen,
+- dokumentierte Reflexion des Entwicklungsprozesses.
+
+Die technische Umsetzung ist abgeschlossen. Der letzte Arbeitsschritt besteht aus formaler Abnahme, dokumentierten Tests und der Erstellung der Abgabedateien.

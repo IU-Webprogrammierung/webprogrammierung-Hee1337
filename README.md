@@ -1,155 +1,281 @@
 # Meine sportliche Laufbahn
 
-Dieses Projekt entsteht im Rahmen des Kurses **Projekt: Web-Programmierung**.
+Responsiver Onepager über meine sportliche Entwicklung: vom Jugend-Mannschaftssport über CrossFit und Hyrox bis zum strukturierten Rennradtraining, dem ersten Radrennen und der nächsten geplanten Etappe.
 
-Geplant und umgesetzt wird ein scrollbarer Onepager über meine sportliche Entwicklung: von Jugend-Mannschaftssport über CrossFit und Hyrox bis zum strukturierten Rennradtraining und meinem ersten Rennen.
+Das Projekt entstand im Rahmen des IU-Kurses **Projekt: Web-Programmierung (DLBUXPWP01)**. Es wurde ohne CSS- oder JavaScript-Framework umgesetzt. Der Schwerpunkt liegt auf semantischem HTML, responsivem CSS, nachvollziehbarer Komponentenstruktur, Barrierefreiheit und gezielt eingesetztem Vanilla JavaScript.
 
-Der Webauftritt wird als statische Website mit HTML, CSS und kleinem Vanilla JavaScript umgesetzt.
+## Projektziel
 
-## Projektstand Phase 1
+Die Website soll meine sportliche Laufbahn als zusammenhängende Entwicklung erzählen und nicht nur einzelne Inhalte nebeneinanderstellen. Besucher:innen sollen sich auf Geräten zwischen 360px und 1920px orientieren können, alle Inhalte per Tastatur erreichen und zentrale Interaktionen auch ohne zusätzliche Bibliotheken nutzen können.
 
-In Phase 1 wurde die Grundlage des Projekts erstellt.
+Die Gestaltung folgt einem dunklen Portfolio-Theme. Akzentlinien, aktive Rahmen und scrollabhängige Zustände verbinden die einzelnen Abschnitte zu einer visuellen Reise.
 
-Umgesetzt wurden:
+## Finaler Seitenaufbau
 
-* GitHub-Repository eingerichtet
-* Projektstruktur angelegt
-* semantisches HTML-Grundgerüst erstellt
-* Navigation mit Sprungmarken eingebaut
-* erste Inhaltsbereiche angelegt
-* Hero-Bereich angelegt
-* Commit-Guideline in `docs/commit-guidelines.md` dokumentiert
-* erste Maßnahmen zur Barrierefreiheit berücksichtigt
-* Konzeptdokument für Phase 1 erstellt
+1. Header mit Logo und responsiver Hauptnavigation
+2. Hero mit responsiven Bildvarianten und Sprungmarken
+3. „Das bin ich“ mit Portrait und persönlicher Einführung
+4. sportliche Timeline mit Handball, CrossFit, Hyrox und Rennrad
+5. interaktives Rennrad-Setup mit Hotspots
+6. strukturierter Trainingsbereich mit semantischer Tabelle und PDF-Download
+7. Trainings-Glossar mit nativen `details`- und `summary`-Elementen
+8. „Mein erstes Rennen“
+9. Abschlussbereich „Die nächste Etappe“ mit Fahrradstrecke und Formular-Demo
+10. Footer mit Impressum, Kontakt und ergänzender Navigation
 
-## Projektstand Phase 2
+## Zentrale Funktionen
 
-In Phase 2 wurde der HTML-Prototyp gestalterisch, strukturell und technisch deutlich erweitert. Der Fokus lag auf responsivem Design, besserer Navigation, konkreteren Komponenten und einer reicheren HTML-Struktur.
+### Responsiver Hero
 
-Umgesetzt wurden:
+- Desktop- und Mobilbild werden mit `picture` und `source` gewechselt.
+- Die mobile Bildvariante zeigt vier großflächige Sport-Cards.
+- Auf der mobilen Bildvariante erscheinen dauerhafte CTAs „Zur Station“, weil Touchgeräte keinen verlässlichen Hover-Hinweis bieten.
+- Ab 768px bleiben die kompakteren Sprungmarken ohne CTA erhalten.
+- Header und Hero nutzen auf Desktop dieselbe maximale Inhaltsbreite und gemeinsame Fluchtlinien.
 
-* responsiver Hero-Bereich mit eigener mobiler Bildvariante
-* klickbare Hero-Overlays als Sprungmarken zu den Sportstationen
-* verschlankte Hauptnavigation mit mobilem Toggle-Menü
-* Desktop-Navigation mit Trennstrichen
-* „Das bin ich“-Bereich als Card mit Portrait
-* sportliche Laufbahn als responsive Card-/Timeline-Struktur
-* Rennrad-Setup als interaktive Komponente mit Hotspots
-* Trainingsbereich mit semantischer Tabelle
-* Download-Link für einen beispielhaften Trainingsplan
-* Trainings-Glossar mit `details` und `summary`
-* Footer mit Impressum, Projektinfo und ergänzender Navigation
-* sichtbare Hover- und Fokuszustände
-* responsive Darstellung für Smartphone, Tablet und Desktop
-* überarbeitete Konzeptdokumentation für Phase 2
+### Scroll-Orientierung vor der Timeline
 
-## Seitenbereiche
+Hero und „Das bin ich“ erhalten abhängig von einer gedachten Leselinie einen aktiven Rahmenzustand. Dadurch beginnt die Orientierung bereits am Seitenanfang.
 
-Der Onepager besteht aktuell aus folgenden Hauptbereichen:
+Oberhalb der eigentlichen Timeline wird bewusst keine vertikale Linie eingesetzt, weil Hero und Vorstellung keine chronologischen Stationen darstellen. Die optische Sprache bleibt durch Akzentrahmen und Schatten dennoch einheitlich.
 
-1. Hero-Bereich
-2. Das bin ich
-3. Meine sportlichen Stationen
-4. Mein Rennrad-Setup
-5. Einblick ins strukturierte Rennradtraining
-6. Trainings-Glossar
-7. Mein erstes Rennen
-8. Footer / Impressum
+### Sportliche Timeline
 
-## Responsive Umsetzung
+- vertikale Grundlinie mit farbigem Scrollfortschritt
+- Marker für jede sportliche Station
+- einspaltige Darstellung auf Smartphone und Tablet
+- ab 1024px wechselnde Cards links und rechts der Mittellinie
+- scrollabhängige aktive Station
+- Weiterführung der visuellen Reise über Setup, Training, Glossar und Rennen
 
-Die Website wird mobile-first umgesetzt.
+### Erweiterte Journey
 
-Verwendete Breakpoints:
+Die Bereiche unterhalb der Haupt-Timeline werden durch `.journey-continuation` verbunden.
 
-* bis 767px: Smartphone-Ansicht mit einspaltigem Layout und mobilem Menü
-* ab 768px: Tablet-Ansicht mit horizontaler Navigation und zweispaltigen Bereichen
-* ab 1024px: Desktop-Ansicht mit stärkerer Layoutstruktur
-* ab 1440px: große Desktop-Ansicht mit begrenzter Inhaltsbreite für bessere Lesbarkeit
+- `data-journey-item` markiert die weiterführenden Stationen.
+- Eine gemeinsame JavaScript-Berechnung steuert die vertikale Fortschrittslinie, den aktiven Zustand und die umlaufenden Kartenrahmen.
+- Linie und Karten verwenden denselben berechneten Linienkopf, damit keine Card vorzeitig animiert.
+- Die letzte Renn-Card wird trotz begrenztem Scrollweg am Seitenende vollständig abgeschlossen.
 
-Für den Hero-Bereich wird zusätzlich eine eigene mobile Bildvariante verwendet, damit die Bildinhalte auf kleinen Bildschirmen nicht ungünstig abgeschnitten werden.
+### Rennrad-Setup
+
+Das Rennradbild enthält fünf echte `button`-Elemente als Hotspots.
+
+Beim Aktivieren eines Hotspots:
+
+- wird die Detailkarte aktualisiert,
+- erhält der ausgewählte Button den aktiven Zustand,
+- wird `aria-pressed` angepasst,
+- informiert `aria-live="polite"` über den neuen Inhalt.
+
+### Trainingsbereich und Glossar
+
+- semantische Tabelle mit `caption`, `thead`, `tbody`, `th` und `scope`
+- horizontal scrollbar auf kleinen Displays
+- Download-Link zu einem beispielhaften Trainingsplan
+- Glossar mit nativen `details` und `summary`
+- sichtbare Offen-, Hover- und Fokuszustände
+
+### Abschlussbereich „Die nächste Etappe“
+
+Nach „Mein erstes Rennen“ führt die Seite nicht abrupt in den Footer, sondern zu einem interaktiven Ausblick.
+
+- dekoratives Rennrad-SVG auf einer horizontalen Strecke
+- Fahrradposition und Linienfüllung reagieren proportional auf den Scrollfortschritt
+- die äußere Kontakt-Card wird mit dem Fortschritt stufenlos heller
+- beim Erreichen des Ziels wird der innere Formularkasten hervorgehoben
+- die vertikale Journey führt optisch bis zum Abschlussbereich, verschwindet aber hinter dessen Card
+- die horizontale Fahrradstrecke übernimmt anschließend die visuelle Führung
+
+### Kontaktformular als lokale Demo
+
+Das Formular demonstriert native HTML-Validierung und eine lokale JavaScript-Reaktion.
+
+Felder:
+
+- Name, Pflichtfeld
+- E-Mail-Adresse, optional
+- Themenauswahl, Pflichtfeld
+- Tipp mit Mindestlänge, Pflichtfeld
+
+Beim Absenden:
+
+- wird die Standardübertragung verhindert,
+- erscheint eine Erfolgsmeldung über `aria-live="polite"`,
+- werden die Felder zurückgesetzt.
+
+**Es werden keine Daten gesendet, gespeichert oder an externe Dienste übertragen.**
+
+## Eingesetzte Technologien und Methoden
+
+### HTML
+
+- semantische Elemente: `header`, `nav`, `main`, `section`, `article`, `aside`, `figure`, `figcaption`, `footer`, `address`
+- responsive Bilder mit `picture` und `source`
+- native Interaktionen mit `details` und `summary`
+- Formularfelder mit Labels, Pflichtfeldern, `type="email"` und `minlength`
+- Tabelle mit semantischer Kopfstruktur
+- Download-Attribut für den Trainingsplan
+- ARIA nur dort, wo native Semantik ergänzt werden muss
+
+### CSS
+
+- CSS-Variablen für Farben, Abstände, Breiten, Radien und Übergänge
+- Mobile-first-Ansatz
+- CSS Grid und Flexbox
+- komponentenbezogenes natives CSS-Nesting
+- Media Queries direkt innerhalb der betroffenen Komponenten
+- `clamp()`, `min()`, `max-width`, `aspect-ratio` und `object-fit`
+- Pseudoelemente für Timeline, Journey, Rahmen und Linienfüllungen
+- `conic-gradient` mit Maskierung für umlaufende Journey-Rahmen
+- `:focus-visible`, `:active`, `:has()` und Zustandsklassen
+- `prefers-reduced-motion` für reduzierte Bewegung
+
+### JavaScript
+
+Vanilla JavaScript ohne externe Bibliotheken.
+
+Die Datei `js/main.js` ist funktional gegliedert in:
+
+- gemeinsame Hilfsfunktionen wie `clamp()`
+- Rennrad-Hotspots
+- lokale Kontaktformular-Demo
+- Intro-Scrollzustände
+- Haupt-Timeline
+- erweiterte Journey
+- scrollabhängige Kontaktstrecke
+- gemeinsame Scroll- und Resize-Steuerung
+
+Scrollabhängige Berechnungen werden über einen gemeinsamen `requestAnimationFrame`-Mechanismus gebündelt. Dadurch werden Timeline, Journey und Kontaktanimation nicht über mehrere konkurrierende Scroll-Listener aktualisiert.
+
+## Responsive Verhalten
+
+Verwendete Hauptbereiche:
+
+- **bis 767px:** mobile Hero-Bildvariante, Toggle-Navigation, große Touch-Cards mit CTA, einspaltige Inhaltsbereiche
+- **ab 768px:** horizontale Navigation, breite Hero-Variante, kompakte Sprungmarken
+- **768px bis 1199px:** angepasste Hero-Höhe und Bildposition für Tablet und kleine Laptops
+- **ab 1024px:** wechselnde Timeline-Cards, zweispaltiges Rennrad-Setup, mehrspaltiger Footer
+- **ab 1200px:** vollständige Desktop-Hero-Anordnung
+- **ab 1440px:** begrenzte Inhaltsbreite für bessere Lesbarkeit
+- **bis 1920px:** zentrierte Maximalbreite statt unkontrolliert wachsender Textzeilen
 
 ## Barrierefreiheit
 
-Bereits in Phase 1 wurden grundlegende Aspekte der Barrierefreiheit berücksichtigt. In Phase 2 wurden diese Punkte weitergeführt und erweitert.
+Umgesetzt wurden unter anderem:
 
-Berücksichtigt wurden unter anderem:
+- `lang="de"`
+- sichtbarer Skip-Link zum Hauptinhalt
+- semantische Überschriftenhierarchie
+- `aria-label` für Navigationen
+- `aria-labelledby` für Sections
+- aussagekräftige Alternativtexte
+- dekoratives Fahrrad-SVG mit leerem `alt`
+- echte Links und Buttons statt klickbarer `div`-Elemente
+- sichtbare Tastaturfokuszustände
+- native Formularvalidierung
+- `aria-pressed` bei Hotspots
+- `aria-live="polite"` für Detailkarte und Formularstatus
+- `aria-current="step"` für die aktive Journey-Station
+- ausreichend große mobile Touchflächen
+- vollständig verständliche Inhalte ohne JavaScript
+- reduzierte Bewegung über `prefers-reduced-motion: reduce`
 
-* Sprachangabe im HTML-Dokument über `lang="de"`
-* semantische Seitenstruktur mit `header`, `nav`, `main`, `section`, `article`, `aside` und `footer`
-* Hauptnavigation mit `aria-label`
-* Skip-Link zum Hauptinhalt
-* eindeutige Abschnittsüberschriften
-* Verknüpfung von Abschnitten und Überschriften mit `aria-labelledby`
-* Bilder mit beschreibenden `alt`-Texten
-* echte Links und Buttons statt rein dekorativer Interaktion
-* sichtbare Fokuszustände
-* tastaturbedienbare Navigation
-* aufklappbares Trainings-Glossar mit nativen HTML-Elementen
-* interaktive Rennrad-Hotspots als echte `button`-Elemente
+Bei reduzierter Bewegung:
 
-## Technologien
+- wird weiches Scrollen deaktiviert,
+- entfallen Puls-, Pop- und Übergangsanimationen,
+- wechseln aktive Zustände ohne Überblendung,
+- steht das Kontaktfahrrad direkt am Ziel,
+- ist die horizontale Strecke vollständig gefüllt.
 
-Verwendet werden:
+## Wichtige Refactorings und Designentscheidungen
 
-* HTML5
-* CSS3
-* CSS Grid
-* Flexbox
-* Media Queries
-* CSS-Variablen
-* Vanilla JavaScript
-* Git / GitHub
-
-Es werden bewusst keine CSS-Frameworks wie Bootstrap oder Tailwind eingesetzt. Der Fokus liegt auf eigener HTML- und CSS-Umsetzung.
-
-## JavaScript
-
-JavaScript wird aktuell gezielt für die interaktive Rennrad-Setup-Komponente eingesetzt.
-
-Beim Klick auf einen Hotspot wird:
-
-* die Detailkarte aktualisiert
-* der aktive Hotspot visuell markiert
-* der Zustand über `aria-pressed` angepasst
-
-Die Hauptnavigation und das Trainings-Glossar funktionieren ohne JavaScript über native HTML-Elemente.
+- Der Hero wurde von einer fast randlosen Fullscreen-Fläche zu einer begrenzten Portfolio-Bühne umgebaut.
+- Der Desktop-Breakpoint des Hero wurde wegen ungünstiger Bildausschnitte von 1024px auf 1200px verschoben.
+- Wiederkehrende CSS-Werte wurden zentralisiert.
+- Media Queries wurden aus globalen Sammelblöcken in die jeweiligen Komponenten verschoben.
+- Doppelte und widersprüchliche CSS-Regeln wurden entfernt.
+- Timeline und Journey wurden von getrennten Scrollberechnungen auf einen gemeinsamen Fortschrittsansatz umgestellt.
+- Mobile CTAs wurden ergänzt, weil Hover auf Touchgeräten keine verlässliche Bedieninformation liefert.
+- Die CTAs wurden auf die mobile Hero-Bildvariante begrenzt. In der breiten Bildvariante bleiben die kompakteren Linien und Fokuszustände erhalten.
+- Der mobile Zierstrich wurde entfernt, weil der CTA dieselbe Funktion klarer übernimmt.
+- Der Kontaktbereich war zunächst als weitere Journey-Card mit umlaufendem Rahmen geplant. Diese Lösung wurde verworfen, weil vertikale Linie, umlaufender Rahmen und Fahrradstrecke gleichzeitig zu überladen wirkten.
+- Die finale Lösung nutzt die vertikale Linie nur als Übergang. Die äußere Card hellt sich proportional zur Fahrradfahrt auf, und das Formular wird erst im Ziel hervorgehoben.
+- Eine einmalige Fahrradfahrt per `IntersectionObserver` wurde durch eine echte scrollgebundene Bewegung ersetzt. Dadurch bleibt die Animation kontrollierbar und läuft beim Zurückscrollen nachvollziehbar zurück.
 
 ## Projektstruktur
 
 ```text
 .
 ├── index.html
+├── README.md
 ├── css/
 │   └── style.css
 ├── js/
 │   └── main.js
 ├── assets/
-│   ├── images/
-│   └── downloads/
+│   ├── downloads/
+│   │   └── beispiel-trainingsplan.pdf
+│   ├── icons/
+│   │   └── rad-icon.svg
+│   └── images/
 ├── docs/
 │   ├── commit-guidelines.md
-│   └── phase-two-concept.md
-└── README.md
+│   ├── phase-two-concept.md
+│   └── phase-three-concept.md
+└── .git/
 ```
 
 ## Git-Workflow
 
-Der Entwicklungsprozess wird mit Git dokumentiert. Die Commit-Messages folgen festen Kategorien, damit Änderungen nachvollziehbar bleiben:
+Die Entwicklung wurde mit Git und GitHub dokumentiert. Änderungen wurden in kleine, nachvollziehbare Arbeitsschritte aufgeteilt.
 
-* `chore:` technische Aufgaben und Projektstruktur
-* `feat:` neue Funktionen oder Seitenbereiche
-* `content:` Inhalte und Texte
-* `style:` CSS und Gestaltung
-* `a11y:` Barrierefreiheit
-* `docs:` Dokumentation und Konzept
-* `fix:` Fehlerbehebungen
-* `refactor:` Codeverbesserungen ohne sichtbare Funktionsänderung
+Verwendete Kategorien:
 
-Die Commit-Legende ist zusätzlich in `docs/commit-guidelines.md` dokumentiert.
+- `chore:` technische Aufgaben und Projektstruktur
+- `feat:` neue Funktionen oder Seitenbereiche
+- `content:` Inhalte und Texte
+- `style:` visuelle Gestaltung
+- `a11y:` Barrierefreiheit
+- `docs:` Dokumentation
+- `fix:` Fehlerbehebungen
+- `refactor:` strukturelle Verbesserungen ohne vollständige Neuentwicklung
 
-## Status und Ausblick
+Die Commit-Konventionen sind zusätzlich in `docs/commit-guidelines.md` dokumentiert.
 
-Phase 2 ist technisch weitgehend umgesetzt. Der aktuelle Stand umfasst responsives Design, erweiterte HTML-Struktur, CSS-Layout, interaktive Elemente und eine überarbeitete Konzeptdokumentation.
+## Testplan vor der finalen Abgabe
 
-In Phase 3 können weitere Verfeinerungen folgen, zum Beispiel zusätzliche Animationen, finale Bildoptimierung, weitere JavaScript-Interaktionen oder eine separate Impressumsseite.
+Die finale Abnahme umfasst:
+
+- Darstellungsprüfung bei 360px, 767px, 768px, 1024px, 1199px, 1200px, 1440px und 1920px
+- mobile und Desktop-Navigation
+- alle Sprungmarken
+- Skip-Link
+- vollständige Tastaturbedienung
+- sichtbare Fokuszustände
+- Rennrad-Hotspots
+- Trainings-Glossar
+- Trainingsplan-Download
+- Haupt-Timeline
+- Journey-Linie und Kartenrahmen
+- Kontaktstrecke und Zielzustand
+- native Formularvalidierung und Erfolgsmeldung
+- `prefers-reduced-motion: reduce`
+- JavaScript-Konsole
+- ungenutzte Dateien
+- finaler Git-Status
+
+Die konkreten Testergebnisse werden vor der Abgabe abschließend dokumentiert.
+
+## Lokale Nutzung
+
+Das Projekt benötigt keinen Build-Prozess und keine Paketinstallation.
+
+1. Projektordner lokal öffnen.
+2. `index.html` über einen lokalen Entwicklungsserver starten, zum Beispiel mit VS Code Live Server.
+3. Alternativ kann die Datei direkt im Browser geöffnet werden. Für ein konsistentes Verhalten wird ein lokaler Server empfohlen.
+
+## Bekannte Grenze
+
+Das Kontaktformular ist absichtlich eine lokale Portfolio-Demonstration. Ohne Backend oder externen Formulardienst können keine echten Nachrichten übertragen werden.
