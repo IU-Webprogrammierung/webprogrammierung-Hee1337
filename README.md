@@ -204,6 +204,17 @@ Bei reduzierter Bewegung:
 - Die finale Lösung nutzt die vertikale Linie nur als Übergang. Die äußere Card hellt sich proportional zur Fahrradfahrt auf, und das Formular wird erst im Ziel hervorgehoben.
 - Eine einmalige Fahrradfahrt per `IntersectionObserver` wurde durch eine echte scrollgebundene Bewegung ersetzt. Dadurch bleibt die Animation kontrollierbar und läuft beim Zurückscrollen nachvollziehbar zurück.
 
+## Persönliche Erkenntnisse und Errungenschaften
+Die größte neue Erfahrung in diesem Projekt bestand für mich darin, einen vollständigen Entwicklungsprozess von der ersten Idee bis zur finalen Umsetzung zu durchlaufen. Dabei habe ich gelernt, wie wichtig der kontinuierliche Austausch, konstruktives Feedback und eine nachvollziehbare Dokumentation für den Erfolg eines Projekts sind.
+
+Besonders viele neue Erkenntnisse konnte ich in den Bereichen Barrierefreiheit, Codestrukturierung und Projektorganisation gewinnen. Im Verlauf der Entwicklung wurde deutlich, wie wichtig es ist, auch bei einem wachsenden Projekt den Überblick zu behalten. Dafür musste ich eine sinnvolle Ordner- und Arbeitsstruktur entwickeln und einen Git-Workflow finden, mit dem Änderungen nachvollziehbar dokumentiert und einzelne Arbeitsschritte sauber voneinander getrennt werden konnten.
+
+Auch die Umsetzung des erhaltenen Feedbacks stellte mich vor neue Herausforderungen. Bestehender Code musste mehrfach angepasst, entfernt oder grundlegend umstrukturiert werden. Dadurch habe ich verstanden, wie wichtig frühzeitige Abstimmungen und regelmäßige Überprüfungen sind, um unnötige oder doppelte Arbeit zu vermeiden.
+
+Besonders faszinierend war für mich das Zusammenspiel von HTML, CSS und JavaScript. Ich habe gelernt, wie JavaScript bestehende Inhalte und Gestaltungselemente um Logik und Interaktion erweitern kann. Im Rahmen des Projekts habe ich erstmals eine scrollabhängige SVG-Animation umgesetzt. Die Entwicklung dieser Animation und ihre Verbindung mit dem restlichen Seitenaufbau gehörten für mich zu den spannendsten Bestandteilen des Projekts.
+
+Am Ende ist eine moderne, responsive und interaktive Website über meine sportliche Laufbahn entstanden. Ich bin stolz darauf, den gesamten Prozess eigenständig durchgeführt zu haben, und möchte die gewonnenen Kenntnisse künftig auch in weiteren Webprojekten anwenden.
+
 ## Projektstruktur
 
 ```text
