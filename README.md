@@ -255,9 +255,7 @@ Verwendete Kategorien:
 
 Die Commit-Konventionen sind zusätzlich in `docs/commit-guidelines.md` dokumentiert.
 
-## Testplan vor der finalen Abgabe
-
-Die finale Abnahme umfasst:
+## Durchgeführte Tests und Ergebnisse
 
 - Darstellungsprüfung bei 360px, 767px, 768px, 1024px, 1199px, 1200px, 1440px und 1920px
 - mobile und Desktop-Navigation
@@ -276,8 +274,6 @@ Die finale Abnahme umfasst:
 - JavaScript-Konsole
 - ungenutzte Dateien
 - finaler Git-Status
-
-Die konkreten Testergebnisse werden vor der Abgabe abschließend dokumentiert.
 
 ## Lokale Nutzung
 
